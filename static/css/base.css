@@ -2,5 +2,27 @@
     background: url('/media/briani.jpg') no-repeat center center fixed;
     height: 100vh;
     width: 100%;
-    background-size: cover;        
+    background-size: cover;
+    position: relative;
 }
+
+.banner {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    margin: 0 -180px;    
+    z-index: 999;
+    color: white;
+}
+
+/*----- Media screen -------------------------------*/
+
+@media (max-width: 576px) {
+    .banner {
+        font-size: 30px;
+        top: 100px;
+        margin: 0 -150px;
+    }
+}
+
+
