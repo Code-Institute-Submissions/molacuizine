@@ -29,11 +29,23 @@
 
 /*----- Media screen -------------------------------*/
 
+.links {
+    width: 100%;
+}
+
+/*----- Media screen -------------------------------*/
+
 @media (max-width: 576px) {
     .banner {
         font-size: 30px;
         top: 100px;
         margin: 0 -150px;
+    }
+}
+
+@media (max-width: 991px) {
+    .links {
+        width: 80%;
     }
 }
 
