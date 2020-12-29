@@ -89,6 +89,7 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
+# login and signup requirements
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
