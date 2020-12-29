@@ -21,11 +21,35 @@
         <title>Mo Lacuizine</title>
     </head>
     <body>
-        <header>
-            <h1 class="fixed-top">Navbar goes here</h1>
-            
+        <header>                   
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand d-none d-lg-block" href="#">Navbar</a> 
+                <div class="text-right links">               
+                    <a class="p-2" href="#">My Account</a> 
+                    <a class="p-2" href="#">Basket</a>
+                </div>            
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav mt-2 mt-lg-0 d-lg-none">
+                        <a class="navbar-brand" href="#">Navbar</a> 
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">All menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Drinks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sides</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Snacks</a>
+                        </li>
+                    </ul>                    
+                </div>
+                </nav>                                 
         </header>
-
         {% block page_header %}    
         {% endblock %}
 
