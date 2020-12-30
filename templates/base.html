@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-2 col-md-8 col-lg-8"> 
                             <form class="form-inline text-center d-none d-md-block">
-                                <input class="form-control search-1 mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control rounded-0 search-1 mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -62,13 +62,13 @@
                             <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                             <a href="#">$0.00</a> 
                         </div>
-                    </div>
+                    </div>                    
                 </div>                           
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mt-2 mt-lg-0 d-lg-none">
                         <a class="navbar-brand" href="#">MoLacuizine</a>
                         <form class="form-inline d-md-none">
-                            <input class="form-control search-2 mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control rounded-0 search-2 mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -88,26 +88,33 @@
                     </ul>                    
                 </div>
             </nav>
-            <nav class="bottom-nav fixed-top d-none d-lg-block" >
+            <nav class="bottom-nav fixed-top" >
                 <div class="row no-gutters">
-                    <div class="col-2">
+                    <div class="col-2 d-none d-lg-block">
                     </div>
-                    <div class="col-2 text-center">
+                    <div class="col-2 text-center d-none d-lg-block">
                         <a class="nav-link" href="#">All Menu</a>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 d-none d-lg-block">
                         <a class="nav-link text-center" href="#">Drinks</a>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 d-none d-lg-block">
                         <a class="nav-link text-center" href="#">Sides</a>
                     </div>
-                    <div class="col-2 text-center">
+                    <div class="col-2 text-center d-none d-lg-block">
                         <a class="nav-link" href="#">Snacks</a>
                     </div>
-                    <div class="col-2">                        
+                    <div class="col-2 d-none d-lg-block">                        
                     </div>                
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="store-open text-center">
+                            We are open!
+                        </div> 
+                    </div>
                 </div>                
-            </nav>                                                        
+            </nav>                                                                   
         </header>
         {% block page_header %}    
         {% endblock %}
