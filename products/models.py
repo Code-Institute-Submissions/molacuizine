@@ -18,7 +18,8 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(
-        'Category', null=True, blank=True, on_delete=models.SET_NULL, related_name='products')
+            'Category', null=True, blank=True, on_delete=models.SET_NULL,
+            related_name='products')
     name = models.CharField(max_length=254)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)

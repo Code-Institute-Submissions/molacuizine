@@ -10,6 +10,11 @@ img {
     object-position: center;
 }
 
+.background {
+    background: rgb(243, 244, 245);
+    height: 100%;
+}
+
 .card-text {
     padding: 0;
     margin: 0;
