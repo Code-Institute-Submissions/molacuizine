@@ -16,8 +16,8 @@
 
 .bottom-nav {
     z-index: 1;
-    top: 60px;
-    background: white;
+    top: 70px;
+    background: white;    
 }
 
 .dropdown-menu {
@@ -27,6 +27,7 @@
 .store-open {
     background: black;
     color:white;
+    font-size: 20px;
 }
 
 .navbar-brand {
