@@ -11,8 +11,9 @@ def all_products(request):
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category']
-            products = products.filter(category__name=categories)            
-
+            products = products.filter(category__name=categories)
+            categories = Category.objects.filter(name=categories)
+            print(categories)
     context = {
         'products': products,
         'current_category': categories,

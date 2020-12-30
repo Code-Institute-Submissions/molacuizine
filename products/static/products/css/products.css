@@ -27,6 +27,25 @@ img {
     padding-top: 0;
 }
 
+.product-tag {    
+    border: 1px solid black;
+    color: rgb(0, 0, 0);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600; 
+    width: 100px;
+    height: 30px;
+    margin: 0 auto; 
+}
+
+.product-tag:hover {
+    background: black;
+    color: white;
+}
+
+.product-link {
+    text-decoration: none !important; 
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {

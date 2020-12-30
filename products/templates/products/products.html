@@ -10,8 +10,11 @@
     <h1 class="header text-center">Products page</h1>
     <hr>
     <div>
-        <!-- For category selected -->
-        {{ current_categories }}
+        {% for c in current_category %}
+            <a class="product-link" href="{% url 'products' %}?category={{ c.name }}">
+                <p class="product-tag text-center">{{ c.friendly_name }}</p>
+            </a>
+        {% endfor %}
     </div> 
     <div class="container background">        
         <div class="row">            
