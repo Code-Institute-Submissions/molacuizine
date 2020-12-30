@@ -34,8 +34,13 @@
 }
 
 .bottom-nav {
+    z-index: 1;
     top: 60px;
     background: white;
+}
+
+.dropdown-menu {
+    z-index: 999;
 }
 
 /*----- Media screen -------------------------------*/
@@ -46,11 +51,19 @@
         top: 100px;
         margin: 0 -150px;
     }
+
+    .search-2 {
+        width: 75% !important;
+    }
 }
 
 @media (max-width: 991px) {
     .links {
         width: 80%;
+    }
+
+    .search-1 {
+        width: 75% !important;
     }
 }
 
