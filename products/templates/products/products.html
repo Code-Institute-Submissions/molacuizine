@@ -8,10 +8,29 @@
 {% block content %}    
     <div class="container"></div>  
     <h1 class="header text-center">Products page</h1>
-    <hr> 
-    <div class="background">
+    <hr>
+    <div>
+        <!-- For category selected -->
+        {{ current_categories }}
+    </div> 
+    <div class="container background">
         {{ products }}
-
+        <div class="row">            
+            {% for product in products %}
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
+                    <div class="card m-2">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>                  
+                </div>                                     
+            {% endfor %}             
+        </div>
     </div>  
     
 {% endblock %}
