@@ -13,11 +13,10 @@
         <!-- For category selected -->
         {{ current_categories }}
     </div> 
-    <div class="container background">
-        {{ products }}
+    <div class="container background">        
         <div class="row">            
             {% for product in products %}
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
+                <div class="product col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
                     <div class="card m-2">
                         {% if product.image %}
                             <img src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -26,11 +25,20 @@
                         {% endif %}
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>                  
-                </div>                                     
+                        <p class="card-text">{{ product.name }}</p>
+                        <p class="card-text">Rs <span class="font-weight-bold">{{ product.price }}</span></p>
+                        <div class="row no-gutters">
+                            <div class="col-1">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="col-11 text-left">
+                                <p class="card-text">{{ product.category.friendly_name }}</p>
+                            </div>                            
+                        </div>
+                    </div>
+                <hr>                                      
+                </div>                                                                     
             {% endfor %}             
         </div>
-    </div>  
-    
+    </div>    
 {% endblock %}
