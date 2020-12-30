@@ -1,5 +1,5 @@
 .container {
-    height: 150px;
+    height: 180px;
     width: 95% !important;
 }
 
@@ -50,6 +50,6 @@ img {
 
 @media (max-width: 991px) {
     .container {
-        height: 100px;        
+        height: 140px;        
     }
 }
