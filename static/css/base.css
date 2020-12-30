@@ -11,14 +11,14 @@
     color: black;
     font-weight: 500;
     text-decoration: none !important;
-    font-size: 1rem;    
+    font-size: 15px;    
 }
 
 .bottom-nav {
     z-index: 1;
     top: 70px;
     background: white; 
-    padding-top: 15px;  
+    padding-top: 5px;  
 }
 
 .dropdown-menu {
@@ -41,12 +41,18 @@
     font-family: 'Lato', sans-serif;
     color: black;
     font-weight: 700;
+    padding-top: 10px;
 }
 
 .search-1, .search-2 {
     border-color: black;
     margin-right: -5px !important;
     border-right: none;
+}
+
+.navbar {
+    padding-bottom: 20px;
+    padding-right: 0;
 }
 
 /*----- Media screen -------------------------------*/
