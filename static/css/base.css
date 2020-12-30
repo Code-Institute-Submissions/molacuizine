@@ -1,31 +1,3 @@
-/*----- Home page -------------------------------*/
-
-.home-background {      
-    background: url('/media/briani.jpg') no-repeat center center fixed;
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    position: relative;
-}
-
-.banner {
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    margin: 0 -198px;    
-    z-index: 999;
-    color: white;
-}
-
-.order-button {
-    position: absolute;
-    bottom: 100px;
-    left: 50%;
-    margin: 0 -65px;
-    background: red;
-    color: white;
- 
-}
 
 /*----- Navbar header -------------------------------*/
 
@@ -46,12 +18,6 @@
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 576px) {
-    .banner {
-        font-size: 30px;
-        top: 100px;
-        margin: 0 -150px;
-    }
-
     .search-2 {
         width: 75% !important;
     }
