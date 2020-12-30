@@ -1,17 +1,31 @@
 .container {
     height: 130px;
+    width: 95% !important;
 }
 
-.background {
-    background-color: rgb(241, 202, 202);
-    width: 100%;
-    height: 100vh;
+img {
+    height: 250px !important;
+    width: 100%;    
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-text {
+    padding: 0;
+    margin: 0;
+    color: rgb(88, 100, 112);
+    font-family: 'Lato', sans-serif;
+    font-size: 500;
+}
+
+.card-body {
+    padding-top: 0;
 }
 
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
     .container {
-        height: 100px;
+        height: 100px;        
     }
 }
