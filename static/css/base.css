@@ -39,6 +39,10 @@
     font-weight: 700;
 }
 
+.search-1, .search-2 {
+    border-color: black;;
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 576px) {
