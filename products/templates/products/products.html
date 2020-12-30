@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
+
+{% block content %}    
+    <div class="container"></div>  
+    <h1 class="header text-center">Products page</h1>
+    <hr> 
+    <div class="background">
+        {{ products }}
+
+    </div>  
+    
+{% endblock %}
