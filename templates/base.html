@@ -29,16 +29,18 @@
                 </button>
                 <div class="links">
                     <div class="row no-gutters">
-                        <div class="col-2 col-lg-2">
-                            <a class="navbar-brand d-none d-lg-block" href="#">Mo Lacuizine</a> 
+                        <div class="col-2 col-lg-2 d-none d-lg-block">
+                            <a class="navbar-brand" href="#">MoLacuizine</a> 
                         </div>
-                        <div class="col-2 col-md-6 col-lg-8"> 
-                            <form class="form-inline text-center d-none d-lg-block">
-                                <input class="form-control mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                        <div class="col-2 col-md-8 col-lg-8"> 
+                            <form class="form-inline text-center d-none d-md-block">
+                                <input class="form-control search-1 mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
                             </form>                           
                         </div>
-                        <div class="col-4 col-md-2 col-lg-1 text-center">
+                        <div class="col-6 col-md-2 col-lg-1 text-center">
                             <div><i class="fas fa-user fa-lg"></i></div>
                             <a href="#" role="button" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Accounts
@@ -64,7 +66,13 @@
                 </div>                           
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mt-2 mt-lg-0 d-lg-none">
-                        <a class="navbar-brand" href="#">Navbar</a> 
+                        <a class="navbar-brand" href="#">MoLacuizine</a>
+                        <form class="form-inline d-md-none">
+                            <input class="form-control search-2 mr-sm-2 w-50" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form> 
                         <li class="nav-item active">
                             <a class="nav-link" href="#">All menu</a>
                         </li>
@@ -80,26 +88,26 @@
                     </ul>                    
                 </div>
             </nav>
-            <nav class="bottom-nav fixed-top d-none d-lg-block">
+            <nav class="bottom-nav fixed-top d-none d-lg-block" >
                 <div class="row no-gutters">
                     <div class="col-2">
                     </div>
-                    <div class="col-2">
-                        <a class="nav-link" href="#">All menu</a>
+                    <div class="col-2 text-center">
+                        <a class="nav-link" href="#">All Menu</a>
                     </div>
                     <div class="col-2">
-                        <a class="nav-link" href="#">Drinks</a>
+                        <a class="nav-link text-center" href="#">Drinks</a>
                     </div>
                     <div class="col-2">
-                        <a class="nav-link" href="#">Sides</a>
+                        <a class="nav-link text-center" href="#">Sides</a>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 text-center">
                         <a class="nav-link" href="#">Snacks</a>
                     </div>
                     <div class="col-2">                        
                     </div>                
-                </div>
-            </nav>                                            
+                </div>                
+            </nav>                                                        
         </header>
         {% block page_header %}    
         {% endblock %}
