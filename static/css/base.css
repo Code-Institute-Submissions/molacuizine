@@ -15,6 +15,11 @@
     z-index: 999;
 }
 
+.store-open {
+    background: black;
+    color: white;
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 576px) {
