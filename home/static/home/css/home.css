@@ -1,0 +1,28 @@
+/*----- Home page -------------------------------*/
+
+.home-background {      
+    background: url('/media/briani.jpg') no-repeat center center fixed;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+}
+
+.banner {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    margin: 0 -198px;    
+    z-index: 999;
+    color: white;
+}
+
+.order-button {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    margin: 0 -65px;
+    background: red;
+    color: white;
+ 
+}
