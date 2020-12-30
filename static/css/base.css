@@ -17,7 +17,12 @@
 
 .store-open {
     background: black;
-    color: white;
+    color:white;
+}
+
+.navbar-brand {
+    font-size: 35px;
+    padding-top: 0;
 }
 
 /*----- Media screen -------------------------------*/
