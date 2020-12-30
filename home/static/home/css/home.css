@@ -23,6 +23,19 @@
     left: 50%;
     margin: 0 -65px;
     background: red;
-    color: white;
- 
+    color: white; 
+}
+
+.container {
+    height: 160px;
+}
+
+/*----- Media screen -------------------------------*/
+
+@media (max-width: 576px) {
+    .banner {
+        font-size: 30px;
+        top: 100px;
+        margin: 0 -150px;
+    }
 }
