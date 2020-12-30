@@ -27,10 +27,15 @@
  
 }
 
-/*----- Media screen -------------------------------*/
+/*----- Navbar header -------------------------------*/
 
 .links {
     width: 100%;
+}
+
+.bottom-nav {
+    top: 60px;
+    background: white;
 }
 
 /*----- Media screen -------------------------------*/
