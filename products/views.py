@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from .models import Product, Category
-
+from django.db.models import Q
 
 # Create your views here.
 def all_products(request):
@@ -14,6 +14,17 @@ def all_products(request):
             products = products.filter(category__name=categories)
             categories = Category.objects.filter(name=categories)
             print(categories)
+
+        if 'q' in request.GET:
+            query = request.GET['q']
+            # Query is blank query= ""
+            if not query:
+                return redirect(reverse('products'))
+            else:
+                queries = Q(
+                    name__icontains=query) | Q(description__icontains=query)
+                products = products.filter(queries)
+
     context = {
         'products': products,
         'current_category': categories,
