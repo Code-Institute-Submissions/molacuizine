@@ -16,10 +16,8 @@
             <div class="col-12 col-md-7 col-lg-5">
                 {% if product.image %}                    
                     <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">                    
-                {% else %}
-                    <a href="#">
-                        <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                    </a>
+                {% else %}                    
+                    <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">                    
                 {% endif %}
             </div>
             <div class="col-12 col-md-5 col-lg-5">                
