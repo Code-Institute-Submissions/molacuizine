@@ -50,10 +50,28 @@ img {
     text-decoration-color: rgb(88, 100, 112) !important; 
 }
 
+.product-detail-image {
+    height: 400px !important;
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
     .container {
         height: 130px;        
+    }
+
+    .product-detail-image {
+        height: 300px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        height: 130px;        
+    }
+
+    .product-detail-image {
+        height: 300px !important;
     }
 }
