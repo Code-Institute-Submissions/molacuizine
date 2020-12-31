@@ -32,20 +32,19 @@ def bag_contents(request):
         delta = 360 - totalMins
         mins = delta % 60
         hours = int((delta-mins)/60)
-        message = f'We will be open in {hours} hours and {mins} mins'
+        open_status = f'We are closed. Orders start in {hours} hours and {mins} mins'
     elif totalMins < 1080:
-        message = "we are open!"
+        open_status = "We are open!"
     elif totalMins <= 1439:
         delta = 1440 - totalMins + 360
         mins = delta % 60
         hours = int((delta-mins)/60)
-        message = f'We will be open in {hours} hours and {mins} mins'
-    print(message)
+        open_status = f'We are closed. Orders start in {hours} hours and {mins} mins'
     context = {
-        'message': message,
+        'open_status': open_status,
         'bag_items': bag_items,
         'total': total,
         'product_count': product_count,
     }
-    
+
     return context
