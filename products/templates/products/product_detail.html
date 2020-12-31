@@ -23,10 +23,10 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-6">
-                {{ product.name }}<br>
-                {{ product.category }}<br>
-                {{ product.description }}<br>
-                {{ product.price }}
+                <p class="text-center card-text pt-3">{{ product.name }}</p><hr>
+                <i class="fas fa-utensils d-inline"></i><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p><br>
+                <p class="card-text mt-4">{{ product.description }}</p><br>
+                <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
             </div>            
                          
         </div>
