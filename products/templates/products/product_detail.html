@@ -31,12 +31,12 @@
                 <!-- Form to add product to bag -->
                 <form class="form" action="#" method="POST">
                     {% csrf_token %}
-                    <div>                             
+                    <div>                                                   
                         <a id="minus" class="btn p-0 m-0">
                             <i class="fas fa-minus"></i>
                         </a>                
                         <label for="quantity"></label>                
-                        <input class="d-inline quantity mt-2 w-25" type="number" id="quantity" name="quantity" min="1" max="10"> 
+                        <input class="quantity mt-2 w-25" type="number" id="quantity" name="quantity" min="1" max="10"> 
                         <a id="plus" class="btn p-0 m-0">
                             <i class="fas fa-plus"></i>
                         </a> 
