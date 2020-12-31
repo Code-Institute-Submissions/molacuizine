@@ -24,9 +24,10 @@ def all_products(request):
                 queries = Q(
                     name__icontains=query) | Q(description__icontains=query)
                 products = products.filter(queries)
-
+    count = products.count()
     context = {
         'products': products,
         'current_category': categories,
+        'count': count,
     }
     return render(request, 'products/products.html', context)
