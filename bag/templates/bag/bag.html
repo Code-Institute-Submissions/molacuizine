@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'bag/css/bag.css' %}">
+{% endblock %}
+
+{% block content %}    
+    <div class="container"></div>  
+    <h1 class="header text-center">Ordered Items</h1>
+    <hr>    
+    <div class="container">
+        {% if bag_items %}
+            <div class="row no-gutters text-center">
+                <div class="col-lg-3">
+                    <p class="header font-weight-bold">Product</p>
+                </div>
+                <div class="header col-lg-4">                    
+                </div>
+                 <div class="header col-lg-3">
+                    <p class="font-weight-bold">Quantity</p>
+                </div>
+                <div class="header col-lg-1">
+                    <p class="font-weight-bold">Price</p>
+                </div>
+                <div class="header col-lg-1">
+                    <p class="font-weight-bold">Subtotal</p>
+                </div>
+                {% for item in bag_items %}                    
+                    <div class="col-12 col-md-3 mt-3">
+                        {% if item.product.image %}                    
+                            <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
+                        {% else %}
+                            <a href="#">
+                                <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-md-4 mt-3 p-2">
+                        {{ item.product.description }}
+                    </div>
+                    <div class="col-12 col-md-3 mt-3">
+                        {{ item.quantity }}
+                    </div>
+                    <div class="col-12 col-md-1 mt-3">
+                        Rs {{ item.product.price }}                    
+                    </div>
+                    <div class="col-12 col-md-1 mt-3">
+                        {{ item.sub_total }}                    
+                    </div>
+                    <hr>                                       
+                {% endfor %}                               
+            </div>            
+        {% else %}
+        {% endif %}      
+    </div>    
+{% endblock %}
+
+{% block extra_js %}       
+    {{ block.super }}            
+    <script src="{% static 'products/js/products.js' %}" type="text/javascript"></script>
+{% endblock %}
