@@ -27,9 +27,25 @@
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'products' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text mt-4">{{ product.description }}</p><br>
                 <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
+                <p class="card-text font-weight-bold mt-4">Quantity:</p>
+                <div>                             
+                    <a class="btn p-0 m-0">
+                        <i class="fas fa-minus"></i>
+                    </a>                
+                    <label for="quantity"></label>                
+                    <input class="d-inline quantity mt-2 w-25" type="number" id="quantity" name="quantity" min="1" max="10"> 
+                    <a class="btn p-0 m-0">
+                        <i class="fas fa-plus"></i>
+                    </a> 
+                </div>  
             </div>
             <div class="col-md-1">                
             </div>                       
         </div>
     </div>    
+{% endblock %}
+
+{% block extra_js %}       
+    {{ block.super }}            
+    <script src="{% static 'products/js/products.js' %}" type="text/javascript"></script>
 {% endblock %}
