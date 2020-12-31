@@ -46,6 +46,10 @@ img {
     text-decoration: none !important; 
 }
 
+.product-details-link {
+    text-decoration-color: rgb(88, 100, 112) !important; 
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
