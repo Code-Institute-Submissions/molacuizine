@@ -1,5 +1,6 @@
 from products.models import Product
 from django.shortcuts import get_object_or_404
+import datetime
 
 
 def bag_contents(request):
@@ -19,11 +20,32 @@ def bag_contents(request):
             'product': product,
             'sub_total': sub_total,
         })
-    print(bag_items)
+
+    '''Code to show if shop is open or closed'''
+
+    hours = datetime.datetime.now().hour
+    mins = datetime.datetime.now().hour
+
+    totalMins = hours * 60 + mins
+
+    if 0 <= totalMins < 360:
+        delta = 360 - totalMins
+        mins = delta % 60
+        hours = int((delta-mins)/60)
+        message = f'We will be open in {hours} hours and {mins} mins'
+    elif totalMins < 1080:
+        message = "we are open!"
+    elif totalMins <= 1439:
+        delta = 1440 - totalMins + 360
+        mins = delta % 60
+        hours = int((delta-mins)/60)
+        message = f'We will be open in {hours} hours and {mins} mins'
+    print(message)
     context = {
+        'message': message,
         'bag_items': bag_items,
         'total': total,
         'product_count': product_count,
     }
-
+    
     return context
