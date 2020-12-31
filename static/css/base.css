@@ -44,9 +44,15 @@
     padding-top: 10px;
 }
 
-.search-1, .search-2 {
+.search-1 {
     border-color: black;
     margin-right: -5px !important;
+    border-right: none;
+}
+
+.search-2 {
+    border-color: black;
+    margin-right: 0px !important;
     border-right: none;
 }
 
