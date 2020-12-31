@@ -27,19 +27,25 @@
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'products' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text mt-4">{{ product.description }}</p><br>
                 <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
-                <p class="card-text font-weight-bold mt-4">Quantity:</p>
+                {% if open_status %} 
+                    <p class="card-text font-weight-bold mt-4">Quantity:</p>
+                {% else %}
+                {% endif %}
                 <!-- Form to add product to bag -->
                 <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                     {% csrf_token %}
-                    <div>                                                   
-                        <a id="minus" class="btn p-0 m-0">
-                            <i class="fas fa-minus"></i>
-                        </a>                
-                        <label for="quantity"></label>                
-                        <input class="quantity mt-2 w-25" type="number" id="quantity" name="quantity" min="1" max="10" value="1"> 
-                        <a id="plus" class="btn p-0 m-0">
-                            <i class="fas fa-plus"></i>
-                        </a> 
+                    <div>
+                        {% if open_status %}                                                    
+                            <a id="minus" class="btn p-0 m-0">
+                                <i class="fas fa-minus"></i>
+                            </a>                                  
+                            <label for="quantity"></label>                
+                            <input class="quantity mt-2 w-25" type="number" id="quantity" name="quantity" min="1" max="10" value="1"> 
+                            <a id="plus" class="btn p-0 m-0">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        {% else %}
+                        {% endif %} 
                     </div>
                     {% if open_status %}
                     <div class="mt-4">
