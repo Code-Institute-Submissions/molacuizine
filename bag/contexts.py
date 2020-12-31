@@ -26,27 +26,31 @@ def bag_contents(request):
     hours = datetime.datetime.now().hour
     mins = datetime.datetime.now().hour
 
-    # totalMins = hours * 60 + mins
-    totalMins = 1300
+    totalMins = hours * 60 + mins
+
     if 0 <= totalMins < 360:
         delta = 360 - totalMins
         mins = delta % 60
         hours = int((delta-mins)/60)
-        open_status = (
+        open_message = (
             f'We are closed. Orders start in {hours} hours and {mins} mins')
+        open_status = False
     elif totalMins < 1080:
-        open_status = "We are open!"
+        open_message = "We are open!"
+        open_status = True
     elif totalMins <= 1439:
         delta = 1440 - totalMins + 360
         mins = delta % 60
         hours = int((delta-mins)/60)
-        open_status = (
+        open_message = (
             f'We are closed. Orders start in {hours} hours and {mins} mins')
+        open_status = False
     context = {
-        'open_status': open_status,
+        'open_message': open_message,
         'bag_items': bag_items,
         'total': total,
         'product_count': product_count,
+        'open_status': open_status,
     }
 
     return context
