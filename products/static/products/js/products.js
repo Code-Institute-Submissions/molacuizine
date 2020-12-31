@@ -1,5 +1,8 @@
 $(document).ready(function(){
-  $("button").click(function(){
-    $("p").slideToggle();
+  $("#minus").click(function(){
+    $("body").css('background', 'red');
+  });
+  $("#plus").click(function(){
+    $("body").css('background', 'blue');
   });
 });
