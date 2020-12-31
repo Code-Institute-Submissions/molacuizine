@@ -26,6 +26,10 @@ img {
     font-size: 500;
 }
 
+.top-row {
+    height: 0 !important;
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
@@ -43,5 +47,12 @@ img {
 
     .container {
         height: 130px;        
+    }
+}
+
+@media (max-width: 576px) {
+    img {
+        width: 60%;
+        margin-left: 20%;
     }
 }

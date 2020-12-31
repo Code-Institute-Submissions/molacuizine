@@ -24,10 +24,10 @@ def bag_contents(request):
     '''Code to show if shop is open or closed'''
 
     hours = datetime.datetime.now().hour
-    mins = datetime.datetime.now().hour
+    mins = datetime.datetime.now().minute
 
     totalMins = hours * 60 + mins
-
+    # totalMins = 370
     if 0 <= totalMins < 360:
         delta = 360 - totalMins
         mins = delta % 60
