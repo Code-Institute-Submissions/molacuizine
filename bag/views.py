@@ -1,6 +1,5 @@
 from django.shortcuts import (
-    render, redirect, reverse, get_object_or_404)
-from products.models import Product
+    render, redirect, reverse)
 
 
 # Create your views here.
@@ -25,5 +24,5 @@ def add_to_bag(request, product_id):
             bag[product_id] = quantity
 
     request.session['bag'] = bag
-
+    print(bag)
     return redirect(reverse('product_detail', args=[product_id]))
