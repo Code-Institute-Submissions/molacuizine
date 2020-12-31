@@ -1,0 +1,43 @@
+{% if bag_items %}
+            <div class="row no-gutters">
+                <div class="d-none d-md-block col-md-3">
+                    <p class="header font-weight-bold">Product</p>
+                </div>
+                <div class="header d-none d-md-block col-md-3">                    
+                </div>
+                 <div class="header d-none d-md-block col-md-4">
+                    <p class="font-weight-bold">Quantity</p>
+                </div>
+                <div class="header d-none d-md-block col-md-1">
+                    <p class="font-weight-bold">Price</p>
+                </div>
+                <div class="header d-none d-md-block col-md-1">
+                    <p class="font-weight-bold">Subtotal</p>
+                </div>
+                {% for item in bag_items %}                    
+                    <div class="d-none d-md-block col-md-3 mt-3">
+                        {% if item.product.image %}                    
+                            <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
+                        {% else %}
+                            <a href="#">
+                                <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="bag-text d-none d-md-block col-md-3 mt-3 p-3">
+                        {{ item.product.description }}
+                    </div>
+                    <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
+                        {{ item.quantity }}
+                    </div>
+                    <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
+                        {{ item.product.price }}                    
+                    </div>
+                    <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
+                        {{ item.sub_total }}                    
+                    </div>
+                    <hr>                                       
+                {% endfor %}                               
+            </div>            
+        {% else %}
+        {% endif %}
