@@ -11,9 +11,9 @@
     <hr>    
     <div class="container">        
         <div class="row mt-5">
-            <div class="col-md-1">                
+            <div class="col-lg-1">                
             </div>
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-7 col-lg-5">
                 {% if product.image %}                    
                     <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">                    
                 {% else %}
@@ -22,8 +22,8 @@
                     </a>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-5">
-                <p class="text-center card-text pt-3">{{ product.name }}</p><hr>
+            <div class="col-12 col-md-5 col-lg-5">
+                <p class="text-center card-text pt-0">{{ product.name }}</p><hr>
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'products' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text mt-4">{{ product.description }}</p><br>
                 <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
@@ -42,12 +42,12 @@
                         </a> 
                     </div>
                     <div class="mt-4">
-                        <a href="#" class="btn">Back to Menu</a>
-                        <input type="submit" class="btn">
+                        <a href="#" class="btn product-return"><i class="fas fa-chevron-left"></i> Continue Ordering</a>
+                        <input type="submit" class="btn product-submit" value="Add to bag">
                     </div>
                 </form>  
             </div>
-            <div class="col-md-1">                
+            <div class="col-lg-1">                
             </div>                       
         </div>
     </div>    
