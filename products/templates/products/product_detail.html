@@ -41,10 +41,16 @@
                             <i class="fas fa-plus"></i>
                         </a> 
                     </div>
+                    {% if open_status %}
                     <div class="mt-4">
                         <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Continue Ordering</a>
                         <input type="submit" class="btn product-submit" value="Add to bag">
                     </div>
+                    {% else %}
+                        <div class="mt-4">
+                            <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Back to menu</a>                            
+                        </div>
+                    {% endif %}
                 </form>  
             </div>
             <div class="col-lg-1">                
