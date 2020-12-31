@@ -7,48 +7,28 @@
 
 {% block content %}    
     <div class="container"></div>  
-    <h1 class="header text-center">Products page</h1>
-    <hr>
-    <div>
-        {% for c in current_category %}
-            <a class="product-link" href="{% url 'products' %}?category={{ c.name }}">
-                <p class="product-tag text-center">{{ c.friendly_name }}</p>
-            </a>
-        {% endfor %}
-    </div>
-    <p class="card-text text-center mt-2">{{ count }} Products</p>
+    <h1 class="header text-center">Products Details</h1>
+    <hr>    
     <div class="container background mt-2">        
-        <div class="row">            
-            {% for product in products %}
-                <div class="product col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
-                    <div class="card m-2">
-                        {% if product.image %}
-                            <a href="#">
-                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                            </a>
-                        {% else %}
-                            <a href="#">
-                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{ product.name }}</p>
-                        <p class="card-text">Rs <span class="font-weight-bold">{{ product.price }}</span></p>
-                        <div class="row no-gutters">
-                            <div class="col-1">
-                                <i class="fas fa-utensils"></i>
-                            </div>
-                            <div class="col-11 text-left">
-                                <a href="#">
-                                    <p class="card-text">{{ product.category.friendly_name }}</p>
-                                </a>
-                            </div>                            
-                        </div>
-                    </div>
-                <hr>                                      
-                </div>                                                                     
-            {% endfor %}             
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% if product.image %}
+                    <a href="#">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </a>
+                {% else %}
+                    <a href="#">
+                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+                {{ product.name }}<br>
+                {{ product.category }}<br>
+                {{ product.description }}<br>
+                {{ product.price }}
+            </div>            
+                         
         </div>
     </div>    
 {% endblock %}
