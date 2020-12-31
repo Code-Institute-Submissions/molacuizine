@@ -1,3 +1,5 @@
+/* Products app css */
+
 .container {
     height: 170px;
     width: 95% !important;
@@ -82,6 +84,34 @@ img {
     height: 32px;    
 }
 
+.product-submit {
+    border: 1px solid black;
+    border-radius: 0;
+    background: black;
+    color: rgb(255, 255, 255);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+}
+
+.product-return {
+    border: 1px solid black;
+    border-radius: 0;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+}
+
+.product-return:hover {    
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);    
+}
+
+.product-submit:hover {    
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);    
+}
+
 /* Hide arrows on input fields */
 /*https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp*/
 
@@ -95,20 +125,21 @@ input::-webkit-inner-spin-button {
 
 @media (max-width: 991px) {
     .container {
-        height: 130px;        
+        height: 130px;            
     }
-
-    .product-detail-image {
-        height: 300px !important;
-    }
+    .product-return, .product-submit {
+        font-size: 15px;
+    }    
 }
 
 @media (max-width: 576px) {
     .container {
         height: 130px;        
     }
-
     .product-detail-image {
         height: 300px !important;
     }
+    .product-return, .product-submit {
+        font-size: 14px;
+    } 
 }
