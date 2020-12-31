@@ -12,10 +12,8 @@
     <div class="container background mt-2">        
         <div class="row">
             <div class="col-12 col-md-6">
-                {% if product.image %}
-                    <a href="#">
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                    </a>
+                {% if product.image %}                    
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">                    
                 {% else %}
                     <a href="#">
                         <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
@@ -24,7 +22,7 @@
             </div>
             <div class="col-12 col-md-6">
                 <p class="text-center card-text pt-3">{{ product.name }}</p><hr>
-                <i class="fas fa-utensils d-inline"></i><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p><br>
+                <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'products' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text mt-4">{{ product.description }}</p><br>
                 <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
             </div>            
