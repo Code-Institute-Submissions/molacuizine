@@ -22,14 +22,14 @@
                     </a>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-5 col-lg-5">
+            <div class="col-12 col-md-5 col-lg-5">                
                 <p class="text-center card-text pt-0">{{ product.name }}</p><hr>
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'products' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text mt-4">{{ product.description }}</p><br>
                 <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
                 <p class="card-text font-weight-bold mt-4">Quantity:</p>
                 <!-- Form to add product to bag -->
-                <form class="form" action="#" method="POST">
+                <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                     {% csrf_token %}
                     <div>                                                   
                         <a id="minus" class="btn p-0 m-0">
