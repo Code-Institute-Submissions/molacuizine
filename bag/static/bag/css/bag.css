@@ -72,6 +72,19 @@ img {
     background: rgb(90, 90, 245);    
 }
 
+.delete-item {
+    background: rgb(247, 43, 43);
+    color: white;
+    font-size: 14px;    
+    border: none;
+    padding: 3px;
+}
+
+.delete-item:hover {
+    background: rgb(243, 91, 91);
+    color: white;    
+}
+
 /*----- Quanitity form input ----------------------------*/
 
 .fa-plus {
