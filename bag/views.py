@@ -26,3 +26,18 @@ def add_to_bag(request, product_id):
     request.session['bag'] = bag
     print(bag)
     return redirect(reverse('product_detail', args=[product_id]))
+
+
+def adjust_bag(request, product_id):
+    """ A view to adjust bag content"""
+    if request.POST:
+        # product = Products.get_object_or_404(Product, pk=product_id)
+        quantity = int(request.POST.get('quantity'))
+
+        # Request existing bag
+        bag = request.session.get('bag', {})
+
+        bag[product_id] += quantity
+
+    request.session['bag'] = bag
+    return redirect(reverse('view_bag'))
