@@ -60,6 +60,18 @@ img {
     color: rgb(255, 255, 255);    
 }
 
+.edit-item {
+    background: rgb(41, 41, 245);
+    color: white;
+    font-size: 14px;    
+    border: none;
+    padding: 3px;
+}
+
+.edit-item:hover {
+    background: rgb(90, 90, 245);    
+}
+
 /*----- Quanitity form input ----------------------------*/
 
 .fa-plus {
