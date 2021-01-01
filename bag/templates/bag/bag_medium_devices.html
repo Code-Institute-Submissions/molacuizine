@@ -23,8 +23,8 @@
                 <a id="plus-small-{{ forloop.counter }}" class="plus-small btn p-0 m-0">
                     <i class="fas fa-plus"></i>
                 </a><br>
-                <input type="submit" class="btn edit-item mb-1 mr-3" value="Update item">
-                <a href="{% url 'delete_item' item.product.id %}" class="btn delete-item mb-1 ml-3">Delete item</a>
+                <input type="submit" class="btn edit-item" value="Update item">
+                <a href="{% url 'delete_item' item.product.id %}" class="btn delete-item">Delete item</a>
             </form>
             <p class="bag-text p-1"><span class="font-weight-bold">Price: </span>Rs {{ item.product.price }}</p>
             <p class="bag-text p-1"><span class="font-weight-bold">Subtotal: </span>Rs {{ item.sub_total }}</p>

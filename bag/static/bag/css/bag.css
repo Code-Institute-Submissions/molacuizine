@@ -165,13 +165,27 @@ input::-webkit-inner-spin-button {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .mobile-top-row {
         margin-top: -50px;
+    }
+
+    .container {
+        height: 130px;        
     }
     
     .checkout-button, .product-return {
         font-size: 12px;
         padding: 6px;
-    } 
+    }
+    
+    .fa-plus {
+        margin-top: 0;     
+        margin-left: -6px;
+    }
+    
+    .fa-minus { 
+        margin-top: -1px;         
+        margin-right: -10px;
+    }    
 }
