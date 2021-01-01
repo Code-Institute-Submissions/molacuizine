@@ -1,13 +1,14 @@
-$(document).ready(function(){    
-    let val=0;           
+$(document).ready(function(){
+    // Function for product quantity selector //    
+    let val=parseInt($("#quantity").val());           
     $("#plus").click(function(){
-        if(val<=9 && val >=0){
+        if(val<=19){
             val += 1;
             $("#quantity").val(val);
         }                       
     });    
     $("#minus").click(function(){ 
-        if(val<=10 && val >=1){            
+        if(val >=2){            
             val -= 1;
             $("#quantity").val(val);
         }      
