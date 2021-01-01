@@ -1,5 +1,7 @@
 from django.shortcuts import (
-    render, redirect, reverse)
+    render, redirect, reverse, get_object_or_404)
+from django.contrib import messages
+from products.models import Product
 
 
 # Create your views here.
@@ -11,8 +13,10 @@ def view_bag(request):
 
 def add_to_bag(request, product_id):
     """ A view that add's specific product to bag"""
+
+    product = get_object_or_404(Product, pk=product_id)
+
     if request.POST:
-        # product = Products.get_object_or_404(Product, pk=product_id)
         quantity = int(request.POST.get('quantity'))
 
         # Create or call existing bag
@@ -20,8 +24,10 @@ def add_to_bag(request, product_id):
 
         if product_id in bag.keys():
             bag[product_id] += quantity
+            messages.success(request, f'Added {product.name} to your bag')
         else:
             bag[product_id] = quantity
+            messages.success(request, f'Added {product.name} to your bag')
 
     request.session['bag'] = bag
     print(bag)
