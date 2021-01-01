@@ -163,6 +163,11 @@ input::-webkit-inner-spin-button {
         margin-left: 20%;
     }
 
+    .fa-minus { 
+        margin-top: -1px;         
+        margin-right: -11px !important;
+    }  
+
 }
 
 @media (max-width: 767px) {
@@ -186,6 +191,6 @@ input::-webkit-inner-spin-button {
     
     .fa-minus { 
         margin-top: -1px;         
-        margin-right: -10px;
+        margin-right: -11px;
     }    
 }
