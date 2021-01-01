@@ -37,7 +37,7 @@ def adjust_bag(request, product_id):
         # Request existing bag
         bag = request.session.get('bag', {})
 
-        bag[product_id] += quantity
+        bag[product_id] = quantity
 
     request.session['bag'] = bag
     return redirect(reverse('view_bag'))
