@@ -14,7 +14,11 @@
         <div class="header d-none d-md-block col-md-1">
             <p class="font-weight-bold">Subtotal</p>
         </div>
-        {% for item in bag_items %}                    
+        {% for item in bag_items %}
+            <div class="bag-text d-none d-md-block col-md-3 mt-1 pl-3 pt-2 pb-0">
+                <span class="border-bottom border-secondary mb-3">{{ forloop.counter }}. {{ item.product.name }}</span><br>                
+                {{ item.product.description }}
+            </div>                    
             <div class="d-none d-md-block col-md-3 mt-3">
                 {% if item.product.image %}                    
                     <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
@@ -23,11 +27,7 @@
                         <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                     </a>
                 {% endif %}
-            </div>
-            <div class="bag-text d-none d-md-block col-md-3 mt-1 pl-3 pt-2 pb-0">
-                <span class="border-bottom border-secondary mb-3">{{ forloop.counter }}.{{ item.product.name }}</span><br>                
-                {{ item.product.description }}
-            </div>
+            </div>            
             <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
                 {{ item.quantity }}
             </div>
@@ -39,6 +39,11 @@
             </div>
             <hr>                                       
         {% endfor %}                               
-    </div>            
+    </div>
+    <div class="row">
+        <div class="col 12">
+            {{ total }}
+        </div>
+    </div>               
 {% else %}
 {% endif %}
