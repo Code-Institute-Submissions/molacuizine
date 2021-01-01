@@ -3,19 +3,21 @@ $(document).ready(function(){
 
     $(".plus").click(function(){ 
         let plus=$(this).attr("id");
-        let val=parseInt($("#quantity-"+plus).val()); 
+        let newPlus=plus.split("-")
+        let val=parseInt($("#quantity-"+newPlus[1]).val()); 
         console.log(val)
         if(val<=49){
             val += 1;
-            $("#quantity-"+plus).val(val);
+            $("#quantity-"+newPlus[1]).val(val);
         }                       
     });    
     $(".minus").click(function(){
         let minus=$(this).attr("id");
-        let val=parseInt($("#quantity-"+minus).val()); 
+        let newMinus=minus.split("-")
+        let val=parseInt($("#quantity-"+newMinus[1]).val()); 
         if(val >=2){            
             val -= 1;
-            $("#quantity-"+minus).val(val);
+            $("#quantity-"+newMinus[1]).val(val);
         }      
     });         
 });
