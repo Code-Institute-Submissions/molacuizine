@@ -10,9 +10,12 @@
     <h1 class="text-center">Ordered Items</h1>
     <hr>    
     <div class="container">
-        <!-- For medium and higher devices -->
-        {% include "bag/bag_large_devices.html" %}
-        {% include "bag/bag_medium_devices.html" %}                                     
+        <!-- For medium and higher devices -->  
+        {% if bag_items %}
+            {% include "bag/bag_large_devices.html" %}
+            {% include "bag/bag_medium_devices.html" %}
+        {% else %}
+        {% endif %}                                     
     </div>    
 {% endblock %}
 

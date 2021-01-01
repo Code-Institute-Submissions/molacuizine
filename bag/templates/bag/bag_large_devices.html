@@ -1,70 +1,67 @@
-{% if bag_items %}
-    <div class="row top-row no-gutters mb-3">
-        <div class="d-none d-md-block col-md-3">
-            <p class="header font-weight-bold">Item</p>
-        </div>
-        <div class="header d-none d-md-block col-md-3">                    
-        </div>
-        <div class="header d-none d-md-block col-md-4">
-            <p class="font-weight-bold">Quantity</p>
-        </div>
-        <div class="header d-none d-md-block col-md-1">
-            <p class="font-weight-bold">Price</p>
-        </div>
-        <div class="header d-none d-md-block col-md-1">
-            <p class="font-weight-bold">Subtotal</p>
-        </div>
+<div class="row top-row no-gutters mb-3">
+    <div class="d-none d-md-block col-md-3">
+        <p class="header font-weight-bold">Item</p>
     </div>
-    <div class="mobile-top-row row no-gutters">
-        {% for item in bag_items %}
-            <div class="bag-text d-none d-md-block col-md-3 mt-1 pl-3 pt-2 pb-0">
-                <span class="border-bottom border-secondary mb-3">{{ forloop.counter }}. {{ item.product.name }}</span><br>                
-                {{ item.product.description }}
-            </div>                    
-            <div class="d-none d-md-block col-md-3 mt-3">
-                {% if item.product.image %}                    
-                    <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
-                {% else %}
-                    <a href="#">
-                        <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                    </a>
-                {% endif %}
-            </div>            
-            <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
-                {{ item.quantity }}
-            </div>
-            <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
-                {{ item.product.price }}                    
-            </div>
-            <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
-                {{ item.sub_total }}                    
-            </div>
-            <hr>                                       
-        {% endfor %}                               
+    <div class="header d-none d-md-block col-md-3">                    
     </div>
-    <div class="row">
-        <div class="col-12 border-top mt-2 d-none d-md-block">
-        </div>
+    <div class="header d-none d-md-block col-md-4">
+        <p class="font-weight-bold">Quantity</p>
     </div>
-    <div class="row mt-2">
-        <div class="col-10 d-none d-md-block">
-            <p class="header font-weight-bold text-right">Total</p>
+    <div class="header d-none d-md-block col-md-1">
+        <p class="font-weight-bold">Price</p>
+    </div>
+    <div class="header d-none d-md-block col-md-1">
+        <p class="font-weight-bold">Subtotal</p>
+    </div>
+</div>
+<div class="mobile-top-row row no-gutters">
+    {% for item in bag_items %}
+        <div class="bag-text d-none d-md-block col-md-3 mt-1 pl-3 pt-2 pb-0">
+            <span class="border-bottom border-secondary mb-3">{{ forloop.counter }}. {{ item.product.name }}</span><br>                
+            {{ item.product.description }}
+        </div>                    
+        <div class="d-none d-md-block col-md-3 mt-3">
+            {% if item.product.image %}                    
+                <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
+            {% else %}
+                <a href="#">
+                    <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                </a>
+            {% endif %}
+        </div>            
+        <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
+            {{ item.quantity }}
         </div>
-        <div class="col-2 text-right bag-text d-none d-md-block">
-            Rs {{ total }}
+        <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
+            {{ item.product.price }}                    
         </div>
+        <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
+            {{ item.sub_total }}                    
+        </div>
+        <hr>                                       
+    {% endfor %}                               
+</div>
+<div class="row">
+    <div class="col-12 border-top mt-2 d-none d-md-block">
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-10 d-none d-md-block">
+        <p class="header font-weight-bold text-right">Total</p>
+    </div>
+    <div class="col-2 text-right bag-text d-none d-md-block">
+        Rs {{ total }}
+    </div>
+    <div class="col-10">
+        <p class="header font-weight-bold text-right d-none d-md-block">Transport</p>
+    </div>
+    <div class="col-2 text-right bag-text d-none d-md-block">
+        Rs {{ transport }}
+    </div>
         <div class="col-10">
-            <p class="header font-weight-bold text-right d-none d-md-block">Transport</p>
-        </div>
-        <div class="col-2 text-right bag-text d-none d-md-block">
-            Rs {{ transport }}
-        </div>
-         <div class="col-10">
-            <p class="header font-weight-bold text-right d-none d-md-block">Grand Total</p>
-        </div>
-        <div class="col-2 text-right bag-text d-none d-md-block">
-            Rs {{ grand_total }}
-        </div>
-    </div>               
-{% else %}
-{% endif %}
+        <p class="header font-weight-bold text-right d-none d-md-block">Grand Total</p>
+    </div>
+    <div class="col-2 text-right bag-text d-none d-md-block">
+        Rs {{ grand_total }}
+    </div>
+</div>               
