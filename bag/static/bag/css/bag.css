@@ -30,7 +30,7 @@ img {
     height: 0 !important;
 }
 
-/*----- Bag buttonsn ------------------------------*/
+/*----- Bag buttons ------------------------------*/
 
 .checkout-button {
     border: 1px solid black;
@@ -60,6 +60,36 @@ img {
     color: rgb(255, 255, 255);    
 }
 
+/*----- Quanitity form input ----------------------------*/
+
+.fa-plus {
+    background: black;
+    color: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    margin-left: -10px;
+}
+
+.fa-plus:hover {
+    background: rgb(65, 60, 60);
+}
+
+.fa-minus:hover {
+    background: rgb(65, 60, 60);
+}
+
+.fa-minus {
+    background: black;
+    color: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    margin-right: -11px
+}
+
+.quantity {
+    height: 32px;    
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
@@ -77,6 +107,16 @@ img {
 
     .container {
         height: 130px;        
+    }
+
+    .fa-plus {
+        margin-top: 1px;     
+        margin-left: -5px;
+    }
+
+    .fa-minus {
+        margin-top: 1px;    
+        margin-right: -8px;
     }
 }
 

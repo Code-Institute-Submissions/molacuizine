@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'bag/css/bag.css' %}">
+    <link rel="stylesheet" href="{% static 'bag/css/bag.css' %}">    
 {% endblock %}
 
 {% block content %}    
     <div class="container"></div>  
-    <h1 class="text-center">Ordered Items</h1>
+        <h1 class="text-center">Ordered Items</h1>
     <hr>    
     <div class="container">
         <!-- For medium and higher devices -->  
@@ -15,6 +15,8 @@
             {% include "bag/bag_large_devices.html" %}
             {% include "bag/bag_medium_devices.html" %}
         {% else %}
+            <h1 class="card-text text-center">Your bag is empty!</h1>
+            <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> CONTINUE ORDERING</a>
         {% endif %}                                     
     </div>    
 {% endblock %}
