@@ -1,4 +1,4 @@
-<div class="row top-row no-gutters order-1">
+<div class="row top-row no-gutters">
     {% for item in bag_items %}                      
         <div class="col-12 col-sm-5 d-md-none mt-2">
             <p class="bag-text pb-0 p-1 mb-2 border-bottom border-secondary">{{ forloop.counter }}.{{ item.product.name}}</p> 
@@ -16,9 +16,26 @@
             <p class="bag-text p-1"><span class="font-weight-bold">Price: </span>Rs {{ item.product.price }}</p>
             <p class="bag-text p-1"><span class="font-weight-bold">Subtotal: </span>Rs {{ item.sub_total }}</p>
         </div>
-    {% endfor %}
-</div>
-<div class="row">
-    <div class="col-12 border-top">        
+    {% endfor %}    
+    <div class="col-12 border-top mt-2 mb-2 d-md-none">        
+    </div> 
+    <div class="col-8 d-md-none">
+        <p class="header font-weight-bold text-right">Total</p>
     </div>
-</div>                        
+    <div class="col-4 text-right bag-text d-md-none">
+        Rs {{ total }}
+    </div>
+    <div class="col-8">
+        <p class="header font-weight-bold text-right d-md-none">Transport</p>
+    </div>
+    <div class="col-4 text-right bag-text d-md-none">
+        Rs {{ transport }}
+    </div>
+        <div class="col-8">
+        <p class="header font-weight-bold text-right d-md-none">Grand Total</p>
+    </div>
+    <div class="col-4 text-right bag-text d-md-none">
+        Rs {{ grand_total }}
+    </div>      
+</div>
+                       
