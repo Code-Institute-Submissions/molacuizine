@@ -85,7 +85,7 @@ img {
     color: white;    
 }
 
-/*----- Quanitity form input ----------------------------*/
+/*----- Quantity form input ----------------------------*/
 
 .fa-plus {
     background: black;
@@ -151,6 +151,9 @@ input::-webkit-inner-spin-button {
     .fa-minus {
         margin-top: 1px;    
         margin-right: -8px;
+    }
+    .edit-item, .delete-item {    
+        font-size: 12px;   
     }
 }
 
