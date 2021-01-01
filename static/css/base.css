@@ -70,6 +70,10 @@
     z-index: 999;
 }
 
+.toast-body {
+    background-color: white;
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 576px) {
