@@ -1,5 +1,6 @@
 from products.models import Product
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 import datetime
 
 
@@ -51,6 +52,8 @@ def bag_contents(request):
         'total': total,
         'product_count': product_count,
         'open_status': open_status,
+        'transport': settings.TRANSPORT_COST,
+        'grand_total': total + settings.TRANSPORT_COST,
     }
 
     return context
