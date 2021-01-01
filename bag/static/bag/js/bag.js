@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    // Code to allow selection on bag page //
+    // Code to allow quantity selection on bag page //
     // medium and large screens //
     $(".plus").click(function(){ 
         let plus=$(this).attr("id");
@@ -21,7 +21,8 @@ $(document).ready(function(){
         }      
     }); 
     
-    // Medim and lower screens //
+    // Medium and lower screens //
+    /* Add new id to differentiate from large screens */
     $(".plus-small").click(function(){ 
         let plus=$(this).attr("id");
         let newPlus=plus.split("-")
