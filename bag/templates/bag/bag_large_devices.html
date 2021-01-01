@@ -52,16 +52,21 @@
     <div class="col-2 text-right bag-text d-none d-md-block">
         Rs {{ total }}
     </div>
-    <div class="col-10">
-        <p class="header font-weight-bold text-right d-none d-md-block">Transport</p>
+    <div class="col-10 d-none d-md-block">
+        <p class="header font-weight-bold text-right">Transport</p>
     </div>
     <div class="col-2 text-right bag-text d-none d-md-block">
         Rs {{ transport }}
     </div>
-        <div class="col-10">
-        <p class="header font-weight-bold text-right d-none d-md-block">Grand Total</p>
+        <div class="col-10 d-none d-md-block">
+        <p class="header font-weight-bold text-right">Grand Total</p>
     </div>
     <div class="col-2 text-right bag-text d-none d-md-block">
         Rs {{ grand_total }}
+    </div>
+    <div class="col-4 d-none d-md-block"></div>    
+    <div class="col-8 d-none d-md-block text-right pr-0">        
+        <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> KEEP ORDERING</a>        
+        <a href="{% url 'products' %}" class="btn checkout-button"><i class="fas fa-lock"></i> SECURE CHECKOUT</a>
     </div>
 </div>               
