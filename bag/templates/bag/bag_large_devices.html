@@ -31,13 +31,13 @@
         </div>            
         <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
             {{ item.quantity }}<br>
-            <form class="form" action="#" method="POST">
+            <form class="form" action="{% url 'adjust_bag' item.product.id %}" method="POST">
                 {% csrf_token %}
                 <a id="minus-{{ forloop.counter }}" class="minus btn p-0 m-0">
                     <i class="fas fa-minus"></i>
                 </a>                                  
                 <label for="quantity"></label>                
-                <input class="quantity mt-2 w-25" type="number" id="quantity-{{ forloop.counter }}" name="quantity" min="1" max="10" value="{{ item.quantity }}"> 
+                <input class="quantity mt-2 w-25" type="number" id="quantity-{{ forloop.counter }}" name="quantity" min="1" max="50" value="{{ item.quantity }}"> 
                 <a id="plus-{{ forloop.counter }}" class="plus btn p-0 m-0">
                     <i class="fas fa-plus"></i>
                 </a><br>
