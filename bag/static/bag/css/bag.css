@@ -30,6 +30,36 @@ img {
     height: 0 !important;
 }
 
+/*----- Bag buttonsn ------------------------------*/
+
+.checkout-button {
+    border: 1px solid black;
+    border-radius: 0;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 247, 247);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+}
+
+.checkout-button:hover {    
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);    
+}
+
+.product-return {
+    border: 1px solid black;
+    border-radius: 0;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+}
+
+.product-return:hover {    
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);    
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
@@ -61,5 +91,10 @@ img {
 @media (max-width: 768px) {
     .mobile-top-row {
         margin-top: -50px;
-    }    
+    }
+    
+    .checkout-button, .product-return {
+        font-size: 12px;
+        padding: 6px;
+    } 
 }
