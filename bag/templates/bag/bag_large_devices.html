@@ -9,13 +9,13 @@
             <p class="font-weight-bold">Quantity</p>
         </div>
         <div class="header d-none d-md-block col-md-1">
-            <p class="font-weight-bold pl-3">Price</p>
+            <p class="font-weight-bold">Price</p>
         </div>
         <div class="header d-none d-md-block col-md-1">
-            <p class="font-weight-bold pl-3">Subtotal</p>
+            <p class="font-weight-bold">Subtotal</p>
         </div>
     </div>
-    <div class="row">
+    <div class="mobile-top-row row no-gutters">
         {% for item in bag_items %}
             <div class="bag-text d-none d-md-block col-md-3 mt-1 pl-3 pt-2 pb-0">
                 <span class="border-bottom border-secondary mb-3">{{ forloop.counter }}. {{ item.product.name }}</span><br>                

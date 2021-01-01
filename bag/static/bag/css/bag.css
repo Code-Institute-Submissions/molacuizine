@@ -55,5 +55,11 @@ img {
         width: 60%;
         margin-left: 20%;
     }
-    
+
+}
+
+@media (max-width: 768px) {
+    .mobile-top-row {
+        margin-top: -50px;
+    }    
 }
