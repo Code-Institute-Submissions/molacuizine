@@ -22,7 +22,7 @@
             </div>
             <div class="col-12 col-md-5 col-lg-5">                
                 <p class="text-center card-text pt-0">{{ product.name }}</p><hr>
-                <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'products' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
+                <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'category_search' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text mt-4">{{ product.description }}</p><br>
                 <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
                 {% if open_status %} 
