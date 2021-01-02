@@ -34,6 +34,9 @@ def all_products(request):
     else:
         object_finish = object_start + 4
 
+    previous_page = page_number - 1
+    next_page = page_number + 1
+    last_page = page_num[-1]
     context = {
         'page_num': page_num,
         'objects': objects,
@@ -41,6 +44,9 @@ def all_products(request):
         'count': count,
         'start': object_start,
         'finish': object_finish,
+        'next': next_page,
+        'previous': previous_page,
+        'last': last_page,
     }
     return render(request, 'products/products.html', context)
 
