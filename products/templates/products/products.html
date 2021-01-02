@@ -21,10 +21,10 @@
     <ul class="pagination justify-content-center ">
         <li class="page-item">
             {% if previous == 0 %}
-                <a class="page-link page-item text-dark font-weight-bold" href="#" aria-label="Previous">
+                <span class="page-link page-item text-dark font-weight-bold end-link" href="#" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
-                </a> 
+                </span> 
             {% else %}
                 <a class="page-link text-dark font-weight-bold" href="{% url 'products' %}?page_number={{ previous }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
@@ -35,10 +35,10 @@
                 <li class="page-item font-weight-normal"><a class="page-link text-dark"  href="{% url 'products' %}?page_number={{ num }}">{{ num }}</a></li>
             {% endfor %}
             {% if next > last %}
-                <a class="page-link page-item text-dark font-weight-bold" href="#" aria-label="Next">
+                <span class="page-link page-item text-dark font-weight-bold end-link" href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
-                </a> 
+                </span> 
             {% else %}
                 <a class="page-link text-dark font-weight-bold" href="{% url 'products' %}?page_number={{ next }}" aria-label="Previous">
                     <span aria-hidden="true">&raquo;</span>
