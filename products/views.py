@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.core.paginator import Paginator
 from .models import Product, Category
 from django.db.models import Q
 
@@ -26,6 +27,14 @@ def all_products(request):
                     name__icontains=query) | Q(description__icontains=query)
                 products = products.filter(queries)
     count = products.count()
+
+    ''' Add pagination to product view page'''
+
+    objects = products
+    p = Paginator(objects, 5)
+    print(p.count)
+    print(p.num_pages)
+
     context = {
         'products': products,
         'current_category': categories,
