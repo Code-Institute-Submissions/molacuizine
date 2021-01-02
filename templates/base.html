@@ -33,7 +33,7 @@
                             <a class="navbar-brand font-weight-bold" href="{% url 'home' %}">MoLacuizine</a> 
                         </div>
                         <div class="col-2 col-md-8 col-lg-8 pt-lg-2"> 
-                            <form method="GET" action="{% url 'products' %}" class="form-inline text-center d-none d-md-block">
+                            <form method="GET" action="{% url 'query_search' %}" class="form-inline text-center d-none d-md-block">
                                 <input class="form-control search-1 rounded-0 mr-sm-2 w-50" name="q" type="search" placeholder="Search our products" aria-label="Search">
                                 <button class="btn btn-outline-dark my-2 my-sm-0 rounded-0" type="submit">
                                     <i class="fas fa-search"></i>
@@ -69,7 +69,7 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mt-2 mt-lg-0 d-lg-none">
                         <a class="navbar-brand" href="{% url 'home' %}">MoLacuizine</a>
-                        <form method="GET" action="{% url 'products' %}" class="form-inline d-md-none">
+                        <form method="GET" action="{% url 'query_search' %}" class="form-inline d-md-none">
                             <input class="form-control search-2 rounded-0 mr-sm-2 w-50" name="q" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-dark rounded-0 my-2 my-sm-0" type="submit">
                                 <i class="fas fa-search"></i>
