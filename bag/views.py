@@ -49,7 +49,7 @@ def adjust_bag(request, product_id):
         bag[product_id] = quantity
 
     request.session['bag'] = bag
-    messages.success(request, f'Updated {product.name} quantity to {quantity}')
+    messages.success(request, f'Updated {product.name} quantity')
 
     return redirect(reverse('view_bag'))
 
