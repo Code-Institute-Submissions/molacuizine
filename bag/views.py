@@ -57,7 +57,12 @@ def adjust_bag(request, product_id):
 def delete_from_bag(request, product_id):
     """View to remove item from the shopping bag"""
 
+    product = get_object_or_404(Product, pk=product_id)
+
     bag = request.session.get('bag')
     bag.pop(product_id)
     request.session['bag'] = bag
+
+    messages.success(request, f'{product.name} removed from bag')
+
     return redirect(reverse('view_bag'))
