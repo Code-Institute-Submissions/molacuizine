@@ -128,7 +128,7 @@ label.requiredField {
     color: rgb(0, 0, 0);
 }
 
-.password_change label {
+.password_change label, .password_reset label {
     display: none;
 }
 
