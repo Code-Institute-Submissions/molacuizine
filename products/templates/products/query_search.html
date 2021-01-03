@@ -9,22 +9,42 @@
     <div class="container"></div>  
     <h1 class="header text-center">Our Menu</h1>
     <hr>    
+    <p class="card-text text-center mt-2 mb-2">Showing {{ start }}-{{ finish }} of {{ count }} items</p>
     <nav aria-label="Page navigation example">
-    <ul class="pagination">
+    <!-- Page pagination -->
+    <ul class="pagination justify-content-center ">
         <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>                                
+            {% if previous == 0 %}
+                <span class="page-link page-item text-dark font-weight-bold end-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </span> 
+            {% else %}
+                <a class="page-link text-dark font-weight-bold" href="{% url 'query_search' %}?page_number={{ previous }}&q={{ query }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a> 
+            {% endif %}
             {% for num in page_num %}
-            <li class="page-item"><a class="page-link" href="{% url 'query_search' %}?page_number={{ num }}&q={{ query }}">{{ num }}</a></li>
+                {% if num == page_number %}
+                    <li class="page-item font-weight-normal active"><a class="page-link text-dark"  href="{% url 'query_search' %}?page_number={{ num }}&q={{ query }}">{{ num }}</a></li>
+                {% else %}
+                    <li class="page-item font-weight-normal"><a class="page-link text-dark"  href="{% url 'query_search' %}?page_number={{ num }}&q={{ query }}">{{ num }}</a></li>
+                {% endif %}
             {% endfor %}
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
+            {% if next > last %}
+                <span class="page-link page-item text-dark font-weight-bold end-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </span> 
+            {% else %}
+                <a class="page-link text-dark font-weight-bold" href="{% url 'query_search' %}?page_number={{ next }}&q={{ query }}" aria-label="Previous">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            {% endif %} 
         </li>
-    </ul>
+    </ul>    
     </nav>
     <p class="card-text text-center mt-2">{{ count }} Products</p>
     <div class="container background mt-2">        
