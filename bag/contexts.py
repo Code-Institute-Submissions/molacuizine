@@ -33,8 +33,12 @@ def bag_contents(request):
         delta = 360 - totalMins
         mins = delta % 60
         hours = int((delta-mins)/60)
-        open_message = (
-            f'We are closed. Orders start in {hours} hours and {mins} mins')
+        if hours < 1:
+            open_message = (
+                f'We are closed. Orders start in {mins} mins')
+        else:
+            open_message = (
+                f'We are closed. Orders start in {hours} hours and {mins} mins')
         open_status = False
     elif totalMins < 1080:
         open_message = "We are open!"
