@@ -143,4 +143,8 @@ label.requiredField {
     .login, .signup {
         width: 100% !important;
     }
+
+    .container {
+        width: 90%;
+    }
 }
