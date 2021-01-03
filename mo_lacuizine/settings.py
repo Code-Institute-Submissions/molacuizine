@@ -93,6 +93,10 @@ TEMPLATES = [
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+# Required for login for customisation
+# https://dev.to/gajesh/the-complete-django-allauth-guide-la3
+ACCOUNT_FORMS = {'signup': 'templates.forms.CustomSignupForm'}
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
