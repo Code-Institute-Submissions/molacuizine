@@ -41,7 +41,6 @@ def all_products(request):
         'page_number': page_number,
         'page_num': page_num,
         'objects': objects,
-        'current_category': categories,
         'count': count,
         'start': object_start,
         'finish': object_finish,
@@ -54,7 +53,7 @@ def all_products(request):
 
 def query_search(request):
     """ A view to return products when searching using search bar
-     with pagination"""
+     including pagination"""
 
     products = Product.objects.all()
 
@@ -68,29 +67,51 @@ def query_search(request):
                 name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
+    # Add pagination numbers and links to product page
+
     if 'page_number' in request.GET:
         page_number = int(request.GET['page_number'])
     else:
         page_number = 1
+
+    count = products.count()
     objects = products
 
     p = Paginator(objects, 5)
     page_num = list(range(1, p.num_pages+1))
     objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
+    print(page_num)
+    end = count % 5
 
-    count = products.count()
+    # Code to provide page references in pagination
 
+    object_start = ((page_number-1) * 5) + 1
+    if page_number == page_num[-1]:
+        object_finish = object_start + end-1
+    else:
+        object_finish = object_start + 4
+
+    previous_page = page_number - 1
+    next_page = page_number + 1
+    last_page = page_num[-1]
     context = {
+        'query': query,
+        'page_number': page_number,
         'page_num': page_num,
         'objects': objects,
         'count': count,
-        'query': query,
+        'start': object_start,
+        'finish': object_finish,
+        'next': next_page,
+        'previous': previous_page,
+        'last': last_page,
     }
     return render(request, 'products/query_search.html', context)
 
 
 def category_search(request):
-    """ A view to return products when searching category with pagination"""
+    """ A view to return products when searching category
+        including pagination"""
 
     products = Product.objects.all()
     category = None
@@ -116,7 +137,9 @@ def category_search(request):
     objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
     print(page_num)
     end = count % 5
+
     # Code to provide page references in pagination
+
     object_start = ((page_number-1) * 5) + 1
     if page_number == page_num[-1]:
         object_finish = object_start + end-1
