@@ -126,7 +126,7 @@ label.requiredField {
         height: 150px;
     }
 
-    .login {
+    .login, .signup {
         width: 75% !important;
     }
 }
@@ -136,7 +136,11 @@ label.requiredField {
         width: 75% !important;
     }
 
-    .login {
+    .navbar-toggler {
+        padding: 4px;
+    }
+
+    .login, .signup {
         width: 100% !important;
     }
 }
