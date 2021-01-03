@@ -7,8 +7,8 @@ from django.db.models import Q
 # Create your views here.
 def all_products(request):
     """ A view to return all products  """
+
     products = Product.objects.all()
-    categories = None
 
     count = products.count()
 
@@ -25,7 +25,6 @@ def all_products(request):
     p = Paginator(objects, 5)
     page_num = list(range(1, p.num_pages+1))
     objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
-    print(page_num)
     end = count % 5
     # Code to provide page references in pagination
     object_start = ((page_number-1) * 5) + 1
@@ -80,7 +79,6 @@ def query_search(request):
     p = Paginator(objects, 5)
     page_num = list(range(1, p.num_pages+1))
     objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
-    print(page_num)
     end = count % 5
 
     # Code to provide page references in pagination
@@ -135,7 +133,6 @@ def category_search(request):
     p = Paginator(objects, 5)
     page_num = list(range(1, p.num_pages+1))
     objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
-    print(page_num)
     end = count % 5
 
     # Code to provide page references in pagination
