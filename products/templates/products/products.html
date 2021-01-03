@@ -9,15 +9,14 @@
     <div class="container"></div>  
     <h1 class="header text-center">Our Menu</h1>
     <hr>
-    <div>
-        {% for c in current_category %}
-            <a class="product-link" href="{% url 'products' %}?category={{ c.name }}">
-                <p class="product-tag text-center">{{ c.friendly_name }}</p>
-            </a>
-        {% endfor %}    
+    <div>        
+        <a class="product-link" href="{% url 'products' %}">
+            <p class="product-tag text-center">All Menu</p>
+        </a>            
     </div>
     <p class="card-text text-center mt-2 mb-2">Showing {{ start }}-{{ finish }} of {{ count }} items</p>
     <nav aria-label="Page navigation example">
+    <!-- Page pagination -->
     <ul class="pagination justify-content-center ">
         <li class="page-item">
             {% if previous == 0 %}
@@ -30,9 +29,13 @@
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a> 
-            {% endif %}                              
+            {% endif %}
             {% for num in page_num %}
-                <li class="page-item font-weight-normal"><a class="page-link text-dark"  href="{% url 'products' %}?page_number={{ num }}">{{ num }}</a></li>
+                {% if num == page_number %}
+                    <li class="page-item font-weight-normal active"><a class="page-link text-dark"  href="{% url 'products' %}?page_number={{ num }}">{{ num }}</a></li>
+                {% else %}
+                    <li class="page-item font-weight-normal"><a class="page-link text-dark"  href="{% url 'products' %}?page_number={{ num }}">{{ num }}</a></li>
+                {% endif %}
             {% endfor %}
             {% if next > last %}
                 <span class="page-link page-item text-dark font-weight-bold end-link" href="#" aria-label="Next">
@@ -47,7 +50,8 @@
             {% endif %} 
         </li>
     </ul>    
-    </nav>    
+    </nav>
+    <!-- Food item listing -->   
     <div class="container background mt-2">        
         <div class="row">            
             {% for product in objects %}
