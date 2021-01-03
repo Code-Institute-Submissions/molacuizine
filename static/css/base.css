@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,400&display=swap');
 
+
+/*----- Text ---------------------------------------*/
+h1 {
+    color: rgba(121, 118, 118);
+}
+
 /*----- Navbar header -------------------------------*/
 
 .links {
@@ -46,13 +52,13 @@
 
 .search-1 {
     border-color: black;
-    margin-right: -5px !important;
-    border-right: none;
+    margin-right: -6px !important;
+    border-right: none !important;
 }
 
 .search-2 {
     border-color: black;
-    margin-right: 0px !important;
+    margin-right: -1px !important;
     border-right: none;
 }
 
@@ -90,13 +96,22 @@
     color: rgb(0, 0, 0);    
 }
 
-/*----- Media screen -------------------------------*/
+/*----- Allauth ------------------------------------*/
 
-@media (max-width: 576px) {
-    .search-2 {
-        width: 75% !important;
-    }
+.empty-container {
+    height: 200px;
 }
+
+.form-control {
+    border-radius: 0;
+    border: 1px solid black;
+}
+
+label.requiredField {
+    display: none;
+}
+
+/*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
     .links {
@@ -106,6 +121,22 @@
     .search-1 {
         width: 75% !important;
     }
+
+    .empty-container {
+        height: 150px;
+    }
+
+    .login {
+        width: 75% !important;
+    }
 }
 
+@media (max-width: 576px) {
+    .search-2 {
+        width: 75% !important;
+    }
 
+    .login {
+        width: 100% !important;
+    }
+}
