@@ -36,16 +36,21 @@ def add_to_bag(request, product_id):
 
 def adjust_bag(request, product_id):
     """ A view to adjust bag content"""
+
+    product = get_object_or_404(Product, pk=product_id)
+
     if request.POST:
-        # product = Products.get_object_or_404(Product, pk=product_id)
+
         quantity = int(request.POST.get('quantity'))
 
         # Request existing bag
         bag = request.session.get('bag', {})
-
+        # Update quantity
         bag[product_id] = quantity
 
     request.session['bag'] = bag
+    messages.success(request, f'Updated {product.name} quantity to {quantity}')
+
     return redirect(reverse('view_bag'))
 
 
