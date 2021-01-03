@@ -38,6 +38,7 @@ def all_products(request):
     next_page = page_number + 1
     last_page = page_num[-1]
     context = {
+        'page_number': page_number,
         'page_num': page_num,
         'objects': objects,
         'current_category': categories,
@@ -99,24 +100,44 @@ def category_search(request):
         products = products.filter(category__name=category)
         friendly_name = (get_object_or_404(
             Category, name=category)).friendly_name
+
+    # Add pagination numbers and links to product page
+
     if 'page_number' in request.GET:
         page_number = int(request.GET['page_number'])
     else:
         page_number = 1
+
+    count = products.count()
     objects = products
 
     p = Paginator(objects, 5)
     page_num = list(range(1, p.num_pages+1))
     objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
+    print(page_num)
+    end = count % 5
+    # Code to provide page references in pagination
+    object_start = ((page_number-1) * 5) + 1
+    if page_number == page_num[-1]:
+        object_finish = object_start + end-1
+    else:
+        object_finish = object_start + 4
 
-    count = products.count()
-
+    previous_page = page_number - 1
+    next_page = page_number + 1
+    last_page = page_num[-1]
     context = {
+        'friendly_name': friendly_name,
+        'page_number': page_number,
         'page_num': page_num,
         'objects': objects,
         'current_category': category,
-        'friendly_name': friendly_name,
         'count': count,
+        'start': object_start,
+        'finish': object_finish,
+        'next': next_page,
+        'previous': previous_page,
+        'last': last_page,
     }
     return render(request, 'products/category_search.html', context)
 
