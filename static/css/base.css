@@ -111,6 +111,23 @@ label.requiredField {
     display: none;
 }
 
+.allauth-button {
+    background: black;
+    color: white;
+    border-radius: 0;
+    border: none;
+    height: 40px;
+    padding: 0 10px 0 10px;    
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    border: 1px solid black;
+}
+
+.allauth-button:hover {
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
