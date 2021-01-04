@@ -97,7 +97,7 @@ h1 {
     color: rgb(0, 0, 0);    
 }
 
-/*----- Forms styling (allauth, profile, order ---------------*/
+/*----- Forms styling for allauth ---------------*/
 
 .empty-container {
     height: 200px;
