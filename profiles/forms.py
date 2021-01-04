@@ -16,7 +16,7 @@ class UserProfileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             'default_phone_number': 'Phone Number',
-            'default_street_address1': 'Street Address 1',
+            'default_street_address1': 'Street Address',
             'town': 'Street Address 2',
             'default_postcode': 'County, State or Locality',
         }
