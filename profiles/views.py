@@ -10,12 +10,13 @@ from django.contrib.auth.decorators import login_required
 def profile(request):
     """ Display the user's profile. """
 
+    # Request profile for logged in user
     profile = get_object_or_404(UserProfile, user__username=request.user)
 
     if request.method == 'POST':
 
         form = UserProfileForm(request.POST, instance=profile)
-        
+
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully')
