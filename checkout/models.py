@@ -26,7 +26,10 @@ class Order(models.Model):
     stripe_pid = models.CharField(
         max_length=254, null=False, blank=False, default='')
 
+    def __str__(self):
+        return self.order_number
 
+        
 class OrderLineItem(models.Model):
     # orderlineitem can have only 1 order, so put foreignkey here
     order = models.ForeignKey(
