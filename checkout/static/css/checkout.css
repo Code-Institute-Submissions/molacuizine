@@ -1,3 +1,11 @@
 .stripe-style-input::placeholder {
     color: #aab7c4;
 }
+
+#id_town option:first-child {
+    color: #aab7c4;
+}
+
+#id_town option:not(:first-child) {
+    color: #000;
+}
