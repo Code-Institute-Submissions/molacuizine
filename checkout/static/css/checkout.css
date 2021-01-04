@@ -9,3 +9,7 @@
 #id_town option:not(:first-child) {
     color: #000;
 }
+
+#id_request {
+    height: 100px ;
+}
