@@ -9,7 +9,11 @@
     <div class="container">
         <h1 class="text-left">Checkout Page</h1>
         <hr>
-                                             
+        <form class="order-form mt-3 w-50" action="#" method="POST" id="order-update-form">
+            {% csrf_token %}
+            {{ order_form|crispy }}
+            <button class="allauth-button">Send to Kitchen</button>
+        </form>                                             
     </div>    
 {% endblock %}
 
