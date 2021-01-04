@@ -97,7 +97,7 @@ h1 {
     color: rgb(0, 0, 0);    
 }
 
-/*----- Allauth ------------------------------------*/
+/*----- Forms styling (allauth, profile, order ---------------*/
 
 .empty-container {
     height: 200px;
@@ -148,7 +148,7 @@ label.requiredField {
         height: 150px;
     }
 
-    .login, .signup {
+    .login, .signup, .profile-form {
         width: 75% !important;
     }
 }
@@ -162,7 +162,7 @@ label.requiredField {
         padding: 4px;
     }
 
-    .login, .signup {
+    .login, .signup, .profile-form {
         width: 100% !important;
     }
 
