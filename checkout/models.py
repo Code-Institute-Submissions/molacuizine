@@ -1,7 +1,7 @@
 from django.db import models
 from profiles.models import UserProfile, Town
 from products.models import Product
-
+import uuid
 
 # Create your models here.
 class Order(models.Model):
@@ -26,10 +26,20 @@ class Order(models.Model):
     stripe_pid = models.CharField(
         max_length=254, null=False, blank=False, default='')
 
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the order number
+        if it hasn't been set already.
+        """
+
+        if not self.order_number:
+            self.order_number = uuid.uuid4().hex.upper()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.order_number
 
-        
+
 class OrderLineItem(models.Model):
     # orderlineitem can have only 1 order, so put foreignkey here
     order = models.ForeignKey(
@@ -42,15 +52,6 @@ class OrderLineItem(models.Model):
     lineitem_total = models.DecimalField(
         max_digits=6, decimal_places=2, null=False,
         blank=False, editable=False)
-
-    def save(self, *args, **kwargs):
-        """
-        Override the original save method to set the lineitem total
-        and update the order total.
-        """
-
-        self.lineitem_total = self.product.price * self.quantity
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.order.order_number}'
