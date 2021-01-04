@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}    
+{% endblock %}
+
+{% block content %}    
+    <div class="empty-container"></div>   
+    <div class="container">
+        <h1 class="text-left">Profile</h1>
+        <hr>    
+        <form class="profile-form mt-3 w-50" action="{% url 'profile' %}" method="POST" id="profile-update-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="allauth-button">Update Information</button>
+        </form>                                     
+    </div>    
+{% endblock %}
+
+{% block extra_js %}       
+    {{ block.super }}            
+    <script src="{% static 'js/profile.js' %}" type="text/javascript"></script>
+{% endblock %}
