@@ -3,8 +3,11 @@ from profiles.models import UserProfile, Town
 from products.models import Product
 import uuid
 
+
 # Create your models here.
 class Order(models.Model):
+    '''Model for each order completed'''
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL, null=True, blank=True,
@@ -13,7 +16,9 @@ class Order(models.Model):
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True)
-    town = models.Foreignkey(Town, max_length=20, null=False, blank=False)
+    town = models.ForeignKey(
+        Town, on_delete=models.SET_NULL,
+        max_length=20, null=False, blank=False)
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(
@@ -41,7 +46,8 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
-    # orderlineitem can have only 1 order, so put foreignkey here
+    '''Model for each line item associated with 1 order'''
+
     order = models.ForeignKey(
         Order, null=False, blank=False,
         on_delete=models.CASCADE, related_name='lineitems')
