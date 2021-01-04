@@ -9,7 +9,10 @@
     <div class="empty-container"></div>   
     <div class="container">
         <h1 class="text-left">{{ profile.user.username }}'s Profile</h1>
-        <hr>    
+        <hr>
+        {% if user.is_authenticated %}
+        <a class="allauth-button btn pt-1" href="{% url 'account_change_password' %}">Change Password</a>
+        {% endif %}    
         <form class="profile-form mt-3 w-50" action="{% url 'profile' %}" method="POST" id="profile-update-form">
             {% csrf_token %}
             {{ form|crispy }}
