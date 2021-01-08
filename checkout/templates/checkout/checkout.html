@@ -20,6 +20,7 @@
                         Subtotal 
                     </div>
                 </div>
+                <!-- Display items next to order form -->
                 {% for item in bag_items %}
                     <row class="row no-gutters">
                         <div class="col-6">
@@ -37,24 +38,25 @@
                         {% endif %}
                     </div>
                         Qty: {{ item.quantity }}                         
-                {% endfor %}                
+                {% endfor %}
+                <!-- Order summary totals -->                
                 <div class="row no-gutters font-weight-bold border-top mt-2">
-                    <div class="col-8 text-right mt-1">
+                    <div class="col-7 col-md-8 text-right mt-1">
                         Order Total  
                     </div>
-                    <div class="col-4 text-right">
+                    <div class="col-5 col-md-4 text-right mt-1">
                         Rs {{ total }}
                     </div>
-                    <div class="col-8 text-right mt-1">
+                    <div class="col-7 col-md-8 text-right mt-1">
                         Delivery  
                     </div>
-                    <div class="col-4 text-right">
+                    <div class="col-5 col-md-4 text-right mt-1">
                         Rs {{ transport }}
                     </div>
-                    <div class="col-8 text-right mt-1">
+                    <div class="col-7 col-md-8 text-right mt-1">
                         Grand Total   
                     </div>
-                    <div class="col-4 text-right">
+                    <div class="col-5 col-md-4 text-right mt-1">
                         Rs {{ grand_total }}
                     </div>                       
                 </div>
