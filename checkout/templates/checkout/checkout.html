@@ -9,16 +9,23 @@
     <div class="empty-container"></div>   
     <div class="container">
         <h1 class="text-left">Checkout Page</h1>
-        <hr>
-        <form class="order-form mt-3 w-50" action="#" method="POST" id="order-update-form">
-            {% csrf_token %}
-            {{ order_form|crispy }}
-            <div class="form-check form-check-inline float-left mr-0">            
-                <label class="form-check-label" for="id-save-info">Update my profile</label>
-                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>            
-            </div><br>
-            <button class="allauth-button mt-2 mb-2">Send to Kitchen</button>
-        </form>                                                     
+        <hr>        
+        <div class="row">
+            <div class="order-1 order-md-2 col-12 col-md-6">
+                zahur meerun
+            </div>           
+            <div class="order-2 order-md-1 col-12 col-md-6">
+                <form class="order-form mt-3 w-100" action="#" method="POST" id="order-update-form">
+                    {% csrf_token %}
+                    {{ order_form|crispy }}
+                    <div class="form-check form-check-inline float-left mr-0">            
+                        <label class="form-check-label" for="id-save-info">Update my profile</label>
+                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>            
+                    </div><br>
+                    <button class="allauth-button mt-2 mb-2">Send to Kitchen</button>
+                </form>
+            </div>            
+        </div>                                                           
     </div>    
 {% endblock %}
 
