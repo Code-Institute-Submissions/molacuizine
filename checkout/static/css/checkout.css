@@ -34,6 +34,10 @@ img {
 
 @media (max-width: 576px) {
     .checkout-text {
+        font-size: 14px;
+    }
+
+    .header-text {
         font-size: 12px;
     }
 }
