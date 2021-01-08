@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import OrderForm
 from profiles.models import UserProfile
-from .models import OrderLineItem
+from .models import OrderLineItem, Order
 from products.models import Product
 from bag.contexts import bag_contents
 from profiles.forms import UserProfileForm
@@ -57,7 +57,8 @@ def checkout(request):
                 if user_profile_form.is_valid():
                     user_profile_form.save()
 
-            return redirect(reverse('products'))
+            return redirect(reverse(
+                'checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -77,3 +78,23 @@ def checkout(request):
         'order_form': order_form,
     }
     return render(request, 'checkout/checkout.html', context)
+
+
+def checkout_success(request, order_number):
+    """
+    Handle successful checkouts
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation \
+        email will be sent to {order.email}.')
+
+    if 'bag' in request.session:
+        del request.session['bag']
+
+    context = {
+        'order': order,
+    }
+
+    return render(request, 'checkout/checkout_success.html', context)
