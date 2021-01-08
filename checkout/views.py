@@ -27,6 +27,7 @@ def checkout(request):
         if order_form.is_valid():
             order = order_form.save(commit=False)
             order.original_bag = json.dumps(bag)
+            order.user_profile = profile
             order.save()
             # Save items to Orderlineitem
             for item_id, item_data in bag.items():
@@ -36,17 +37,16 @@ def checkout(request):
                     order=order,
                     product=product,
                     quantity=item_data,
-                    lineitem_total = lineitem_total,
+                    lineitem_total=lineitem_total,
                 )
                 order_line_item.save()
-                return redirect(reverse('product'))
+            return redirect(reverse('products'))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
 
     # Get request
     else:
-        
         order_form = OrderForm(initial={
             'full_name': profile.user.first_name + " " + profile.user.last_name,
             'email': profile.user.email,
