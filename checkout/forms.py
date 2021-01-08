@@ -23,7 +23,7 @@ class OrderForm(forms.ModelForm):
             'postcode': 'Post Code',
             'town': 'Town',
             'street_address': 'Street Address',
-            'request': 'Add any requests you have'
+            'request': 'Please add any special requests you may have'
         }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
