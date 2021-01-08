@@ -6,6 +6,7 @@ from profiles.models import UserProfile
 from .models import OrderLineItem
 from products.models import Product
 from bag.contexts import bag_contents
+from profiles.forms import UserProfileForm
 import json
 
 
@@ -23,6 +24,7 @@ def checkout(request):
     profile = get_object_or_404(UserProfile, user__username=request.user)
 
     if request.method == 'POST':
+        save_info = request.POST.get('save-info')
         order_form = OrderForm(request.POST)
         if order_form.is_valid():
             order = order_form.save(commit=False)
@@ -40,11 +42,25 @@ def checkout(request):
                     lineitem_total=lineitem_total,
                 )
                 order_line_item.save()
+
+            ''' Update profile data if checked by user'''
+            if save_info:
+                profile_data = {
+                    'default_phone_number': order.phone_number,
+                    'default_street_address1': order.street_address,
+                    'town': order.town,
+                    'default_postcode': order.postcode,
+                }
+                user_profile_form = UserProfileForm(
+                    profile_data, instance=profile)
+
+                if user_profile_form.is_valid():
+                    user_profile_form.save()
+
             return redirect(reverse('products'))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
-
     # Get request
     else:
         order_form = OrderForm(initial={
