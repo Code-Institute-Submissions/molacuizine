@@ -64,7 +64,8 @@ def checkout(request):
     # Get request
     else:
         order_form = OrderForm(initial={
-            'full_name': profile.user.first_name + " " + profile.user.last_name,
+            'full_name':
+                profile.user.first_name + " " + profile.user.last_name,
             'email': profile.user.email,
             'phone_number': profile.default_phone_number,
             'postcode': profile.default_postcode,
