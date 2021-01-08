@@ -7,6 +7,10 @@ h1 {
     font-weight: 400;
 }
 
+p {
+    font-family: 'Lato', sans-serif;
+}
+
 /*----- Navbar header -------------------------------*/
 
 .links {
