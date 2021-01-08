@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">      
+{% endblock %}
+
+{% block content %}    
+    <div class="empty-container"></div>   
+    <div class="container">
+        <h1 class="text-left">Order Successful. Thank You!</h1>
+        <hr>
+        <p>Your order information summary is below. A confirmation has been sent to <span class="font-weight-bold">{{ order.email }}</span></p>       
+        <p>Estimate delivery in 50 mins. Our driver will contact you soon</p>
+        <div class="checkout-summary checkout-text border border-secondary">
+            <div class="row m-1">
+                <div class="col-12 col-md-5 text-left text-dark font-weight-bold mt-2">Order Number</div>
+                <div class="col-12 col-md-7 text-md-right mt-md-2 order-number">{{ order.order_number }}</div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Date and time</div>
+                <div class="col-12 col-md-6 text-md-right mt-md-1">{{ order.date}}</div> 
+                <div class="col-12">
+                    Ordered items:
+                </div>
+                {% for item in order.lineitems.all %}
+                    <div class="col-12 col-md-6 text-left text-dark font-weight-bold">{{ forloop.counter }}.{{ item.product.name }}</div>
+                    <div class="col-12 col-md-6 text-md-right">{{ item.quantity }} @ ${{ item.product.price }} each</div>
+                {% endfor %}
+                <div class="col-12">
+                    Delivery Info:
+                </div>  
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold">Full Name</div>
+                <div class="col-12 col-md-6 text-md-right">{{ order.full_name}}</div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Phone Number</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.phone_number}}</div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Street Address</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.street_address}}</div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Town</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.town}}</div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Postcode</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.postcode}}</div>                       
+                <div class="col-12">
+                    Billing Info:
+                </div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Total</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.order_total }}</div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Delivery Cost</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.delivery_cost }}</div>
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Grand Total</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.grand_total }}</div>
+            </div>           
+        </div>                                                        
+    </div>    
+{% endblock %}
+
+{% block extra_js %}       
+    {{ block.super }}
+    <script src="{% static 'js/checkout.js' %}" type="text/javascript"></script>    
+{% endblock %}
