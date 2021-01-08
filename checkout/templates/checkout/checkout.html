@@ -20,8 +20,8 @@
                         Subtotal 
                     </div>
                 </div>
-                {% for item in bag_items %}                     
-                    {{ forloop.counter }}. {{ item.product.name }}  
+                {% for item in bag_items %}
+                    <span class="font-weight-bold">{{ forloop.counter }}. {{ item.product.name }} </span>    
                     <div class="checkout-image mb-1 mt-1">
                         {% if item.product.image %}                    
                             <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
@@ -36,11 +36,10 @@
                         <div class="col-6 text-right">
                             Rs {{ item.sub_total }} 
                         </div>
-                    </div>
-                    <hr>                          
-                {% endfor %}
-                <div class="row no-gutters font-weight-bold">
-                    <div class="col-8 text-right">
+                    </div>                                             
+                {% endfor %}                
+                <div class="row no-gutters font-weight-bold border-top mt-2">
+                    <div class="col-8 text-right mt-1">
                         Grand Total   
                     </div>
                     <div class="col-4 text-right">
