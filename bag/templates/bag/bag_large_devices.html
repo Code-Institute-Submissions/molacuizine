@@ -23,10 +23,8 @@
         <div class="d-none d-md-block col-md-3 mt-3">
             {% if item.product.image %}                    
                 <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
-            {% else %}
-                <a href="#">
-                    <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                </a>
+            {% else %}                
+                <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">                
             {% endif %}
         </div>            
         <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
