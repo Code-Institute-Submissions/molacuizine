@@ -68,7 +68,7 @@
                         Please fill out form to complete command 
                     </div>                    
                 </div>
-                <form class="order-form mt-3 w-100" action="#" method="POST" id="order-update-form">
+                <form class="order-form mt-3 w-100" action="{% url 'checkout' %}" method="POST" id="order-update-form">
                     {% csrf_token %}
                     {{ order_form|crispy }}
                     <div class="form-check form-check-inline float-left mr-0">            
