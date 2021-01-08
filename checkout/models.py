@@ -20,7 +20,7 @@ class Order(models.Model):
         Town, on_delete=models.CASCADE,
         max_length=20, null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True)
-    request = models.TextField(null=False, blank=False)
+    request = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(
         max_digits=6, decimal_places=2, null=False, default=0)
