@@ -1,6 +1,10 @@
 from django.db import models
 from profiles.models import UserProfile, Town
 from products.models import Product
+from django.conf import settings
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+from django.db.models import Sum
 import uuid
 
 
@@ -45,6 +49,18 @@ class Order(models.Model):
     def __str__(self):
         return self.order_number
 
+    def update_total(self):
+        """
+        Update grand total each time a line item is added,
+        accounting for delivery costs.
+        """
+
+        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+
+        self.delivery_cost = settings.TRANSPORT_COST
+        self.grand_total = self.order_total + self.delivery_cost
+        self.save()
+
 
 class OrderLineItem(models.Model):
     '''Model for each line item associated with 1 order'''
@@ -62,3 +78,20 @@ class OrderLineItem(models.Model):
 
     def __str__(self):
         return f'{self.order.order_number}'
+
+
+@receiver(post_save, sender=OrderLineItem)
+def update_on_save(sender, instance, created, **kwargs):
+    """
+    Update order total on lineitem update/create
+    """
+    # update_total obtained from checkout.models
+    instance.order.update_total()
+
+
+@receiver(post_delete, sender=OrderLineItem)
+def update_on_delete(sender, instance, **kwargs):
+    """
+    Update order total on lineitem delete
+    """
+    instance.order.update_total()
