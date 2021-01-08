@@ -13,3 +13,10 @@
 #id_request {
     height: 100px ;
 }
+
+img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    object-position: center;
+}
