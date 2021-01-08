@@ -10,11 +10,51 @@
     <div class="container">
         <h1 class="text-left">Checkout Page</h1>
         <hr>        
-        <div class="row">
+        <div class="row checkout-text">
             <div class="order-1 order-md-2 col-12 col-md-6">
-                zahur meerun
+                <div class="row no-gutters">
+                    <div class="col-6 font-weight-bold">
+                        Order Summary  
+                    </div>
+                    <div class="col-6 text-right font-weight-bold">
+                        Subtotal 
+                    </div>
+                </div>
+                {% for item in bag_items %}                     
+                    {{ forloop.counter }}. {{ item.product.name }}  
+                    <div class="checkout-image mb-1 mt-1">
+                        {% if item.product.image %}                    
+                            <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
+                        {% else %}                            
+                            <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">                            
+                        {% endif %}
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            Qty: {{ item.quantity }}   
+                        </div>
+                        <div class="col-6 text-right">
+                            Rs {{ item.sub_total }} 
+                        </div>
+                    </div>
+                    <hr>                          
+                {% endfor %}
+                <div class="row no-gutters font-weight-bold">
+                    <div class="col-8 text-right">
+                        Grand Total   
+                    </div>
+                    <div class="col-4 text-right">
+                        Rs {{ grand_total }}
+                    </div>                       
+                </div>
+                <br> 
             </div>           
             <div class="order-2 order-md-1 col-12 col-md-6">
+                <div class="row no-gutters">
+                    <div class="col-12 font-weight-bold">
+                        Please fill out form to complete command 
+                    </div>                    
+                </div>
                 <form class="order-form mt-3 w-100" action="#" method="POST" id="order-update-form">
                     {% csrf_token %}
                     {{ order_form|crispy }}
