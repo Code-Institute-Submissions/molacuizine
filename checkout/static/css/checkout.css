@@ -29,15 +29,37 @@ img {
     font-size: 500;
 }
 
+.order-number {
+    font-size: 14px;
+}
+
+
+.checkout-summary {
+    width: 60%;
+}
 
 /*----- Media screen -------------------------------*/
+
+@media (max-width: 991px) {
+    .checkout-summary {
+        width: 75% !important;
+    }
+}
 
 @media (max-width: 576px) {
     .checkout-text {
         font-size: 14px;
     }
 
+    .order-number {
+        font-size: 11px;
+    }
+
     .header-text {
         font-size: 12px;
+    }
+    .checkout-summary {
+        width: 100% !important;
+        margin: 0 auto;
     }
 }
