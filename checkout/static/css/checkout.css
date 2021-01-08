@@ -28,3 +28,12 @@ img {
     font-family: 'Lato', sans-serif;
     font-size: 500;
 }
+
+
+/*----- Media screen -------------------------------*/
+
+@media (max-width: 576px) {
+    .checkout-text {
+        font-size: 12px;
+    }
+}
