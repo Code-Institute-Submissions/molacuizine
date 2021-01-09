@@ -24,7 +24,7 @@
             <div class="col-12 col-md-5 mt-3 mt-md-0 col-lg-6">
                 <p class="font-weight-bold border-bottom">Order History</p>
                 {% for order in orders %}
-                    <a href="{% 'order_history' order.order_number %}" class="profile-text"><span class="font-weight-bold">{{ forloop.counter }}.</span> {{ order.order_number|truncatechars:20 }}</a>
+                    <a href="{% url 'order_history' order.order_number %}" class="profile-text"><span class="font-weight-bold">{{ forloop.counter }}.</span> {{ order.order_number|truncatechars:20 }}</a>
                 {% endfor %}
             </div>
         </div>                                          
