@@ -22,15 +22,14 @@
                 </form>            
             </div>
             <div class="col-12 col-md-5 mt-3 mt-md-0 col-lg-6">
-                <p class="font-weight-bold">Order History</p>
+                <p class="font-weight-bold border-bottom">Order History</p>
                 {% for order in orders %}
                     <a href="#" class="profile-text"><span class="font-weight-bold">{{ forloop.counter }}.</span> {{ order.order_number|truncatechars:20 }}</a>
                 {% endfor %}
             </div>
-        </div>
-                                           
+        </div>                                          
     </div>    
-{% endblock %}
+{% endblock %}z
 
 {% block extra_js %}       
     {{ block.super }}            
