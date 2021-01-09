@@ -10,11 +10,20 @@
         <div class="container">
             <h1 class="header text-center">Store Management</h1>
             <hr>
-            <form class="mt-3 w-50" action="#" method="POST" id="profile-update-form">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button class="allauth-button">Update Information</button>
-            </form>
+            <div class="row">                
+                <div class="col-12 col-md-7 col-lg-6 order-1 order-md-0">
+                    <h2 class="text-center">Add Product</h2>
+                    <form class="product-form mt-3" action="#" method="POST" id="profile-update-form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="allauth-button">Update Information</button>
+                    </form>
+                </div>
+                <div class="col-12 col-md-5 col-lg-6 order-0 order-md-0">
+                    <h2 class="text-center">Store Status</h2>
+                    <div class="text-center mb-3">on/off switch</div>
+                </div>
+            </div>            
        </div>      
 {% endblock %}
 

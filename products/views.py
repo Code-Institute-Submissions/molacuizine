@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Product, Category
 from django.db.models import Q
+from .forms import ProductForm
 
 
 # Create your views here.
@@ -174,7 +175,8 @@ def product_detail(request, product_id):
 def store_management(request):
     """ A view to manage store products and openning hours """
 
+    form = ProductForm()
     context = {
-        
+        'form': form,
     }
     return render(request, 'products/store_management.html', context)
