@@ -12,5 +12,19 @@ $(document).ready(function(){
             val -= 1;
             $("#quantity").val(val);
         }      
-    });         
+    });
+    
+    // Required to add paceholders to store management form page //
+    if($('#id_category').val()== ""){
+            $('#id_category').css('color', '#aab7c4');            
+        }    
+    $('#id_category option:first-child').html('Category');
+    $('#id_category').change(function(){
+        if($('#id_category option:selected').val()== ""){
+            $('#id_category').css('color', '#aab7c4');
+        }
+        else{
+            $('#id_category').css('color', 'black');
+        }          
+    }) 
 });
