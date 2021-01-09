@@ -3,6 +3,8 @@ from django.core.paginator import Paginator
 from .models import Product, Category
 from django.db.models import Q
 from .forms import ProductForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -172,8 +174,12 @@ def product_detail(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
+@login_required
 def store_management(request):
     """ A view to manage store products and openning hours """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
 
     form = ProductForm()
     context = {
