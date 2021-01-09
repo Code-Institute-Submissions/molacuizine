@@ -113,6 +113,20 @@ img {
     color: rgb(0, 0, 0);    
 }
 
+/*----- Store management form  --------------------------*/
+
+.product-form input::placeholder {
+    color: #aab7c4;
+}
+
+#id_category option:first-child {
+    color: #aab7c4;
+}
+
+#id_category option:not(:first-child) {
+    color: #000;
+}
+
 /*----- Pagination -------------------------------*/
 
 .end-link {
