@@ -27,6 +27,8 @@ $(document).ready(function(){
             $('#id_category').css('color', 'black');
         }          
     }) 
+
+    // Required for customisable image upload button //
     $('#upload-button').click(function(){
         $('#id_image').click(); 
              
