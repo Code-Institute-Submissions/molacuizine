@@ -152,7 +152,7 @@ label.requiredField {
         height: 150px;
     }
 
-    .login, .signup, .profile-form {
+    .login, .signup {
         width: 75% !important;
     }
 }
@@ -166,7 +166,7 @@ label.requiredField {
         padding: 4px;
     }
 
-    .login, .signup, .profile-form {
+    .login, .signup {
         width: 100% !important;
     }
 
