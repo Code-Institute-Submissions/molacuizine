@@ -169,3 +169,12 @@ def product_detail(request, product_id):
         'product': product,
     }
     return render(request, 'products/product_detail.html', context)
+
+
+def store_management(request):
+    """ A view to manage store products and openning hours """
+
+    context = {
+        
+    }
+    return render(request, 'products/store_management.html', context)
