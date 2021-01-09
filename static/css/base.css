@@ -7,6 +7,12 @@ h1 {
     font-weight: 400;
 }
 
+h2 {
+    color: rgb(68, 65, 65);
+    font-weight: 400;
+    font-family: 'Lato', sans-serif;
+}
+
 p {
     font-family: 'Lato', sans-serif;
 }
