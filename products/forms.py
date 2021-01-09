@@ -5,6 +5,7 @@ from .models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         """
@@ -25,9 +26,11 @@ class ProductForm(forms.ModelForm):
         for field in self.fields:
             if field != 'category':
                 if self.fields[field].required:
-                    placeholder = f'{placeholders[field]} *'
+                    self.fields[field].widget.attrs[
+                        'placeholder'] = f'{placeholders[field]} *'
                 else:
-                    placeholder = placeholders[field]
-            self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'product-form-input'
+                    self.fields[field].widget.attrs[
+                        'placeholder'] = placeholders[field]
+            self.fields[field].widget.attrs[
+                'class'] = 'border-black rounded-0 product-form-input'
             self.fields[field].label = False
