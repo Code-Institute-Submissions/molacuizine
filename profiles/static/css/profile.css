@@ -36,4 +36,8 @@
     .order-history {
         width: 100% !important;
     }
+
+    .order-number {
+        font-size: 11px;
+    }
 }
