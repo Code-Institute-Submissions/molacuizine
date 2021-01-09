@@ -37,3 +37,17 @@ def profile(request):
         'orders': orders,
     }
     return render(request, 'profiles/profile.html', context)
+
+
+@login_required
+def order_history(request, order_number):
+    """
+    Handle Order history details
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+
+    context = {
+        'order': order,
+    }
+
+    return render(request, 'profiles/order_history.html', context)
