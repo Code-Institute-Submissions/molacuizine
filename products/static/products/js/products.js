@@ -27,4 +27,13 @@ $(document).ready(function(){
             $('#id_category').css('color', 'black');
         }          
     }) 
+    $('#upload-button').click(function(){
+        $('#id_image').click(); 
+             
+    })
+    $('#id_image').hide();
+    $('#id_image').change(function(){
+        filename=$('#id_image').val().split('\\');      
+        $('#filename-text').html(filename[filename.length-1]);
+    });     
 });
