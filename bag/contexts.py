@@ -28,7 +28,7 @@ def bag_contents(request):
     mins = datetime.datetime.now().minute
 
     totalMins = hours * 60 + mins
-    # totalMins = 370
+    totalMins = 370
     if 0 <= totalMins < 360:
         delta = 360 - totalMins
         mins = delta % 60
