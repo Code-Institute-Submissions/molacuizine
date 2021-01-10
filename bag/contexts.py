@@ -29,7 +29,7 @@ def store_status(request):
 
 def bag_contents(request):
     '''View which contains bag order to be used across all apps'''
-    
+
     product = 0
     bag_items = []
     total = 0
