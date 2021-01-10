@@ -236,16 +236,13 @@ def product_update(request, product_id):
 
 
 @login_required
-def product_delete(request, product_id):
-    """ A view to manage update items in product database
-    """
+def delete_product(request, product_id):
+    """ Delete a product from the store """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    product = get_object_or_404(Product, id=product_id)    
-
-    context = {
-        'form': form,
-    }
-    return render(request, 'products/update_product.html', context)
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
+    messages.success(request, 'Product deleted!')
+    return redirect(reverse('products'))
