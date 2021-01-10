@@ -1,7 +1,23 @@
 from products.models import Product
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, HttpResponse
 from django.conf import settings
+from django.views.decorators.http import require_POST
 import datetime
+from django.contrib import messages
+
+
+# Create your views here.
+@require_POST
+def store_status(request):
+    """ A view to manage store open close status """
+    try:
+        status = request.POST.get('status')
+        print(status)
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
+        return HttpResponse(content=e, status=400)
 
 
 def bag_contents(request):
