@@ -201,3 +201,34 @@ def store_management(request):
         'form': form,
     }
     return render(request, 'products/store_management.html', context)
+
+
+@login_required
+def update_product(request, product_id):
+    """ A view to manage update items in product database
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == 'POST':
+
+        form = ProductForm(request.POST, request.FILES, instance=product)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated product!')
+            return redirect(reverse('product_detail', args=[product.id]))
+        else:
+            messages.error(
+                request, 'Item could not be added. Please ensure the form is valid.')
+
+    else:
+        form = ProductForm(instance=product)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'products/update_product.html', context)
