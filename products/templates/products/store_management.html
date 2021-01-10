@@ -25,10 +25,17 @@
                 </div>
                 <div class="col-12 col-md-5 col-lg-6 order-0 order-md-0">
                     <h2 class="text-center">Store Status</h2>
-                    <div class="text-center">
-                        <p class="btn allauth-button pt-1" id="open">Open</p>
-                        <p class="btn allauth-button pt-1" id="close">Closed</p>
-                    </div>                    
+                    {% if open_status %}
+                        <p class="card-text text-center">Current status: <span class="font-weight-bold text-success">OPEN</span></p>
+                        <div class="text-center">
+                            <p class="btn allauth-button pt-1 mt-2" id="close">Close</p>
+                        </div>
+                    {% else %}
+                        <p class="card-text text-center">Current status: <span class="font-weight-bold text-danger">CLOSED</span></p>
+                        <div class="text-center">
+                            <p class="btn allauth-button pt-1 mt-2" id="open">Open</p>
+                        </div>                   
+                    {% endif %}                                     
                 </div>
             </div>            
        </div>      
