@@ -1,8 +1,7 @@
 from products.models import Product
-from django.shortcuts import get_object_or_404, HttpResponse, reverse, redirect
+from django.shortcuts import get_object_or_404, HttpResponse
 from django.conf import settings
 from django.views.decorators.http import require_POST
-import datetime
 from django.contrib import messages
 from bag.models import Store
 
@@ -11,6 +10,7 @@ from bag.models import Store
 @require_POST
 def store_status(request):
     """ A view to manage store open close status """
+
     store_status = get_object_or_404(Store, id=1)
     try:
         status = request.POST.get('status')
@@ -29,6 +29,7 @@ def store_status(request):
 
 def bag_contents(request):
     '''View which contains bag order to be used across all apps'''
+    
     product = 0
     bag_items = []
     total = 0
@@ -55,7 +56,7 @@ def bag_contents(request):
     else:
         open_status = False
         open_message = 'We are closed'
-    
+
     context = {
         'open_message': open_message,
         'bag_items': bag_items,
