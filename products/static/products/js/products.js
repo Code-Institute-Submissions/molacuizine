@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    // Function for product quantity selector //    
+    // Function for product quantity selector //
+
     let val=parseInt($("#quantity").val());           
     $("#plus").click(function(){
         if(val<=19){
@@ -15,6 +16,7 @@ $(document).ready(function(){
     });
     
     // Required to add paceholders to store management form page //
+
     if($('#id_category').val()== ""){
             $('#id_category').css('color', '#aab7c4');            
         }    
@@ -29,13 +31,26 @@ $(document).ready(function(){
     }) 
 
     // Required for customisable image upload button //
+
     $('#upload-button').click(function(){
         $('#id_image').click(); 
-             
+         
     })
     $('#id_image').hide();
     $('#id_image').change(function(){
         filename=$('#id_image').val().split('\\');      
         $('#filename-text').html(filename[filename.length-1]);
-    });     
+    }); 
+
+    // Required to send store status data to context view to update model //
+
+    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    $('#open').click(function(){        
+        console.log('zahur');
+        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'open'})                   
+    })
+    $('#close').click(function(){        
+        console.log('zahur');
+        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'close'})                   
+    })    
 });
