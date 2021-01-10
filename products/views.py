@@ -204,7 +204,7 @@ def store_management(request):
 
 
 @login_required
-def update_product(request, product_id):
+def product_update(request, product_id):
     """ A view to manage update items in product database
     """
     if not request.user.is_superuser:
@@ -227,6 +227,23 @@ def update_product(request, product_id):
 
     else:
         form = ProductForm(instance=product)
+
+    context = {
+        'form': form,
+        'product': product,
+    }
+    return render(request, 'products/product_update.html', context)
+
+
+@login_required
+def product_delete(request, product_id):
+    """ A view to manage update items in product database
+    """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    product = get_object_or_404(Product, id=product_id)    
 
     context = {
         'form': form,
