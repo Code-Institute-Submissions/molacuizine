@@ -13,7 +13,7 @@
         <div class="row mt-5">
             <div class="col-lg-1">                
             </div>
-            <div class="col-12 col-md-7 col-lg-5">
+            <div class="col-12 col-md-7 col-lg-5 mb-5">
                 {% if product.image %}                    
                     <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">                    
                 {% else %}                    
@@ -55,12 +55,17 @@
                             <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Back to menu</a>                            
                         </div>
                     {% endif %}
-                </form>  
+                </form>
+                {% if request.user.is_superuser %}
+                    <div class="product-update mt-3">       
+                        <a href="{% url 'product_update' product.id %}" class="text-primary">Update</a>/<a href="#" class="text-danger">Delete</a>
+                    </div>
+                {% endif %} 
             </div>
             <div class="col-lg-1">                
             </div>                       
         </div>
-    </div>    
+    </div>       
 {% endblock %}
 
 {% block extra_js %}       
