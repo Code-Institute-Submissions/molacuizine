@@ -82,7 +82,7 @@
                         </div>
                         {% if request.user.is_superuser %}
                             <div class="product-update mt-2">       
-                                <a href="{% url 'update_product' product.id %}" class="text-primary">Update</a>/<a href="#" class="text-danger">Delete</a>
+                                <a href="{% url 'product_update' product.id %}" class="text-primary">Update</a>/<a href="#" class="text-danger">Delete</a>
                             </div>
                         {% endif %}                       
                     </div>
