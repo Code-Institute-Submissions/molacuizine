@@ -2,9 +2,17 @@ from django.shortcuts import (
     render, redirect, reverse, get_object_or_404)
 from django.contrib import messages
 from products.models import Product
+from django.views.decorators.http import require_POST
 
 
 # Create your views here.
+@require_POST
+def store_status(request):
+    """ A view to store open close status """
+
+    return render(request, 'bag/bag.html')
+
+
 def view_bag(request):
     """ A view that renders the bag contents page """
 
