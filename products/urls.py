@@ -9,5 +9,6 @@ urlpatterns = [
     path('query_search', views.query_search, name='query_search'),
     path('store_management', views.store_management, name='store_management'),
     path('product_delete', views.product_delete, name='product_delete'),
-    path('product_update', views.product_update, name='product_update'),
+    path('product_update/<int:product_id>',
+         views.product_update, name='product_update'),
 ]
