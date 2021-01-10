@@ -17,11 +17,12 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div>                            
-                            <span id="upload-button" class="allauth-button btn mb-1 pt-1">Upload Image</span>          
+                            <span id="upload-button" class="allauth-button btn mb-1 pt-1">Change Image</span>          
                             <p class="text-left d-inline" id="filename-text"></p>
                         </div>
-                        <button type="submit" class="allauth-button">Update Information</button>                                              
-                    </form>                    
+                        <button type="submit" class="allauth-button">Update Information</button>
+                        <a href="{% url 'products' %}" class="allauth-button btn mb-1 pt-1">Cancel</a>                                             
+                    </form>                                        
                 </div>
                 <div class="col-12 col-md-5 col-lg-6 order-0 order-md-0">                    
                 </div>
