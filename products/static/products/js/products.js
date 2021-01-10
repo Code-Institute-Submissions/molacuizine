@@ -45,12 +45,12 @@ $(document).ready(function(){
     // Required to send store status data to context view to update model //
 
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-    $('#open').click(function(){        
-        console.log('zahur');
-        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'open'})                   
+    $('#open').click(function(){       
+        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'open'})
+        location.reload();                   
     })
-    $('#close').click(function(){        
-        console.log('zahur');
-        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'close'})                   
+    $('#close').click(function(){       
+        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'close'})
+        location.reload();                   
     })    
 });
