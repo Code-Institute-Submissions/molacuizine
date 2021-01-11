@@ -78,11 +78,20 @@ img {
     font-size: 14px;    
     border: none;
     padding: 3px;
+    margin-bottom: 2px;
 }
 
 .delete-item:hover {
     background: rgb(243, 91, 91);
     color: white;    
+}
+
+.input-group-prepend {
+    text-decoration: none !important;
+}
+
+.input-group-append {
+    text-decoration: none !important;
 }
 
 /*----- Quantity form input ----------------------------*/
@@ -91,8 +100,7 @@ img {
     background: black;
     color: white;
     padding: 8px;
-    margin-bottom: 5px;
-    margin-left: -10px;
+    height: 32px;
 }
 
 .fa-plus:hover {
@@ -107,8 +115,7 @@ img {
     background: black;
     color: white;
     padding: 8px;
-    margin-bottom: 5px;
-    margin-right: -9px
+    height: 32px;
 }
 
 .quantity {
@@ -142,18 +149,14 @@ input::-webkit-inner-spin-button {
     .container {
         height: 130px;        
     }
-
-    .fa-plus {
-        margin-top: 1px;     
-        margin-left: -5px;
-    }
-
-    .fa-minus {
-        margin-top: 1px;    
-        margin-right: -8px;
-    }
+    
     .edit-item, .delete-item {    
         font-size: 12px;   
+    }
+    
+    .delete-item {
+        margin-bottom: 0px;
+        font-size: 12px; 
     }
 }
 
@@ -182,15 +185,5 @@ input::-webkit-inner-spin-button {
     .checkout-button, .product-return {
         font-size: 12px;
         padding: 6px;
-    }
-    
-    .fa-plus {
-        margin-top: 0;     
-        margin-left: -6px;
-    }
-    
-    .fa-minus { 
-        margin-top: -1px;         
-        margin-right: -11px;
-    }    
+    }  
 }
