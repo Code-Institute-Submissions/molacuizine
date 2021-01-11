@@ -29,7 +29,7 @@
         </div>            
         <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
             {{ item.quantity }}<br>
-            <form class="form mt-3" action="{% url 'adjust_bag' item.product.id %}" method="POST">
+            <form class="form mt-3 ml-3" action="{% url 'adjust_bag' item.product.id %}" method="POST">
                 {% csrf_token %}
                 <div class="input-group mb-3">
                     <a id="minus-{{ forloop.counter }}" class="minus input-group-prepend">
@@ -47,8 +47,7 @@
                         </div>
                     </div>                                   
                 </div>               
-            </form>
-            
+            </form>            
         </div>
         <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
             {{ item.product.price }}                    
