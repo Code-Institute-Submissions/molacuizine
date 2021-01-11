@@ -1,0 +1,1 @@
+web: gunicorn mo_lacuizine.wsgi:application
