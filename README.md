@@ -551,6 +551,8 @@ During testing phase the following issues were identified and corrected.
 
 5. Adding placeholder to profile form using javascript.
 
+6. Adding customised upload image button using javascript
+
 # DEPLOYMENT
 
 Gitpod was used as an online IDE and then pushed to GITHUB. The Github account was then linked to 
