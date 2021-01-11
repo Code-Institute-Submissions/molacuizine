@@ -165,12 +165,6 @@ input::-webkit-inner-spin-button {
         width: 60%;
         margin-left: 20%;
     }
-
-    .fa-minus { 
-        margin-top: -1px;         
-        margin-right: -11px !important;
-    }  
-
 }
 
 @media (max-width: 767px) {
