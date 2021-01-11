@@ -131,7 +131,7 @@ WSGI_APPLICATION = 'mo_lacuizine.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse('postgres://zuwhuegchjccrv:8fc6acfdfaa9f788f42ee8143294587d837c5aa149c317f596a7df99afed4305@ec2-79-125-86-58.eu-west-1.compute.amazonaws.com:5432/d6bt3aa0aq3d68')
     }
 else:
     DATABASES = {
