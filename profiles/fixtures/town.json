@@ -1,0 +1,56 @@
+[
+{
+    "model": "profiles.town",
+    "pk": 2,
+    "fields": {
+        "name": "Curepipe",
+        "long_coord": "-20.317100",
+        "lat_coord": "57.526500"
+    }
+},
+{
+    "model": "profiles.town",
+    "pk": 3,
+    "fields": {
+        "name": "Quatre-Borne",
+        "long_coord": "-20.267500",
+        "lat_coord": "57.479700"
+    }
+},
+{
+    "model": "profiles.town",
+    "pk": 4,
+    "fields": {
+        "name": "Phoenix",
+        "long_coord": "-20.286100",
+        "lat_coord": "57.512200"
+    }
+},
+{
+    "model": "profiles.town",
+    "pk": 5,
+    "fields": {
+        "name": "Ebene",
+        "long_coord": "-20.241900",
+        "lat_coord": "57.489600"
+    }
+},
+{
+    "model": "profiles.town",
+    "pk": 6,
+    "fields": {
+        "name": "Moka",
+        "long_coord": "-20.219500",
+        "lat_coord": "57.502300"
+    }
+},
+{
+    "model": "profiles.town",
+    "pk": 7,
+    "fields": {
+        "name": "Vacoas",
+        "long_coord": "-20.298400",
+        "lat_coord": "57.493800"
+    }
+}
+]

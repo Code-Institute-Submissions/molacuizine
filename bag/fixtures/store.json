@@ -1,0 +1,9 @@
+[
+{
+    "model": "bag.store",
+    "pk": 1,
+    "fields": {
+        "store_status": "open"
+    }
+}
+]
