@@ -1,0 +1,14 @@
+[
+{
+    "model": "products.product",
+    "pk": 42,
+    "fields": {
+        "category": 1,
+        "name": "coke",
+        "description": "coke",
+        "price": "50.00",
+        "image_url": null,
+        "image": "coke_ikWHcTq.jpg"
+    }
+}
+]
