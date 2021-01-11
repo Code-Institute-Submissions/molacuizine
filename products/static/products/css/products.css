@@ -59,22 +59,30 @@ img {
 
 .fa-plus {
     background: black;
-    color: white;
+    color: white;    
     padding: 8px;
     height: 32px;   
 }
 
+.input-group-prepend {
+    text-decoration: none !important;
+}
+
+.input-group-append {
+    text-decoration: none !important;
+}
+
 .fa-plus:hover {
-    background: rgb(65, 60, 60);
+    background: rgb(65, 60, 60);   
 }
 
 .fa-minus:hover {
-    background: rgb(65, 60, 60);
+    background: rgb(65, 60, 60);    
 }
 
 .fa-minus {
     background: black;
-    color: white;
+    color: white;    
     padding: 8px;
     height: 32px;    
 }

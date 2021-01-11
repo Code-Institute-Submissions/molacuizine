@@ -34,16 +34,16 @@
                     {% csrf_token %}
                     <div>
                         {% if open_status %}
-                        <div class="input-group mb-3">                                                
-                            <a id="minus">
-                                <i class="fas fa-minus input-group-prepend"></i>
+                        <div class="input-group">                                                  
+                            <a id="minus" class="input-group-prepend">
+                                <i class="fas fa-minus"></i>
                             </a>                                  
                             <label for="quantity"></label>                
                             <input class="quantity w-25" type="number" id="quantity" name="quantity" min="1" max="20" value="1"> 
-                            <a id="plus">
-                                <i class="fas fa-plus input-group-append"></i>
+                            <a id="plus" class="input-group-append">
+                                <i class="fas fa-plus"></i>
                             </a>
-                        </div>    
+                        </div>  
                         {% else %}
                         {% endif %} 
                     </div>
