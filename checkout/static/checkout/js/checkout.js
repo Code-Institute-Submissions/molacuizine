@@ -16,15 +16,15 @@ $(document).ready(function(){
     })
     
     // Stripe Core logic  for payment //
-    let stripePublicKey = $('#stripe_public_key').val()
-    let clientSecret = $('#client_secret').val()
-    var stripePublicKey1 = $('#id_stripe_public_key').text().slice(1, -1);
+    // let stripePublicKey = $('#stripe_public_key').val()
+    // let clientSecret = $('#client_secret').val()
+    var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+    var clientSecret = $('#id_client_secret').text().slice(1, -1);
     // var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
     // var clientSecret = $('#id_client_secret').text().slice(1, -1);
     // console.log(clientSecret)
     console.log(stripePublicKey)
-    console.log(stripePublicKey1)
-    console.log(clientSecret)
+    
     console.log(clientSecret)
     console.log('zahur')
 
