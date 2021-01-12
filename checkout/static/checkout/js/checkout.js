@@ -15,17 +15,27 @@ $(document).ready(function(){
         }          
     })
     
-    // Stripe Core logic  for payment //
-    // let stripePublicKey = $('#stripe_public_key').val()
-    // let clientSecret = $('#client_secret').val()
-    var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
-    var clientSecret = $('#id_client_secret').text().slice(1, -1);
-    // var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
-    // var clientSecret = $('#id_client_secret').text().slice(1, -1);
-    // console.log(clientSecret)
-    console.log(stripePublicKey)
+    // Stripe Core logic  for payment //    
+    let stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+    let clientSecret = $('#id_client_secret').text().slice(1, -1);
     
-    console.log(clientSecret)
-    console.log('zahur')
-
+    let stripe = Stripe(stripePublicKey);
+        let elements = stripe.elements();
+        let style = {
+            base: {
+                color: '#000',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#dc3545',
+                iconColor: '#dc3545'
+            }
+        };
+        let card = elements.create('card', {style: style});
+        card.mount('#card-element');
 }); 
