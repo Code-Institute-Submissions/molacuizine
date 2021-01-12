@@ -81,7 +81,7 @@ def checkout(request):
                     'username': request.user,
                 },
             )
-        
+
         order_form = OrderForm(initial={
             'full_name':
                 profile.user.first_name + " " + profile.user.last_name,
