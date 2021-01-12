@@ -21,7 +21,7 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-5 col-lg-5">                
-                <p class="text-center card-text font-weight-bold h4">{{ product.name }}</p><hr>
+                <p class="text-center card-text font-weight-bold h4 pt-2 pt-md-0">{{ product.name }}</p><hr>
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'category_search' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text pb-1 pt-1">{{ product.description }}</p>
                 <p class="card-text font-weight-bold d-inline">Price: </p><p class="card-text d-inline">Rs {{ product.price }}</p>
