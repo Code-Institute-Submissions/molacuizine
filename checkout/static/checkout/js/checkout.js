@@ -61,7 +61,10 @@ $(document).ready(function(){
     form.addEventListener('submit', function(ev) {
         /* Prevents form from being submitted to view and instead runs the following function */
         ev.preventDefault();  
-        card.update({ 'disabled': true});  
+        card.update({ 'disabled': true});
+        $('#payment-form').fadeToggle(100);
+        $('#loading-overlay').fadeToggle(100);
+
         stripe.confirmCardPayment(clientSecret, {            
             payment_method: {
                 // Checks  card and add details from form 
@@ -96,7 +99,9 @@ $(document).ready(function(){
                     <i class="fas fa-times"></i>
                     </span>
                     <span>${result.error.message}</span>`;
-                $(errorDiv).html(html);                
+                $(errorDiv).html(html);  
+                $('#payment-form').fadeToggle(100);
+                $('#loading-overlay').fadeToggle(100);              
                 card.update({ 'disabled': false});
                 $('#submit-button').attr('disabled', false);                
             } else {
