@@ -75,6 +75,16 @@
                         <label class="form-check-label" for="id-save-info">Update my profile</label>
                         <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>            
                     </div><br>
+                    <fieldset class="px-3">
+                        <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                        <!-- A Stripe card element will go here -->
+                        <div class="mb-3" id="card-element"></div>
+                        <!-- Used to display form errors -->
+                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                        <!-- Pass the client secret to the view so we can get the payment intent id -->
+                        <div id="client_secret-key" type="hidden" value="{{ client_secret }}" name="client_secret"></div>
+                        <div id="id_client_secret" type="hidden" value="{{ id_client_secret }}" name="client_secret"></div>
+                    </fieldset>
                     <button class="allauth-button mt-2 mb-2">Send to Kitchen</button>
                 </form>
             </div>            
