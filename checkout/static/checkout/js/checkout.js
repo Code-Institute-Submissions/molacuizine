@@ -65,51 +65,65 @@ $(document).ready(function(){
         $('#payment-form').fadeToggle(100);
         $('#loading-overlay').fadeToggle(100);
 
-        stripe.confirmCardPayment(clientSecret, {            
-            payment_method: {
-                // Checks  card and add details from form 
-                card: card,                
-                // email is accepted in billing and not in shipping
-                billing_details: {
+        // Send info if form was checked or not //
+        let saveInfo = Boolean($('#id-save-info').attr('checked'));        
+        let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+        let postData = {
+            'csrfmiddlewaretoken': csrfToken,
+            'client_secret': clientSecret,
+            'save_info': saveInfo,
+        };
+        let url = '/checkout/cache_checkout_data/';
+        $.post(url, postData).done(function (){
+            stripe.confirmCardPayment(clientSecret, {            
+                payment_method: {
+                    // Checks  card and add details from form 
+                    card: card,                
+                    // email is accepted in billing and not in shipping
+                    billing_details: {
+                        name: $.trim(form.full_name.value),
+                        phone: $.trim(form.phone_number.value),
+                        email: $.trim(form.email.value),
+                        address:{
+                            line1: $.trim(form.street_address.value),                        
+                            city: $.trim(form.town.value),
+                            postal_code: $.trim(form.postcode.value),
+                        }
+                    }
+                },
+                // https://stripe.com/docs/api/payment_intents/confirm#confirm_payment_intent-shipping            
+                shipping: {
                     name: $.trim(form.full_name.value),
-                    phone: $.trim(form.phone_number.value),
-                    email: $.trim(form.email.value),
-                    address:{
-                        line1: $.trim(form.street_address.value),                        
-                        city: $.trim(form.town.value),
-                        postal_code: $.trim(form.postcode.value),
+                    phone: $.trim(form.phone_number.value),                
+                    address: {
+                        line1: $.trim(form.street_address.value),                    
+                        city: $.trim(form.town.value),                    
+                        postal_code: $.trim(form.postcode.value),                    
+                    }
+                },
+            }).then(function(result) {
+                if (result.error) {
+                    let errorDiv = document.getElementById('card-errors');
+                    let html = `
+                        <span class="icon" role="alert">
+                        <i class="fas fa-times"></i>
+                        </span>
+                        <span>${result.error.message}</span>`;
+                    $(errorDiv).html(html);  
+                    $('#payment-form').fadeToggle(100);
+                    $('#loading-overlay').fadeToggle(100);              
+                    card.update({ 'disabled': false});
+                    $('#submit-button').attr('disabled', false);                
+                } else {
+                    if (result.paymentIntent.status === 'succeeded') {
+                        // Form will only be submitted to view now and model updated
+                        form.submit();
                     }
                 }
-            },
-            // https://stripe.com/docs/api/payment_intents/confirm#confirm_payment_intent-shipping            
-            shipping: {
-                name: $.trim(form.full_name.value),
-                phone: $.trim(form.phone_number.value),                
-                address: {
-                    line1: $.trim(form.street_address.value),                    
-                    city: $.trim(form.town.value),                    
-                    postal_code: $.trim(form.postcode.value),                    
-                }
-            },
-        }).then(function(result) {
-            if (result.error) {
-                let errorDiv = document.getElementById('card-errors');
-                let html = `
-                    <span class="icon" role="alert">
-                    <i class="fas fa-times"></i>
-                    </span>
-                    <span>${result.error.message}</span>`;
-                $(errorDiv).html(html);  
-                $('#payment-form').fadeToggle(100);
-                $('#loading-overlay').fadeToggle(100);              
-                card.update({ 'disabled': false});
-                $('#submit-button').attr('disabled', false);                
-            } else {
-                if (result.paymentIntent.status === 'succeeded') {
-                    // Form will only be submitted to view now and model updated
-                    form.submit();
-                }
-            }
+            });
+        }).fail(function (){
+        // just reload the page, the error will be in django messages
+        location.reload();
         });
     })    
 }); 
