@@ -21,24 +21,20 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-5 col-lg-5">                
-                <p class="text-center card-text pt-0 font-weight-bold">{{ product.name }}</p><hr>
+                <p class="text-center card-text font-weight-bold">{{ product.name }}</p><hr>
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'category_search' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
-                <p class="card-text mt-4">{{ product.description }}</p><br>
-                <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
-                {% if open_status %} 
-                    <p class="card-text font-weight-bold mt-4">Quantity:</p>
-                {% else %}
-                {% endif %}
+                <p class="card-text pb-1 pt-1">{{ product.description }}</p>
+                <p class="card-text font-weight-bold d-inline">Price: </p><p class="card-text d-inline">Rs {{ product.price }}</p>
                 <!-- Form to add product to bag -->
-                <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
+                <form class="form d-inline" action="{% url 'add_to_bag' product.id %}" method="POST">
                     {% csrf_token %}
                     <div>
                         {% if open_status %}
-                        <div class="input-group">                                                  
+                        <div class="input-group mt-2">
+                            <label for="quantity"><p class="card-text font-weight-bold pr-2">Quantity:</p></label>                                                    
                             <a id="minus" class="input-group-prepend">
                                 <i class="fas fa-minus"></i>
-                            </a>                                  
-                            <label for="quantity"></label>                
+                            </a>                                        
                             <input class="quantity w-25" type="number" id="quantity" name="quantity" min="1" max="20" value="1"> 
                             <a id="plus" class="input-group-append">
                                 <i class="fas fa-plus"></i>
