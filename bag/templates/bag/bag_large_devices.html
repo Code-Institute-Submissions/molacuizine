@@ -1,17 +1,17 @@
 <!-- For medium and higher devices -->  
-<div class="row top-row no-gutters mb-3">
+<div class="row top-row no-gutters mb-4">
     <div class="d-none d-md-block col-md-3">
         <p class="header font-weight-bold">Item</p>
     </div>
     <div class="header d-none d-md-block col-md-3">                    
     </div>
     <div class="header d-none d-md-block col-md-4">
-        <p class="font-weight-bold">Quantity</p>
+        <p class="font-weight-bold ml-5">Quantity</p>
     </div>
     <div class="header d-none d-md-block col-md-1">
         <p class="font-weight-bold">Price</p>
     </div>
-    <div class="header d-none d-md-block col-md-1">
+    <div class="header d-none d-md-block col-md-1 pl-3">
         <p class="font-weight-bold">Subtotal</p>
     </div>
 </div>
@@ -28,11 +28,10 @@
                 <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">                
             {% endif %}
         </div>            
-        <div class="bag-text text-center d-none d-md-block col-md-4 mt-3">
-            {{ item.quantity }}<br>
+        <div class="bag-text d-none d-md-block col-md-4 mt-3">            
             <form class="form mt-3 ml-5" action="{% url 'adjust_bag' item.product.id %}" method="POST">
                 {% csrf_token %}
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 justify-content-center">
                     <a id="minus-{{ forloop.counter }}" class="minus input-group-prepend">
                         <i class="fas fa-minus"></i>
                     </a>                                  
@@ -53,7 +52,7 @@
         <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
             {{ item.product.price }}                    
         </div>
-        <div class="bag-text text-center d-none d-md-block col-md-1 mt-3">
+        <div class="bag-text text-right d-none d-md-block col-md-1 mt-3 pl-4">
             {{ item.sub_total }}                    
         </div>
         <hr>                                       
