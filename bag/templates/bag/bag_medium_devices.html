@@ -1,7 +1,7 @@
 <!-- For medium and smaller devices -->  
 <div class="row top-row no-gutters">
     {% for item in bag_items %}                      
-        <div class="col-12 col-sm-5 d-md-none mt-2">
+        <div class="col-12 col-sm-5 d-md-none">
             <p class="bag-text pb-0 p-1 mb-2 border-bottom border-secondary font-weight-bold">{{ forloop.counter }}.{{ item.product.name}}</p> 
             {% if item.product.image %}                    
                 <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
