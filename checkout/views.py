@@ -5,6 +5,7 @@ from .forms import OrderForm
 from profiles.models import UserProfile
 from .models import OrderLineItem, Order
 from products.models import Product
+from bag.models import Store
 from bag.contexts import bag_contents
 from profiles.forms import UserProfileForm
 from django.conf import settings
@@ -18,9 +19,15 @@ def checkout(request):
     """ view to display checkout page """
 
     bag = request.session.get('bag', {})
+    store_status = get_object_or_404(Store, id=1)
 
     if not bag:
         messages.error(request, "There's nothing in your bag at the moment")
+        return redirect(reverse('products'))
+
+    if store_status.store_status == "close":
+        messages.error(
+            request, "We are presently closed and cannot accept payments")
         return redirect(reverse('products'))
 
     profile = get_object_or_404(UserProfile, user__username=request.user)
