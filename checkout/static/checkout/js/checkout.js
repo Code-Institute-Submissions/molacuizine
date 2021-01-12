@@ -42,9 +42,9 @@ $(document).ready(function(){
     // Handle realtime validation errors on the card element
     
     card.addEventListener('change', function (event) {
-        var errorDiv = document.getElementById('card-errors');
+        let errorDiv = document.getElementById('card-errors');
         if (event.error) {
-            var html = `
+            let html = `
                 <span class="icon" role="alert">
                     <i class="fas fa-times"></i>
                 </span>
@@ -55,4 +55,56 @@ $(document).ready(function(){
             errorDiv.textContent = '';
         }
     });
+    
+    // Handle form submit
+    let form = document.getElementById('payment-form');    
+    form.addEventListener('submit', function(ev) {
+        /* Prevents form from being submitted to view and instead runs the following function */
+        ev.preventDefault();  
+        card.update({ 'disabled': true});  
+        stripe.confirmCardPayment(clientSecret, {            
+            payment_method: {
+                // Checks  card and add details from form 
+                card: card,                
+                // email is accepted in billing and not in shipping
+                billing_details: {
+                    name: $.trim(form.full_name.value),
+                    phone: $.trim(form.phone_number.value),
+                    email: $.trim(form.email.value),
+                    address:{
+                        line1: $.trim(form.street_address.value),                        
+                        city: $.trim(form.town.value),
+                        postal_code: $.trim(form.postcode.value),
+                    }
+                }
+            },
+            // https://stripe.com/docs/api/payment_intents/confirm#confirm_payment_intent-shipping            
+            shipping: {
+                name: $.trim(form.full_name.value),
+                phone: $.trim(form.phone_number.value),                
+                address: {
+                    line1: $.trim(form.street_address.value),                    
+                    city: $.trim(form.town.value),                    
+                    postal_code: $.trim(form.postcode.value),                    
+                }
+            },
+        }).then(function(result) {
+            if (result.error) {
+                let errorDiv = document.getElementById('card-errors');
+                let html = `
+                    <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>${result.error.message}</span>`;
+                $(errorDiv).html(html);                
+                card.update({ 'disabled': false});
+                $('#submit-button').attr('disabled', false);                
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    // Form will only be submitted to view now and model updated
+                    form.submit();
+                }
+            }
+        });
+    })    
 }); 
