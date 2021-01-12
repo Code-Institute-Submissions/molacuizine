@@ -21,7 +21,7 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-5 col-lg-5">                
-                <p class="text-center card-text font-weight-bold">{{ product.name }}</p><hr>
+                <p class="text-center card-text font-weight-bold h4">{{ product.name }}</p><hr>
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'category_search' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text pb-1 pt-1">{{ product.description }}</p>
                 <p class="card-text font-weight-bold d-inline">Price: </p><p class="card-text d-inline">Rs {{ product.price }}</p>
@@ -30,7 +30,7 @@
                     {% csrf_token %}
                     <div>
                         {% if open_status %}
-                        <div class="input-group mt-2">
+                        <div class="input-group mt-2 mb-5">
                             <label for="quantity"><p class="card-text font-weight-bold pr-2">Quantity:</p></label>                                                    
                             <a id="minus" class="input-group-prepend">
                                 <i class="fas fa-minus"></i>
@@ -44,7 +44,7 @@
                         {% endif %} 
                     </div>
                     {% if open_status %}
-                    <div class="mt-4">
+                    <div class="pt-0 pt-md-5">
                         <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Continue Ordering</a>
                         <input type="submit" class="btn product-submit" value="Add to bag">
                     </div>
