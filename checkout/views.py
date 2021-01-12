@@ -7,7 +7,9 @@ from .models import OrderLineItem, Order
 from products.models import Product
 from bag.contexts import bag_contents
 from profiles.forms import UserProfileForm
+from django.conf import settings
 import json
+import stripe
 
 
 # Create your views here.
@@ -64,6 +66,22 @@ def checkout(request):
                 Please double check your information.')
     # Get request
     else:
+        # Create Stripe intent request
+
+        current_bag = bag_contents(request)
+        total = current_bag['grand_total']
+        stripe_total = round(total * 100)
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+                metadata={
+                    'bag': json.dumps(request.session.get('bag', {})),
+                    'username': request.user,
+                },
+            )
+        print(intent)
         order_form = OrderForm(initial={
             'full_name':
                 profile.user.first_name + " " + profile.user.last_name,
@@ -76,6 +94,8 @@ def checkout(request):
 
     context = {
         'order_form': order_form,
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'client_secret': intent.client_secret,
     }
     return render(request, 'checkout/checkout.html', context)
 
