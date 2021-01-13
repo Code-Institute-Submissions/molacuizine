@@ -50,8 +50,8 @@
     <div class="container mt-2">        
         <div class="row">                      
             {% for product in objects %}
-                <div class="product background col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
-                    <div class="card m-2">
+                <div class="product col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
+                    <div class="card">
                         {% if product.image %}
                             <a href="{% url 'product_detail' product.id %}">
                                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -62,7 +62,7 @@
                             </a>
                         {% endif %}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body background">
                         <p class="card-text">{{ product.name }}</p>
                         <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
                         <div class="row no-gutters">
