@@ -17,8 +17,7 @@ $(document).ready(function(){
     
     // Stripe Core logic  for payment //    
     let stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
-    let clientSecret = $('#id_client_secret').text().slice(1, -1);
-    console.log(stripePublicKey) 
+    let clientSecret = $('#id_client_secret').text().slice(1, -1);    
        
     let stripe = Stripe(stripePublicKey);
     let elements = stripe.elements();
@@ -129,4 +128,3 @@ $(document).ready(function(){
         })
     });    
 });
-               
