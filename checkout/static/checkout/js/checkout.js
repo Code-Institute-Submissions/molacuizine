@@ -58,7 +58,9 @@ $(document).ready(function(){
     
     // Handle form submit
 
-    let form = document.getElementById('payment-form');    
+    let form = document.getElementById('payment-form');
+    let town = document.getElementById('id_town');    
+     
     form.addEventListener('submit', function(ev){
         /* Prevents form from being submitted to view and instead runs the following function */
         ev.preventDefault();
@@ -79,7 +81,7 @@ $(document).ready(function(){
         };
         let url = '/checkout/cache_checkout_data/';
         
-        $.post(url, postData).done(function () {
+        $.post(url, postData).done(function () {            
             // https://stripe.com/docs/js/payment_intents/confirm_card_payment#stripe_confirm_card_payment-clientSecret
             stripe.confirmCardPayment(clientSecret, {
                     payment_method: {                    
@@ -90,7 +92,7 @@ $(document).ready(function(){
                         email: $.trim(form.email.value),
                         address:{
                             line1: $.trim(form.street_address.value),                        
-                            city: $.trim(form.town.value),
+                            city: $.trim(town.options[town.selectedIndex].text),                            
                             postal_code: $.trim(form.postcode.value),
                         }
                     }
@@ -100,7 +102,7 @@ $(document).ready(function(){
                     phone: $.trim(form.phone_number.value),                
                     address: {
                         line1: $.trim(form.street_address.value),                    
-                        city: $.trim(form.town.value),                    
+                        city: $.trim(town.options[town.selectedIndex].text),                    
                         postal_code: $.trim(form.postcode.value),                    
                     }
                 },
