@@ -1,5 +1,10 @@
 /* bag app css */
 
+body {
+    background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url("/media/background.jpg");    
+    background-size: contain;      
+}
+
 .container {
     height: 170px;
     width: 95% !important;    
