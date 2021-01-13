@@ -8,7 +8,7 @@
 {% block content %}    
     <div class="container"></div>  
     <h1 class="header text-center">Our Menu</h1>
-    <hr>
+    <hr class="">
     <div>        
         <a class="product-link" href="{% url 'products' %}">
             <p class="product-tag text-center">All Menu</p>
@@ -67,8 +67,8 @@
                             </a>
                         {% endif %}
                     </div>
-                    <div class="card-body background">
-                        <p class="card-text">{{ product.name }}</p>
+                    <div class="card-body background pt-2">
+                        <a href="{% url 'product_detail' product.id %}" class="card-text">{{ product.name }}</a>
                         <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
                         <div class="row no-gutters">
                             <div class="col-1">

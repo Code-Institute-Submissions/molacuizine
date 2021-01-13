@@ -67,8 +67,8 @@
                             </a>
                         {% endif %}
                     </div>
-                    <div class="card-body background">
-                        <p class="card-text">{{ product.name }}</p>
+                    <div class="card-body background pt-2">
+                        <a href="{% url 'product_detail' product.id %}" class="card-text">{{ product.name }}</a>
                         <p class="card-text font-weight-bold">Rs {{ product.price }}</p>
                         <div class="row no-gutters">
                             <div class="col-1">
