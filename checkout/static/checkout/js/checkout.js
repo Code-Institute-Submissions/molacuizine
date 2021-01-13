@@ -1,5 +1,5 @@
 $(document).ready(function(){    
-
+    
     // Required to add paceholders to profile form page //
 
     if($('#id_town').val()== ""){
@@ -18,9 +18,10 @@ $(document).ready(function(){
     // Stripe Core logic  for payment //    
     let stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
     let clientSecret = $('#id_client_secret').text().slice(1, -1);
-    
+    console.log(stripePublicKey) 
+       
     let stripe = Stripe(stripePublicKey);
-        let elements = stripe.elements();
+    let elements = stripe.elements();
         let style = {
             base: {
                 color: '#000',
@@ -36,8 +37,8 @@ $(document).ready(function(){
                 iconColor: '#dc3545'
             }
         };
-        let card = elements.create('card', {style: style});
-        card.mount('#card-element');
+    let card = elements.create('card', {style: style});
+    card.mount('#card-element');
 
     // Handle realtime validation errors on the card element
     
@@ -57,16 +58,20 @@ $(document).ready(function(){
     });
     
     // Handle form submit
+
     let form = document.getElementById('payment-form');    
-    form.addEventListener('submit', function(ev) {
+    form.addEventListener('submit', function(ev){
         /* Prevents form from being submitted to view and instead runs the following function */
-        ev.preventDefault();  
-        card.update({ 'disabled': true});
+        ev.preventDefault();
+        
+        card.update({ 'disabled': true});    
+        $('#submit-button').attr('disabled', true);
         $('#payment-form').fadeToggle(100);
         $('#loading-overlay').fadeToggle(100);
 
-        // Send info if form was checked or not //
-        let saveInfo = Boolean($('#id-save-info').attr('checked'));        
+        
+        let saveInfo = Boolean($('#id-save-info').attr('checked'));
+        // From using {% csrf_token %} in the form
         let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
         let postData = {
             'csrfmiddlewaretoken': csrfToken,
@@ -74,12 +79,12 @@ $(document).ready(function(){
             'save_info': saveInfo,
         };
         let url = '/checkout/cache_checkout_data/';
-        $.post(url, postData).done(function (){
-            stripe.confirmCardPayment(clientSecret, {            
-                payment_method: {
-                    // Checks  card and add details from form 
-                    card: card,                
-                    // email is accepted in billing and not in shipping
+        
+        $.post(url, postData).done(function () {
+            // https://stripe.com/docs/js/payment_intents/confirm_card_payment#stripe_confirm_card_payment-clientSecret
+            stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {                    
+                    card: card,                    
                     billing_details: {
                         name: $.trim(form.full_name.value),
                         phone: $.trim(form.phone_number.value),
@@ -90,8 +95,7 @@ $(document).ready(function(){
                             postal_code: $.trim(form.postcode.value),
                         }
                     }
-                },
-                // https://stripe.com/docs/api/payment_intents/confirm#confirm_payment_intent-shipping            
+                },                
                 shipping: {
                     name: $.trim(form.full_name.value),
                     phone: $.trim(form.phone_number.value),                
@@ -103,27 +107,26 @@ $(document).ready(function(){
                 },
             }).then(function(result) {
                 if (result.error) {
-                    let errorDiv = document.getElementById('card-errors');
-                    let html = `
+                    var errorDiv = document.getElementById('card-errors');
+                    var html = `
                         <span class="icon" role="alert">
                         <i class="fas fa-times"></i>
                         </span>
                         <span>${result.error.message}</span>`;
-                    $(errorDiv).html(html);  
+                    $(errorDiv).html(html);
                     $('#payment-form').fadeToggle(100);
-                    $('#loading-overlay').fadeToggle(100);              
+                    $('#loading-overlay').fadeToggle(100);
                     card.update({ 'disabled': false});
-                    $('#submit-button').attr('disabled', false);                
+                    $('#submit-button').attr('disabled', false);
                 } else {
-                    if (result.paymentIntent.status === 'succeeded') {
-                        // Form will only be submitted to view now and model updated
+                    if (result.paymentIntent.status === 'succeeded'){                        
                         form.submit();
                     }
                 }
             });
-        }).fail(function (){
-        // just reload the page, the error will be in django messages
-        location.reload();
-        });
-    })    
-}); 
+        }).fail(function () {            
+            location.reload();
+        })
+    });    
+});
+               
