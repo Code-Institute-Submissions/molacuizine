@@ -13,15 +13,15 @@
         <div class="row mt-5">
             <div class="col-lg-1">                
             </div>
-            <div class="col-12 col-md-7 col-lg-5 mb-1">
+            <div class="col-12 col-md-7 col-lg-5 p-0">
                 {% if product.image %}                    
                     <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">                    
                 {% else %}                    
                     <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">                    
                 {% endif %}
             </div>
-            <div class="col-12 col-md-5 col-lg-5">                
-                <p class="text-center card-text font-weight-bold h4 pt-2 pt-md-0">{{ product.name }}</p><hr>
+            <div class="col-12 col-md-5 col-lg-5 pl-4 pr-0 background">                
+                <p class="text-center card-text font-weight-bold h4 pt-3 pt-md-2">{{ product.name }}</p><hr>
                 <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'category_search' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
                 <p class="card-text pb-1 pt-1">{{ product.description }}</p>
                 <p class="card-text font-weight-bold d-inline">Price: </p><p class="card-text d-inline">Rs {{ product.price }}</p>
