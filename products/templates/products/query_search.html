@@ -51,7 +51,7 @@
         <div class="row">                      
             {% for product in objects %}
                 <div class="product col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
-                    <div class="card">
+                    <div class="card zoom">
                         {% if product.image %}
                             <a href="{% url 'product_detail' product.id %}">
                                 <img src="{{ product.image.url }}" alt="{{ product.name }}">

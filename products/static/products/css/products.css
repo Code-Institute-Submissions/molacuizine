@@ -20,6 +20,18 @@ img {
     object-position: center;
 }
 
+/*----- Zoom effect from https://www.w3schools.com/howto/howto_css_zoom_hover.asp ---------*/
+
+.zoom {  
+  transition: transform .2s; 
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
+
 .background {
     background: rgb(237, 239, 241, 0.7);    
 }
