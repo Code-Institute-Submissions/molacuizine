@@ -67,6 +67,15 @@ p {
     border-right: none !important;
 }
 
+.search {
+    background-color: white !important;
+}
+
+.search:hover {
+    background-color: rgb(0, 0, 0) !important;
+    color: white !important;
+}
+
 .search-2 {
     border-color: black;
     margin-right: -1px !important;
@@ -76,6 +85,7 @@ p {
 .navbar {
     padding-bottom: 20px;
     padding-right: 0;
+    background-color: #d7d7d7;
 }
 
 /* ------------------------------- bootstrap toasts */
@@ -88,7 +98,7 @@ p {
 }
 
 .toast-body, .toast-header {
-    background-color: rgb(248,244,244);
+    background-color: #007bff;
     width: 250px;
 }
 
