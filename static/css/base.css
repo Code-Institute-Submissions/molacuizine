@@ -54,6 +54,11 @@ p {
     color: red !important;
 }
 
+.navbar-toggler {
+    background: white;
+    border-color: black !important;
+}
+
 .nav-link, .nav-link {
     font-family: 'Lato', sans-serif;
     color: black;
