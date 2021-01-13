@@ -7,7 +7,8 @@ $(document).ready(function(){
     $('#id_last_name').attr('placeholder', "Lastname");
     
     $('.product-submit').click(function(){''
-        $(".fa-shopping-bag").css('font-size', '27px');
+        $(".fa-shopping-bag").css('font-size', '40px');
         $(".fa-shopping-bag").css('color', 'green');
+        $(".header-link").hide();
     })
 }); 
