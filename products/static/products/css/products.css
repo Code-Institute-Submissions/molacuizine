@@ -1,5 +1,13 @@
 /* Products app css */
 
+/* Make background image transparent 
+https://stackoverflow.com/questions/41662545/background-image-transparency-in-div */
+
+body {
+    background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)), url("/media/background.jpg");    
+    background-size: contain;      
+}
+
 .container {
     height: 170px;
     width: 95% !important;
@@ -13,7 +21,7 @@ img {
 }
 
 .background {
-    background: rgb(239, 241, 243);    
+    background: rgb(237, 239, 241, 0.7);    
 }
 
 .card-text {
