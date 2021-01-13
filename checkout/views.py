@@ -22,6 +22,7 @@ def cache_checkout_data(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'save_info': request.POST.get('save_info'),
+            'request': request.POST.get('request'),
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -93,7 +94,7 @@ def checkout(request):
                 Please double check your information.')
     # Get request
     else:
-        # Create Stripe intent request      
+        # Create Stripe intent request
 
         current_bag = bag_contents(request)
         total = current_bag['grand_total']

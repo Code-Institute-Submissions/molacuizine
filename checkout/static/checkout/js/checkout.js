@@ -59,6 +59,8 @@ $(document).ready(function(){
     // Handle form submit
 
     let form = document.getElementById('payment-form');
+
+    // https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
     let town = document.getElementById('id_town');    
      
     form.addEventListener('submit', function(ev){
@@ -71,13 +73,15 @@ $(document).ready(function(){
         $('#loading-overlay').fadeToggle(100);
 
         
-        let saveInfo = Boolean($('#id-save-info').attr('checked'));
+        let saveInfo = Boolean($('#id-save-info').attr('checked'));        
+        let request = form.request.value
         // From using {% csrf_token %} in the form
         let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
         let postData = {
             'csrfmiddlewaretoken': csrfToken,
             'client_secret': clientSecret,
             'save_info': saveInfo,
+            'request': request,
         };
         let url = '/checkout/cache_checkout_data/';
         
