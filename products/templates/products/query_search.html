@@ -47,10 +47,10 @@
     </ul>    
     </nav>
     <!-- Product listng -->
-    <div class="container background mt-2">        
+    <div class="container mt-2">        
         <div class="row">                      
             {% for product in objects %}
-                <div class="product col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
+                <div class="product background col-sm-6 col-md-6 col-lg-4 col-xl-3">                    
                     <div class="card m-2">
                         {% if product.image %}
                             <a href="{% url 'product_detail' product.id %}">
