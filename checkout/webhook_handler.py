@@ -21,6 +21,16 @@ class StripeWH_Handler:
         Handle the payment_intent.succeeded webhook from Stripe
         """
 
+        # Request data needed to add order to model incase of error in submission
+
+        intent = event.data.object
+        pid = intent.id
+        bag = intent.metadata.bag
+        save_info = intent.metadata.save_info
+        billing_details = intent.charges.data[0].billing_details
+        shipping_details = intent.shipping
+        grand_total = round(intent.charges.data[0].amount / 100, 2)
+
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Order Successful',
             status=200)
