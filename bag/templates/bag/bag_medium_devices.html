@@ -9,7 +9,7 @@
                 <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">                
             {% endif %}
         </div>            
-        <div class="col-12 col-sm-7 d-md-none p-3 mt-2 mt-sm-4 pl-5">                               
+        <div class="col-12 col-sm-7 d-md-none mt-3 pt-0 pt-sm-3 mt-sm-2 pl-5">                               
             <p class="bag-text p-1">{{ item.product.description}}</p>
             <p class="bag-text p-1"><span class="font-weight-bold">Quantity:</span> {{ item.quantity }}</p>
             <form class="form" action="{% url 'adjust_bag' item.product.id %}" method="POST">
@@ -31,8 +31,8 @@
                     </div> 
                 </div>
             </form>
-            <p class="bag-text p-1"><span class="font-weight-bold">Price: </span>Rs {{ item.product.price }}</p>
-            <p class="bag-text p-1"><span class="font-weight-bold">Subtotal: </span>Rs {{ item.sub_total }}</p>
+            <p class="bag-text text-right"><span class="font-weight-bold">Price: </span>Rs {{ item.product.price }}</p>
+            <p class="bag-text text-right mt-2"><span class="font-weight-bold">Subtotal: </span>Rs {{ item.sub_total }}</p>
         </div>
     {% endfor %}    
     <div class="col-12 border-top mt-2 mb-2 d-md-none">        
