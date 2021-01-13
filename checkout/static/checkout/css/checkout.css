@@ -112,6 +112,10 @@ select option[value=""] {
     .checkout-summary {
         width: 75% !important;
     }
+
+    .container {
+        max-width: 95%;
+    }
 }
 
 @media (max-width: 576px) {
