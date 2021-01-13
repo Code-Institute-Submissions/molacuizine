@@ -17,6 +17,12 @@ p {
     font-family: 'Lato', sans-serif;
 }
 
+hr {
+    height: 1px;
+    background-color: #aca7a7;
+    border: none;
+}
+
 /*----- Navbar header -------------------------------*/
 
 .links {
