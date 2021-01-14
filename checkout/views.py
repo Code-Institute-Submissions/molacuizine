@@ -20,9 +20,13 @@ def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        if request.POST.get('request') == "":
+            buyer_request = "No Requests"
+        else:
+            buyer_request = request.POST.get('request')
         stripe.PaymentIntent.modify(pid, metadata={
             'save_info': request.POST.get('save_info'),
-            'request_info': request.POST.get('request'),
+            'request_info': buyer_request,
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -136,6 +140,11 @@ def checkout_success(request, order_number):
     """
     order = get_object_or_404(Order, order_number=order_number)
 
+    # Handle travel time requests using google distance
+    google_api = settings.GOOGLE_API_KEY
+    print(google_api)
+    print('zahur')
+    url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=-20.2984,57.4938&destinations=-20.3171,57.5265&key={google_api}'
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
