@@ -24,8 +24,7 @@ def cache_checkout_data(request):
         if request.POST.get('request') == "":
             buyer_request = "No Request"
         else:
-            buyer_request = request.POST.get('request')
-        print(buyer_request)
+            buyer_request = request.POST.get('request')        
         stripe.PaymentIntent.modify(pid, metadata={
             'save_info': request.POST.get('save_info'),
             'request_info': buyer_request,
