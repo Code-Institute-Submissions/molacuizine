@@ -125,10 +125,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 WSGI_APPLICATION = 'mo_lacuizine.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -214,3 +211,7 @@ if 'USE_AWS' in os.environ:
 TRANSPORT_COST = 200
 # stripe
 STRIPE_CURRENCY = 'mur'
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'molacuizine@example.com'
