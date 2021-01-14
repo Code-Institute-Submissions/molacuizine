@@ -34,8 +34,7 @@ class StripeWH_Handler:
         pid = intent.id
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
-        request = intent.metadata.username
-        request = intent.metadata.request_info
+        request_info = intent.metadata.request_info
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
 
@@ -81,7 +80,7 @@ class StripeWH_Handler:
                     street_address=shipping_details.address.line1,
                     town=get_object_or_404(Town, name=shipping_details.address.city),
                     postcode=shipping_details.address.postal_code,
-                    request=request,
+                    request=request_info,
                     original_bag=bag,
                     stripe_pid=pid,
                 )
