@@ -34,8 +34,8 @@ class StripeWH_Handler:
         pid = intent.id
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
-        request = intent.metadata.request
-        print(request)
+        request = intent.metadata.username
+        request = intent.metadata.request_info
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
 
@@ -66,12 +66,10 @@ class StripeWH_Handler:
                 order = False
                 attempt += 1
                 time.sleep(1)
-                print(attempt)
         if order is True:
             order = Order.objects.get(stripe_pid=pid)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
-                status=200)
+                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database', status=200)
         else:
             order = None
             try:
