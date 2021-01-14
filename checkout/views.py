@@ -13,6 +13,7 @@ from django.conf import settings
 from django.views.decorators.http import require_POST
 import json
 import stripe
+import requests
 
 
 @require_POST
@@ -144,7 +145,14 @@ def checkout_success(request, order_number):
     google_api = settings.GOOGLE_API_KEY
     print(google_api)
     print('zahur')
-    url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=-20.2984,57.4938&destinations=-20.3171,57.5265&key={google_api}'
+    url = f'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=-20.2984,57.4938&destinations=-20.3171,57.5265&key={google_api}'
+    r = requests.get(url)
+    res = r.json()
+    time = res['rows'][0]['elements'][0]['duration']['text']
+    time2 = time.split(" mins")
+    travel_time = int(time2[0])
+    print(travel_time)
+
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
