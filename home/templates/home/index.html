@@ -9,7 +9,7 @@
     <div class="home-background">
     </div>
     {% if open_status %}
-        <a class="order-button btn-lg" href="#">Order now</a>
+        <a class="order-button btn-lg" href="{% url 'products' %}">Order now</a>
     {% else %}
     {% endif %}
 {% endblock %}
