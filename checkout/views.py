@@ -22,9 +22,10 @@ def cache_checkout_data(request):
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         if request.POST.get('request') == "":
-            buyer_request = "No Requests"
+            buyer_request = "No Request"
         else:
             buyer_request = request.POST.get('request')
+        print(buyer_request)
         stripe.PaymentIntent.modify(pid, metadata={
             'save_info': request.POST.get('save_info'),
             'request_info': buyer_request,
