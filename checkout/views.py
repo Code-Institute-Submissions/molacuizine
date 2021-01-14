@@ -141,18 +141,17 @@ def checkout_success(request, order_number):
     """
     order = get_object_or_404(Order, order_number=order_number)
 
-    # Handle travel time requests using google distance
+    # Handle travel time requests using google distance matrix
     google_api = settings.GOOGLE_API_KEY
-    print(google_api)
-    print('zahur')
-    url = f'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=-20.2984,57.4938&destinations=-20.3171,57.5265&key={google_api}'
+    lon = order.town.long_coord
+    lat = order.town.lat_coord
+    url = f'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=-20.2984,57.4938&destinations={lon},{lat}&key={google_api}'
     r = requests.get(url)
     res = r.json()
     time = res['rows'][0]['elements'][0]['duration']['text']
-    time2 = time.split(" mins")
+    time2 = time.split(" ")
     travel_time = int(time2[0])
-    print(travel_time)
-
+    delivery_time = travel_time + 30
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
@@ -161,6 +160,7 @@ def checkout_success(request, order_number):
         del request.session['bag']
 
     context = {
+        'delivery_time': delivery_time,
         'order': order,
     }
 
