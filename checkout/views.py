@@ -24,7 +24,7 @@ def cache_checkout_data(request):
         if request.POST.get('request') == "":
             buyer_request = "No Request"
         else:
-            buyer_request = request.POST.get('request')        
+            buyer_request = request.POST.get('request')
         stripe.PaymentIntent.modify(pid, metadata={
             'save_info': request.POST.get('save_info'),
             'request_info': buyer_request,
@@ -151,7 +151,12 @@ def checkout_success(request, order_number):
     time = res['rows'][0]['elements'][0]['duration']['text']
     time2 = time.split(" ")
     travel_time = int(time2[0])
-    delivery_time = travel_time + 30
+    # Round up travel time to nearest 5 mins
+    if travel_time % 5 != 0:
+        travel_time_five = travel_time + (5-travel_time % 5)
+    else:
+        travel_time_five = travel_time
+    delivery_time = travel_time_five + 30
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
