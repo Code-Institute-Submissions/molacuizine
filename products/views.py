@@ -25,16 +25,16 @@ def all_products(request):
 
     objects = products
 
-    p = Paginator(objects, 5)
+    p = Paginator(objects, 8)
     page_num = list(range(1, p.num_pages+1))
-    objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
-    end = count % 5
+    objects = objects[(page_number-1)*8:((page_number-1)*8)+8]
+    end = count % 8
     # Code to provide page references in pagination
-    object_start = ((page_number-1) * 5) + 1
+    object_start = ((page_number-1) * 8) + 1
     if page_number == page_num[-1]:
         object_finish = object_start + end-1
     else:
-        object_finish = object_start + 4
+        object_finish = object_start + 7
 
     previous_page = page_number - 1
     next_page = page_number + 1
@@ -79,18 +79,18 @@ def query_search(request):
     count = products.count()
     objects = products
 
-    p = Paginator(objects, 5)
+    p = Paginator(objects, 8)
     page_num = list(range(1, p.num_pages+1))
-    objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
-    end = count % 5
+    objects = objects[(page_number-1)*8:((page_number-1)*8)+8]
+    end = count % 8
 
     # Code to provide page references in pagination
 
-    object_start = ((page_number-1) * 5) + 1
+    object_start = ((page_number-1) * 8) + 1
     if page_number == page_num[-1]:
         object_finish = object_start + end-1
     else:
-        object_finish = object_start + 4
+        object_finish = object_start + 7
 
     previous_page = page_number - 1
     next_page = page_number + 1
@@ -133,18 +133,18 @@ def category_search(request):
     count = products.count()
     objects = products
 
-    p = Paginator(objects, 5)
+    p = Paginator(objects, 8)
     page_num = list(range(1, p.num_pages+1))
-    objects = objects[(page_number-1)*5:((page_number-1)*5)+5]
-    end = count % 5
+    objects = objects[(page_number-1)*8:((page_number-1)*8)+8]
+    end = count % 8
 
     # Code to provide page references in pagination
 
-    object_start = ((page_number-1) * 5) + 1
+    object_start = ((page_number-1) * 8) + 1
     if page_number == page_num[-1]:
         object_finish = object_start + end-1
     else:
-        object_finish = object_start + 4
+        object_finish = object_start + 7
 
     previous_page = page_number - 1
     next_page = page_number + 1
