@@ -44,9 +44,9 @@
 
 .footer {
     background:  #d7d7d7;
-    /* font-family: 'Lato', sans-serif; */
+    font-family: 'Lato', sans-serif;
     color: black;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /*----- Media screen -------------------------------*/
