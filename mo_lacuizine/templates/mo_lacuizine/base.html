@@ -135,13 +135,14 @@
                     </div>
                 </div>                
             </nav>                                                                   
-        </header>
+        </header> 
+               
         {% block page_header %}    
-        {% endblock %}
-
-        {% block content %}
-        {% endblock %}
+        {% endblock %}        
         
+        {% block content %}                 
+        {% endblock %}              
+            
         {% if messages %}
             <div class="message-container">
                 {% for message in messages %}
