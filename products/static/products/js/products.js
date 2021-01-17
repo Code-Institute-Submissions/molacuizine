@@ -36,13 +36,16 @@ $(document).ready(function(){
         $('#id_image').click(); 
          
     })
-    url = $("img").attr('src').split("/")[1]    
+    url = $("img").attr('src').split("media")    
+    console.log(url) 
+    url2 = url[0]+ 'media'
+    console.log(url2)
     $('#id_image').hide();
     $('#id_image').change(function(){
         filename=$('#id_image').val().split('\\');      
         $('#filename-text').html(filename[filename.length-1]);
         preview = $('#filename-text').html()            
-        $('.preview').attr('src', '/' + url + '/' + preview)
+        $('.preview').attr('src', url2 + '/' + preview)
     }); 
 
     // Required to send store status data to context view to update model //
