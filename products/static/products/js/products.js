@@ -40,6 +40,8 @@ $(document).ready(function(){
     $('#id_image').change(function(){
         filename=$('#id_image').val().split('\\');      
         $('#filename-text').html(filename[filename.length-1]);
+        preview = $('#filename-text').html()        
+        $('.preview').attr('src', '/media/' + preview)
     }); 
 
     // Required to send store status data to context view to update model //
