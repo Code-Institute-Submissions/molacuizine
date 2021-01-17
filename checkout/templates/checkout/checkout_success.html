@@ -11,7 +11,7 @@
         <h1 class="text-left">Order Successful. Thank You!</h1>
         <hr>
         <p>Your order information summary is below. A confirmation has been sent to <span class="font-weight-bold">{{ order.email }}</span></p>       
-        <p>Your order should be delivered in {{ delivery_time }} mins. Our driver will contact you soon</p>
+        <p>Your order should be delivered in {{ delivery_time }} mins. Our driver will contact you on {{ order.phone_number }} soon</p>
         <div class="checkout-summary checkout-text border border-secondary">
             <div class="row m-1">
                 <div class="col-12 col-md-5 text-left text-dark font-weight-bold mt-2">Order Number</div>
@@ -31,13 +31,13 @@
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold">Full Name</div>
                 <div class="col-12 col-md-6 text-md-right">{{ order.full_name}}</div>
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Phone Number</div>
-                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.phone_number}}</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.phone_number }}</div>
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Street Address</div>
-                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.street_address}}</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.street_address }}</div>
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Town</div>
-                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.town}}</div>
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.town }}</div>
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Postcode</div>
-                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.postcode}}</div>                       
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.postcode }}</div>                       
                 <div class="col-12">
                     Billing Info:
                 </div>
