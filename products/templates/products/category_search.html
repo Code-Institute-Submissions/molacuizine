@@ -11,10 +11,12 @@
     <hr>
     <div>        
         <a class="product-link" href="{% url 'category_search' %}?category={{ current_category }}">
-            <p class="product-tag text-center">{{ friendly_name }}</p>
+            <p class="product-tag text-center mb-2">{{ friendly_name }}</p>
         </a>           
     </div>
-    <p class="card-text text-center mt-2 mb-2">Showing {{ start }}-{{ finish }} of {{ count }} items</p>
+    {% if count > 8 %}       
+        <p class="card-text text-center mt-2 mb-2">Showing {{ start }}-{{ finish }} of {{ count }} items for <span class="font-weight-bold font-italic">{{ query }}</span></p>
+    {% endif %}
     <nav aria-label="Page navigation example">
     <!-- Page pagination -->
     <ul class="pagination justify-content-center mb-4">

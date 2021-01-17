@@ -14,7 +14,9 @@
             <p class="product-tag text-center">All Menu</p>
         </a>            
     </div>
-    <p class="card-text text-center mt-2 mb-2">Showing {{ start }}-{{ finish }} of {{ count }} items</p>
+    {% if count > 8 %}
+        <p class="card-text text-center mt-2 mb-2">Showing {{ start }}-{{ finish }} of {{ count }} items</p>
+    {% endif %}
     <nav aria-label="Page navigation example">
     <!-- Page pagination -->
     <ul class="pagination justify-content-center mb-4">
