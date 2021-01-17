@@ -123,9 +123,15 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="store-open text-center">
-                            {{ open_message }}
-                        </div> 
+                        {% if open_status %}
+                            <div class="store-open text-center font-weight-bold text-success">
+                                {{ open_message }}
+                            </div>
+                        {% else %}
+                        <div class="store-open text-center font-weight-bold text-danger">
+                                {{ open_message }}
+                            </div>
+                        {% endif %} 
                     </div>
                 </div>                
             </nav>                                                                   
