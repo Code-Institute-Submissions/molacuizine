@@ -12,20 +12,21 @@
         <hr>
         <p>Your order information summary is below. A confirmation has been sent to <span class="font-weight-bold">{{ order.email }}</span></p>       
         <p>Your order should be delivered in {{ delivery_time }} mins. Our driver will contact you on {{ order.phone_number }} soon</p>
+        <p>Need Help Contact Us on <a href="tel:57075200">57075200</a></p>
         <div class="checkout-summary checkout-text border border-secondary">
             <div class="row m-1">
                 <div class="col-12 col-md-5 text-left text-dark font-weight-bold mt-2">Order Number</div>
                 <div class="col-12 col-md-7 text-md-right mt-md-2 order-number">{{ order.order_number }}</div>
-                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Date and time</div>
-                <div class="col-12 col-md-6 text-md-right mt-md-1">{{ order.date}}</div> 
+                <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1 border-bottom">Date and time</div>
+                <div class="col-12 col-md-6 text-md-right mt-md-1 border-bottom">{{ order.date}}</div> 
                 <div class="col-12">
                     Ordered items:
-                </div>
+                </div>                
                 {% for item in order.lineitems.all %}
                     <div class="col-12 col-md-6 text-left text-dark font-weight-bold">{{ forloop.counter }}.{{ item.product.name }}</div>
                     <div class="col-12 col-md-6 text-md-right">{{ item.quantity }} @ Rs{{ item.product.price }} each</div>
                 {% endfor %}
-                <div class="col-12">
+                <div class="col-12 border-top">
                     Delivery Info:
                 </div>  
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold">Full Name</div>
@@ -38,7 +39,7 @@
                 <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.town }}</div>
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Postcode</div>
                 <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.postcode }}</div>                       
-                <div class="col-12">
+                <div class="col-12 border-top">
                     Billing Info:
                 </div>
                 <div class="col-6 col-md-6 text-left text-dark font-weight-bold mt-1">Total</div>
