@@ -36,11 +36,10 @@ $(document).ready(function(){
         $('#id_image').click(); 
          
     })
-    url = $("img").attr('src').split("media")    
-    console.log(url) 
-    url2 = url[0]+ 'media'
-    console.log(url2)
+
     $('#id_image').hide();
+    url = $("img").attr('src').split("media")   
+    url2 = url[0]+ 'media'   
     $('#id_image').change(function(){
         filename=$('#id_image').val().split('\\');      
         $('#filename-text').html(filename[filename.length-1]);
