@@ -36,13 +36,29 @@ $(document).ready(function(){
     if($('#id_spice_index option:selected').val()== 'unknown'){
             $('#id_spice_index').css('color', '#aab7c4');            
         }
-    $('#id_spice_index').change(function(){        
+   
+    $('#id_spice_index').change(function(){             
         if($('#id_spice_index option:selected').val()== 'unknown'){
             $('#id_spice_index').css('color', '#aab7c4');            
-        }
+        }        
         else{
             $('#id_spice_index').css('color', 'black');
         }          
+    }) 
+    
+    // Required to add colour to spice selection //
+    
+    $('#spice_index').change(function(){
+        let spice_option=$('#spice_index').val()                   
+        if(spice_option=="mild"){            
+            $('#spice_index').css('color', 'green');
+        }
+        else if(spice_option=="medium"){            
+            $('#spice_index').css('color', 'orange');
+        }
+        else if(spice_option=="hot"){            
+            $('#spice_index').css('color', 'red');
+        }
     })
 
     // Required for customisable image upload button //
