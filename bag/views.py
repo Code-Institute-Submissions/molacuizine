@@ -56,19 +56,21 @@ def adjust_bag(request, product_id):
     """ A view to adjust bag content"""
 
     product = get_object_or_404(Product, pk=product_id)
-
-    if request.POST:
-
-        quantity = int(request.POST.get('quantity'))
-
-        # Request existing bag
-        bag = request.session.get('bag', {})
-        # Update quantity
+    quantity = int(request.POST.get('quantity'))
+    bag = request.session.get('bag', {})
+    spice_index = None
+    print(spice_index)
+    if 'spice_index' in request.POST:
+        spice_index = request.POST['spice_index']
+        bag[product_id]['spice_index'][spice_index] = quantity
+        messages.success(request, f'Updated {product.name} quantity \
+        with spice index of {spice_index} to {quantity}')
+    else:
         bag[product_id] = quantity
+        messages.success(request, f'Updated {product.name} \
+        quantity to {quantity}')
 
     request.session['bag'] = bag
-    messages.success(request, f'Updated {product.name} quantity')
-
     return redirect(reverse('view_bag'))
 
 
