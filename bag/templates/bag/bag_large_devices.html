@@ -16,10 +16,11 @@
     </div>
 </div>
 <div class="mobile-top-row row no-gutters background">
-    {% for item in bag_items %}
+    {% for item in bag_items %}    
         <div class="bag-text d-none d-md-block col-md-3 mt-1 pl-3 pt-2 pb-0 pr-1">
             <span class="border-bottom border-secondary mb-3 font-weight-bold">{{ forloop.counter }}. {{ item.product.name }}</span><br>                
             {{ item.product.description }}
+            {{ item.spice_index }}   
         </div>                    
         <div class="d-none d-md-block col-md-3 mt-3">
             {% if item.product.image %}                    
@@ -40,6 +41,11 @@
                     <a id="plus-{{ forloop.counter }}" class="plus input-group-append">
                         <i class="fas fa-plus"></i>
                     </a>
+                    {% if item.spice_index %}
+                        <label for="spice_index"></label>                
+                        <input type="hidden" name="spice_index" value="{{ item.spice_index }}">
+                    {% else %} 
+                    {% endif %} 
                     <div class="row mt-2">
                         <div class="col-12">
                             <button type="submit" class="edit-item rounded-0" value="Update item">Update item</button>

@@ -1,6 +1,6 @@
 <!-- For medium and smaller devices -->  
 <div class="row top-row no-gutters">
-    {% for item in bag_items %}                      
+    {% for item in bag_items %}                        
         <div class="col-12 col-sm-5 d-md-none">
             <p class="bag-text pb-0 p-1 mb-2 border-bottom border-secondary font-weight-bold">{{ forloop.counter }}.{{ item.product.name}}</p> 
             {% if item.product.image %}                    
@@ -10,7 +10,7 @@
             {% endif %}
         </div>            
         <div class="col-12 col-sm-7 d-md-none mt-3 pt-0 pt-sm-3 mt-sm-2 pl-5">                               
-            <p class="bag-text p-1">{{ item.product.description}}</p>
+            <p class="bag-text p-1">{{ item.product.description}}</p>            
             <p class="bag-text p-1"><span class="font-weight-bold">Quantity:</span> {{ item.quantity }}</p>
             <form class="form" action="{% url 'adjust_bag' item.product.id %}" method="POST">
                 {% csrf_token %}
@@ -23,6 +23,11 @@
                     <a id="plus-small-{{ forloop.counter }}" class="plus-small input-group-append">
                         <i class="fas fa-plus"></i>
                     </a>
+                    {% if item.spice_index %}
+                        <label for="spice_index"></label>                
+                        <input type="hidden" name="spice_index" value="{{ item.spice_index }}">
+                    {% else %} 
+                    {% endif %} 
                     <div class="row mt-2 w-100">
                         <div class="col-12">
                         <button type="submit" class="btn edit-item rounded-0" value="Update item">Update item</button>
