@@ -157,6 +157,14 @@ img {
     color: #000;
 }
 
+#id_spice_index option:first-child {
+    color: #aab7c4;
+}
+
+#id_spice_index option:not(:first-child) {
+    color: #000;
+}
+
 /*----- Pagination -------------------------------*/
 
 .end-link {
