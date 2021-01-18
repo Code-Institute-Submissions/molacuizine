@@ -13,7 +13,7 @@
         <div class="row mt-5 p-1">
             <div class="col-lg-1">                
             </div>
-            <div class="col-12 col-md-7 col-lg-5 p-0">
+            <div class="col-12 col-md-7 col-lg-5 p-0">                
                 {% if product.image %}                    
                     <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">                    
                 {% else %}                    
@@ -40,14 +40,16 @@
                                 <i class="fas fa-plus"></i>
                             </a>
                         </div>
-                        <div class="mt-1 mb-3">
-                            <label class="card-text font-weight-bold pr-2" for="spice_index">Spice Index:</label>
-                            <select class="spice-index form-control d-inline w-25" name="spice_index" id="spice_index">
-                                <option class="text-success" value="mild">Mild</option>
-                                <option class="text-warning" value="medium">Med</option>
-                                <option class="text-danger" value="hot">Hot</option>                                    
-                            </select>                                                                                 
-                        </div>  
+                            {% if product.spice_index %}
+                            <div class="mt-1 mb-3">
+                                <label class="card-text font-weight-bold pr-2" for="spice_index">Spice Index:</label>
+                                <select class="spice-index form-control d-inline w-25" name="spice_index" id="spice_index">
+                                    <option class="text-success" value="mild">Mild</option>
+                                    <option class="text-warning" value="medium">Med</option>
+                                    <option class="text-danger" value="hot">Hot</option>                                    
+                                </select>                                                                                 
+                            </div>                            
+                            {% endif%}
                         {% else %}
                         {% endif %} 
                     </div>
