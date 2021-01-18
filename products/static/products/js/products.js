@@ -28,9 +28,11 @@ $(document).ready(function(){
         else{
             $('#id_category').css('color', 'black');
         }          
-    })
-    $('#id_spice_index').val($('#id_spice_index option:first').val());     
-    $('#id_spice_index option:first-child').html('Spice Index');
+    })    
+    if($('.product-form').attr('id')=='profile-add-form'){
+        $('#id_spice_index').val($('#id_spice_index option:first').val()); 
+        $('#id_spice_index option:first-child').html('Spice Index');
+    }   
     if($('#id_spice_index option:selected').val()== 'unknown'){
             $('#id_spice_index').css('color', '#aab7c4');            
         }
