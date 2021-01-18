@@ -18,16 +18,34 @@ def add_to_bag(request, product_id):
 
     if request.POST:
         quantity = int(request.POST.get('quantity'))
-
+        spice_index = (request.POST.get('spice_index'))
         # Create or call existing bag
         bag = request.session.get('bag', {})
-
-        if product_id in bag.keys():
-            bag[product_id] += quantity
-            messages.success(request, f'Added {product.name} to your bag')
+        if 'spice_index' in request.POST:
+            # Product already exists in bag
+            if product_id in bag.keys():
+                if spice_index in bag[product_id]['spice_index'].keys():
+                    bag[product_id]['spice_index'][spice_index] += quantity
+                    messages.success(request, f'Updated {product.name} with \
+                    spice index of {spice_index} to your bag')
+                # Spice index does not exists in bag
+                else:
+                    bag[product_id]['spice_index'][spice_index] = quantity
+                    messages.success(request, f'Added {product.name} with \
+                    spice index of {spice_index} to your bag')
+            # Product does not exists in bag
+            else:
+                bag[product_id] = {'spice_index': {spice_index: quantity}}
+                messages.success(request, f'Added {product.name} with \
+                spice index of {spice_index} to your bag')
+        # Product has no spice index
         else:
-            bag[product_id] = quantity
-            messages.success(request, f'Added {product.name} to your bag')
+            if product_id in bag.keys():
+                bag[product_id] += quantity
+                messages.success(request, f'Added {product.name} to your bag')
+            else:
+                bag[product_id] = quantity
+                messages.success(request, f'Added {product.name} to your bag')
 
     request.session['bag'] = bag
 
