@@ -17,6 +17,7 @@ class ProductForm(forms.ModelForm):
             'category': 'Category',
             'name': 'Name',
             'description': 'Description',
+            'spice_index': 'Spice Index',
             'price': 'price',
             'image_url': 'image_url',
             'image': 'Image',
@@ -24,7 +25,7 @@ class ProductForm(forms.ModelForm):
 
         self.fields['category'].widget.attrs['autofocus'] = True
         for field in self.fields:
-            if field != 'category':
+            if field != 'category' and field != ['spice_index']:
                 if self.fields[field].required:
                     self.fields[field].widget.attrs[
                         'placeholder'] = f'{placeholders[field]} *'
