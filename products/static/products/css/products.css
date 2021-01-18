@@ -199,7 +199,11 @@ input::-webkit-inner-spin-button {
     }
     .product-return, .product-submit {
         font-size: 15px;
-    }    
+    }
+    
+    .spice-index {
+        width: 32% !important;
+    }
 }
 
 @media (max-width: 576px) {
