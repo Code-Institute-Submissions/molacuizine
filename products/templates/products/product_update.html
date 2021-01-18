@@ -12,7 +12,7 @@
             <hr>
             <div class="row">                
                 <div class="col-12 col-md-7 col-lg-6 order-1 order-md-0">
-                    <h2 class="text-center">Add Product</h2>
+                    <h2 class="text-center">Update Product</h2>
                     <form class="product-form mt-3" action="{% url 'product_update' product.id %}" method="POST" enctype="multipart/form-data" id="profile-update-form">
                         {% csrf_token %}
                         {{ form|crispy }}
