@@ -12,7 +12,7 @@ import json
 import time
 
 
-class StripeWH_Handler:
+class StripeWhHandler:
     """Handle Stripe webhooks"""
 
     def __init__(self, request):
