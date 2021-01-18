@@ -36,15 +36,30 @@ def bag_contents(request):
     product_count = 0
     bag = request.session.get('bag', {})
     for item_id, item_data in bag.items():
-        product = get_object_or_404(Product, pk=item_id)
-        total += item_data * product.price
-        product_count += item_data
-        sub_total = item_data*product.price
-        bag_items.append({
-            'quantity': item_data,
-            'product': product,
-            'sub_total': sub_total,
-        })
+        if isinstance(item_data, int):
+            product = get_object_or_404(Product, pk=item_id)
+            total += item_data * product.price
+            product_count += item_data
+            sub_total = item_data*product.price
+            bag_items.append({
+                'item_id': item_id,
+                'quantity': item_data,
+                'product': product,
+                'sub_total': sub_total,
+            })
+        else:
+            product = get_object_or_404(Product, pk=item_id)
+            for spice_index, quantity in bag[item_id]['spice_index'].items():
+                total += quantity * product.price
+                product_count += quantity
+                sub_total = quantity*product.price
+                bag_items.append({
+                    'item_id': item_id,
+                    'quantity': quantity,
+                    'product': product,
+                    'spice_index': spice_index,
+                    'sub_total': sub_total,
+                })
 
     '''Code to update if shop is open or closed'''
 
