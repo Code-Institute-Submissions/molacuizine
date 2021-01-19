@@ -49,7 +49,7 @@
                     <div class="row mt-2">
                         <div class="col-12">
                             <button type="submit" class="edit-item rounded-0" value="Update item">Update item</button>
-                            <a href="{% url 'delete_item' item.product.id %}" class="btn delete-item rounded-0">Delete item</a> 
+                            <div class="btn delete-item rounded-0" data="{{ item.spice_index }}" id="{{ item.product.id }}">Delete item</div> 
                         </div>
                     </div>                                   
                 </div>               
@@ -95,4 +95,4 @@
         {% else %}
         {% endif %}
     </div>
-</div>               
+</div> 
