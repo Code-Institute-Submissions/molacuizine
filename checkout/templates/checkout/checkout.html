@@ -38,6 +38,7 @@
                             <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">                            
                         {% endif %}
                     </div>
+                        <i class="text-danger fas fa-pepper-hot"></i> {{ item.spice_index }}<br>  
                         Qty: {{ item.quantity }}                         
                 {% endfor %}
                 <!-- Order summary totals -->                
