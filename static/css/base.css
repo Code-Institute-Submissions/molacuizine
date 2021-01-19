@@ -42,7 +42,7 @@ hr {
     top: 70px;
     background: white; 
     padding-top: 5px;
-    background-color:  #d7d7d7;  
+    background-color:  #bbb6b6;  
 }
 
 .dropdown-menu {
@@ -97,7 +97,7 @@ hr {
 .navbar {
     padding-bottom: 20px;
     padding-right: 0;
-    background-color: #d7d7d7;
+    background-color: #bbb6b6;
 }
 
 /* ------------------------------- bootstrap toasts */

@@ -42,33 +42,37 @@
 
 ## INTRODUCTION 
 
-This site has was created as a product listing site with the intention of providing a service for artist to showcase 
-their art work to potential buyers and other enthusiasts in the Mauritian market.
+This project is a online food ordering and delivery service. The menu covers a wide range of popular mauritian 
+cuisine whereby a customer can add food items to a basket and then make payments online using stripe service.
 
-The site would permit the registered users to upload and manage their items while also creating a profile page. Thus providing 
-the user with the power of creating, updating and modifying their items by using a database system. 
+The site name 'MoLacuizine' is mauritian for 'My Kitchen' and covers a wide range of item from main dishes to 
+sides.
 
-The live site can be found [here](http://artist-for-life.herokuapp.com/).
+The site would also permit the user to add and modify profile information to be used at checkout and also to have a list
+order history for reference. 
+
+The site uses the Django framework.
+
+The live site can be found [here](http://mo-lacuizine.herokuapp.com/).
 
 ## UX 
 
 By visiting this site as a user I want to:
-* be able to easily understand what the site is about in order to see if it is of interest to me. 
-* have a user friendly register/login process in order to start using the site.  
-* be able to upload my item information with ease in order for buyers to view them.
-* be provided with an option to upload my personal information so potential buyers can see who I am.
-* be able to edit and delete all uploaded information if any changes need to be made.
-* be able to tag an item as sold so as the buyers can see how in demand my works are.
-
-By visiting this site as a buyer I want to:
-
-* have information about the item being sold in one place for convenience of use.
-* have the ability to view items by search criteria in order to narrow down item list to specific requirements.
+* have a user friendly registration/login process in order to use the site.
+* be provided with full details of each product.
+* be able to add items to a basket so I can view all items I have selected together with the associated cost.
+* be able to modify items added to my basket so as to make any required changes.
+* be able to add and update my user profile so to make any changes if required.
+* have a user friendly checkout process.
+* be provided with estimated delivery time for ordered items to be able to know when I expect my food items to arrive.
+* be provided with a list of previously ordered items for me to track my order history.
+* be advised that checkout was successful to ensure order was processed.
+* be informed of the online open/close status for ordering.
 
 By using this site as the site owner:
 
-* be able to edit and delete any loaded information for content control purposes.
-* have full access to all uploaded information in one convenient place for CRUD operations.
+* be able to add, update and delete items for store management purposes.
+* be able to open and close the online site for control  purposes.
 
 ### UX design work 
 
@@ -76,30 +80,29 @@ The following provides an overview of the site layout and logic behind design ch
 
 A wireframe was constructed using balsamique wireframes. It can be found [here](static/doc/wireframe.pdf).
 
-The site was designed to have an artistic atmosphere by by making use of hero image reflecting an artist studio with 
-suitable banner text. 
+The site consisted of a main landing page which contained a fixed top navbar from which the user could access 
+food items, online-status, accounts and basket. This was done so as to give a general overview to the user before showing any items.
 
-Modals were the preferred chose for login and registration since was more visually appealing.
-
-Also the site implemented several features to make registration, login, adding items and profiles as user friendly and 
+The site implemented several features to make registration, login, checkout, adding items and profiles as user friendly and 
 intuitive as possible. 
 
-Flash messages were included so as to enable the user obtain feedback on whether actions had been completed. The messages
-were made to disappear after 5's since the messages were of temporary nature.
+The django messages system was included so as to enable the user obtain feedback on whether actions had been completed.
 
-A search bar was then provided in-between hero image and items list as it would provide filter options all listed item. This
-was situated above the items list.
+A search bar was then provided in top navbar for conveienience to provide an easy way for searching for items.
 
-The items section was placed next and consisted of using a card display divided into image and description sections providing
-all the necessary info about the item in one place. 
+The items product page provided an overview of the item which could be purchased and could be further broken down into 
+different categories. Each item could be clicked on to provide further detail on the product. This was done to make the 
+product listing page less bulky and more user friendly.
 
-An item list was situated on the right for devices having a screen size large or higher to provide a scroll function to specific
-item names.
+From the product detail page items could be added to a basket to be viewed later.
 
-The profile page consisted of the seller profile information followed by all items the seller has listed in one convenient place.
-This was thought to improve UX since it would be a be able to showcase all works by the user to potential buyers.
+The bag view consisted of a convenient place to view all items added to basket with associated cost. Items could be 
+modified if required in this view.
 
-For the site owner a control center page ws included to allow for centralised place where all CRUD functions could be performed.
+The profile page consisted of a form which the user could prefill which could be used at checkout so as to enable a 
+smoother process.
+
+The store management page allowed a convenient place to upload items and update shop online status.
 
 All features are described in detail [below](#features).
 
@@ -552,6 +555,10 @@ During testing phase the following issues were identified and corrected.
 5. Adding placeholder to profile form using javascript.
 
 6. Adding customised upload image button using javascript
+
+7. Deployment and creating fixtures to enable deployment
+
+8. stripe publishable key errr
 
 # DEPLOYMENT
 
