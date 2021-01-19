@@ -5,9 +5,12 @@
     <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 {% endblock %}
 
-{% block content %}    
-    <div class="home-background">
-    </div>
+{% block content %}
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute;  bottom: 400px; z-index: 1; border-radius: 0;">
+        <i class="fas fa-motorcycle"></i>
+    </button>  
+    <div class="home-background">        
+    </div>    
     {% if open_status %}
         <a class="order-button btn-lg" href="{% url 'products' %}">Order now</a>
     {% else %}
@@ -15,16 +18,33 @@
     <footer>
         <div class="row no-gutters footer fixed-bottom" >
             <div class="col-4 col-sm-6 col-md-7 col-lg-9 p-1 pl-3">
-                Opening hours <br><span class="font-weight-bold text-danger">10am-10pm</span>
+                Opening hours <br><span class="text-danger">10am-10pm</span>
             </div>
             <div class="col-8 col-sm-6 p-1 col-md-5 col-lg-3 text-left">
                 <div class="col-12">
-                    <i class="fas fa-envelope-square"></i><span class="font-weight-bold text-danger"> zahurmeerun@hotmail.com</span>
+                    <i class="fas fa-envelope-square"></i><span class="text-danger"> zahurmeerun@hotmail.com</span>
                 </div>
                 <div class="col-12">
-                    <i class="fas fa-phone"></i><span class="font-weight-bold text-danger"> 57075200</span>
+                    <i class="fas fa-phone"></i><span class="text-danger"> 57075200</span>
                 </div>               
             </div>
         </div>
-    </footer> 
+    </footer>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div> 
 {% endblock %}
