@@ -51,7 +51,7 @@
                                     <i class="fas fa-caret-down"></i> My Account
                                 </a>                               
                             {% endif %}                           
-                            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                            <div class="dropdown-menu border-0 ml-md-0 ml-lg-5" aria-labelledby="user-options">
                                 {% if request.user.is_authenticated %}
                                     {% if request.user.is_superuser %}
                                         <a href="{% url 'store_management' %}" class="dropdown-item">Store Management</a>
