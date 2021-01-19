@@ -43,10 +43,28 @@
 /*----- Footer -------------------------------------*/
 
 .footer {
-    background:  #bbb6b6;
+    background:  rgba(0,0,0,0.9);
     font-family: 'Lato', sans-serif;
     color: black;
     font-weight: 500;
+}
+
+.footer-icons .fas {
+    font-size: 26px;    
+    height: 40px;
+    width: 40px;
+    color: #bbb6b6;
+    border-radius: 50%;
+    padding: 6px;    
+}
+
+.footer-icons .fas:hover {
+    color: #474444;
+}
+
+.modal-content {
+    background: rgba(0,0,0,0.8);
+    color: white;
 }
 
 /*----- Media screen -------------------------------*/
