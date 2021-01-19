@@ -16,37 +16,29 @@
     {% else %}
     {% endif %}
     <footer>
-        <div class="row no-gutters footer fixed-bottom" >
-            <div class="col-4 col-sm-6 col-md-7 col-lg-9 p-1 pl-3">
-                Opening hours <br><span class="text-danger">10am-10pm</span>
-            </div>
-            <div class="col-8 col-sm-6 p-1 col-md-5 col-lg-3 text-left">
-                <div class="col-12">
-                    <i class="fas fa-envelope-square"></i><span class="text-danger"> zahurmeerun@hotmail.com</span>
-                </div>
-                <div class="col-12">
-                    <i class="fas fa-phone"></i><span class="text-danger"> 57075200</span>
-                </div>               
-            </div>
+        <div class="row footer-icons no-gutters footer fixed-bottom text-center">          
+            <div class="col-3"><i class="fas fa-business-time"></i><br><span class="text-light">10am-10pm</span></div>
+            <div class="col-6"><a href="mailto:zahurmeerun@hotmail.com"><i class="fas fa-envelope-square"></i></a><br><span class="text-light">zahurmeerun@hotmail.com</span></div>
+            <div class="col-3"><a href="tel:57075200"><i class="fas fa-phone"></i></a><br><span class="text-light">57075200</span></div>              
         </div>
     </footer>
     <!-- Delivery Modal -->
     <div class="modal fade" id="deliveryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-success" id="exampleModalLabel">Towns We Deliver</h5>                
-            </div>
-            <div class="modal-body">                
-                <ul>
-                    {% for town in towns %}
-                        <li>{{ town }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn close" data-bs-dismiss="modal">Close</button>                
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title text-success" id="exampleModalLabel"><i class="fas fa-city"></i> Towns We Deliver</h5>                
+                </div>
+                <div class="modal-body">                
+                    <ul>
+                        {% for town in towns %}
+                            <li>{{ town }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn close text-light" data-bs-dismiss="modal">Close</button>                
+                </div>
             </div>
         </div>
     </div> 
