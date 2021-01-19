@@ -1,5 +1,5 @@
 from django.shortcuts import (
-    render, redirect, reverse, get_object_or_404)
+    render, redirect, reverse, get_object_or_404, HttpResponse)
 from django.contrib import messages
 from products.models import Product
 
@@ -59,7 +59,6 @@ def adjust_bag(request, product_id):
     quantity = int(request.POST.get('quantity'))
     bag = request.session.get('bag', {})
     spice_index = None
-    print(spice_index)
     if 'spice_index' in request.POST:
         spice_index = request.POST['spice_index']
         bag[product_id]['spice_index'][spice_index] = quantity
@@ -78,11 +77,24 @@ def delete_from_bag(request, product_id):
     """View to remove item from the shopping bag"""
 
     product = get_object_or_404(Product, pk=product_id)
+    try:
+        spice_index = None
+        if 'spice_index' in request.POST:
+            spice_index = request.POST['spice_index']
+        bag = request.session.get('bag')
 
-    bag = request.session.get('bag')
-    bag.pop(product_id)
-    request.session['bag'] = bag
+        if spice_index:
+            del bag[product_id]['spice_index'][spice_index]
+            if not bag[product_id]['spice_index']:
+                bag.pop(product_id)
+                messages.success(request, f'Removed {product.name} from bag')
+        else:
+            bag.pop(product_id)
+            messages.success(request, f'Removed {product.name} from bag')
 
-    messages.success(request, f'{product.name} removed from bag')
+        request.session['bag'] = bag
+        return HttpResponse(status=200)
 
-    return redirect(reverse('view_bag'))
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)
