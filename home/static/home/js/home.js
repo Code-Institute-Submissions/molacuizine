@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     $(".open").click(function(){
-        $("#exampleModal").modal('show')
+        $("#deliveryModal").modal('show');
     })
-
 });
