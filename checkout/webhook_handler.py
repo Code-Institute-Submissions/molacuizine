@@ -128,6 +128,7 @@ class StripeWhHandler:
                             order_line_item.save()
             except Exception as e:
                 if order:
+                    order = Order.objects.get(stripe_pid=pid)
                     order.delete()
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
