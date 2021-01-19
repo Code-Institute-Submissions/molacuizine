@@ -37,8 +37,11 @@
                         {% else %}                            
                             <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">                            
                         {% endif %}
-                    </div>
-                        <i class="text-danger fas fa-pepper-hot"></i> {{ item.spice_index }}<br>  
+                        {% if item.spice_index %}
+                            <i class="ml-2 text-danger fas fa-pepper-hot"></i> {{ item.spice_index }}<br>
+                        {% else %}
+                        {% endif %}  
+                    </div>                        
                         Qty: {{ item.quantity }}                         
                 {% endfor %}
                 <!-- Order summary totals -->                
