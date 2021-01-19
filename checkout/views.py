@@ -71,14 +71,22 @@ def checkout(request):
             # Save items to Orderlineitem
             for item_id, item_data in bag.items():
                 product = Product.objects.get(id=item_id)
-                lineitem_total = product.price * item_data
-                order_line_item = OrderLineItem(
-                    order=order,
-                    product=product,
-                    quantity=item_data,
-                    lineitem_total=lineitem_total,
-                )
-                order_line_item.save()
+                if isinstance(item_data, int):
+                    order_line_item = OrderLineItem(
+                        order=order,
+                        product=product,
+                        quantity=item_data,
+                    )
+                    order_line_item.save()
+                else:
+                    for spice_index, quantity in item_data['spice_index'].items():
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            product=product,
+                            quantity=quantity,
+                            spice_index=spice_index,
+                        )
+                        order_line_item.save()
 
             ''' Update profile data if checked by user'''
             if save_info:
