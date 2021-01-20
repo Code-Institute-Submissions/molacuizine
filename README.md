@@ -1,11 +1,11 @@
-# **Artist For Life**
+# **MoLacuizine**
 
 ![Responsive image for site](static/doc/responsive2.png)
 
 ## TABLE OF CONTENT 
 * [Introduction](#introduction)    
 * [UX](#ux)
-    * [UX design work](#ux-design-work)
+    * [UX design work overview](#ux-design-work-overview)
     * [Colour scheme](#colour-scheme)
     * [Typography](#typography)
 * [Development cycle](#development-cycle)
@@ -74,33 +74,34 @@ By using this site as the site owner:
 * be able to add, update and delete items for store management purposes.
 * be able to open and close the online site for control  purposes.
 
-### UX design work 
+### UX design work overview
 
 The following provides an overview of the site layout and logic behind design choices.
 
 A wireframe was constructed using balsamique wireframes. It can be found [here](static/doc/wireframe.pdf).
 
 The site consisted of a main landing page which contained a fixed top navbar from which the user could access 
-food items, online-status, accounts and basket. This was done so as to give a general overview to the user before showing any items.
+food items categories,accounts and basket. This was done so as to give a general overview to the user before showing any items.
+The main landing page would also show the main information about the site such open-status and delivery zones.
 
 The site implemented several features to make registration, login, checkout, adding items and profiles as user friendly and 
-intuitive as possible. 
+intuitive as possible which are described below. 
 
 The django messages system was included so as to enable the user obtain feedback on whether actions had been completed.
 
-A search bar was then provided in top navbar for conveienience to provide an easy way for searching for items.
+A search bar was then provided in the top navbar for conveienience to provide an easy way for searching for items.
 
-The items product page provided an overview of the item which could be purchased and could be further broken down into 
-different categories. Each item could be clicked on to provide further detail on the product. This was done to make the 
-product listing page less bulky and more user friendly.
+The items product page provided an overview of the item which could be purchased with the main information on the product. 
+Each item could be clicked on to provide further detail on the product. This was done to make the product listing page less bulky 
+and more user friendly.
 
 From the product detail page items could be added to a basket to be viewed later.
 
-The bag view consisted of a convenient place to view all items added to basket with associated cost. Items could be 
+The bag view consisted of a convenient place to view all items added to basket with their associated cost. Items could be 
 modified if required in this view.
 
 The profile page consisted of a form which the user could prefill which could be used at checkout so as to enable a 
-smoother process.
+smoother checkout process.
 
 The store management page allowed a convenient place to upload items and update shop online status.
 
@@ -112,43 +113,41 @@ Several colour schemes were tested and the following palette was finally adopted
 
 ![Image of colour scheme](static/doc/colours.png)
 
-![Image of header](static/doc/header-colour.png)
 
 All button were also designed to have an identical colour scheme for easy identification.
 
 ### Typography
 
 Font were obtained from [google font](https://fonts.google.com/) and consisted of the following:
-- 'Fredericka the Great ws used for logo, login/registration header and flash messages.
-- 'Parisienne' used all page headers
-- 'Lora' was used for flash messages
-- 'Source Serif Pro' used for banner text
-- Roboto
+- 'Lato'
 
 ## DEVELOPMENT CYCLE
 
 The main development cycle is listed below:
 
 1. Site design work making use of sketch pad and balsamique.
-2. Database design (field definition) and creation using mongodb.
-3. Coding of base html page with header, footer and navbar.
-4. Programming of item page.
-5. Coding of registration and login modal in base html page.
-6. Coding of logout function.
-7. Coding of profile page.
-8. Coding of add/edit/delete items functions.
-9. Coding of add/edit/delete profile functions.
-10. Coding of control center functions.
-11. Coding of add/edit/delete categories functions.
-12. Mid Project Review.
-13. Implementation of pagination for items page.
-14. Implementation of search bar on items page with pagination.
-15. Restructuring of profile page.
-16. Restructuring of registration modal to allow for email and phone input.
-17. Modifications to add/edit items page due to modification above.
-16. Creation of about modal.
-17. Coding of sold function.
-18. Final project testing and adjustments.
+2. Database design.
+3. Alluath initial setup.
+4. Home app creation and coding (main landing page).
+5. Product app coding (item listing pages including item details, search bar).
+6. Bag app creatoin and coding (bag page).
+7. Coding add to bag view.
+8. Coding of context.py (bag contents).
+9. Coding of bag view.
+10. Coding of edit and update bag features.
+11. Pagination coding of item listing page.
+12. Profile app creation and coding (profile page).
+13. Checkout app reation and coding(checkout page without stripe).
+14. Coding for updating of profile page details.
+15. Coding for adding order history to profile page.
+16. Coding for store management page (adding/updating/deleteing products).
+17. Store status coding.
+16. Deployment to heroku.
+17. Coding for stripe checkout.
+18. Coding for google distance matrix.
+19. Project review.
+20. Minor modifications addressed from step 19.
+21. Addition of spice index to site with neccessary updating of installed apps.
 
 ## FEATURES
 
