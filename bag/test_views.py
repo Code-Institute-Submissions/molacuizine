@@ -157,13 +157,11 @@ class BagTestViews(TestCase):
         }
         response = self.client.post(reverse(
             'add_to_bag', args=[product.id]), data=post_data)
-        bag = self.client.session.get('bag')
         post_data_two = {
             'spice_index': 'mild',
         }
         response = self.client.post(reverse(
             'delete_item', args=[product.id]), data=post_data_two)
-        bag = self.client.session.get('bag')
         self.assertEqual(response.status_code, 200)
 
     def test_delete_from_bag_with_error(self):
