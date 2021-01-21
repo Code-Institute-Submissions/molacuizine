@@ -24,7 +24,7 @@ def store_status(request):
     except Exception as e:
         messages.error(
             request, 'Sorry store status could not be updated. Try again')
-        return HttpResponse(content=e, status=400)
+        return HttpResponse(content=e, status=500)
 
 
 def bag_contents(request):
