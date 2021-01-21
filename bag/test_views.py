@@ -134,7 +134,7 @@ class BagTestViews(TestCase):
         self.assertRedirects(response, '/bag/')
 
     """ Test deleting items from bag """
-    def test_delete_from_bag(self):
+    def test_delete_from_bag_without_spice_index(self):
         product = Product.objects.create(
                 name="Item", price=50, category_id=1, spice_index=True)
         # Add tester item to bag
