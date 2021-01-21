@@ -26,6 +26,11 @@ class BagTestViews(TestCase):
         }
         response = self.client.post(reverse(
             'add_to_bag', args=[product.id]), data=post_data)
+        bag = self.client.session.get('bag', {})
+        data = post_data['spice_index']
+        self.assertEqual(
+            bag['1']['spice_index'][data], int(post_data['quantity']))
+        self.assertEqual(len(bag), 1)
         self.assertRedirects(response, f'/products/{product.id}')
 
     """ Test Adjusting items in bag """
