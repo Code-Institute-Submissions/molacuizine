@@ -1,7 +1,7 @@
 from django.test import TestCase
 from bag.models import Store
 from products.models import Product, Category
-from django.shortcuts import reverse
+from django.shortcuts import reverse, get_object_or_404
 
 
 # Create your tests here.
@@ -67,4 +67,26 @@ class BagTestViews(TestCase):
             'delete_item', args=[product.id]))
         bag = self.client.session.get('bag')
         self.assertEqual(len(bag), 0)
+        self.assertEqual(response.status_code, 200)
+
+    """ Check context view """
+    # https://docs.djangoproject.com/en/3.1/topics/testing/tools/#django.test.Response.context
+    def test_bag_contents(self):
+        product = Product.objects.create(
+                name="Item", price=50, category_id=1, spice_index=True)
+        # Add tester item to bag
+        post_data = {
+            'quantity': '6',
+        }
+        response = self.client.post(reverse(
+            'add_to_bag', args=[product.id]), data=post_data)
+        response = self.client.get('/bag/')
+        self.assertEqual(response.context['grand_total'], 500)
+        self.assertEqual(response.status_code, 200)
+
+    def test_store_status(self):
+        store_status = Store.objects.create(store_status='close')
+        response = self.client.post('/bag/store_status/', {'status': 'open'})
+        store_status = get_object_or_404(Store, id=1)
+        self.assertEqual(store_status.store_status, 'open')
         self.assertEqual(response.status_code, 200)
