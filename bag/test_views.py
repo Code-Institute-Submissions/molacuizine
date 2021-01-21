@@ -28,4 +28,14 @@ class BagTestViews(TestCase):
             'add_to_bag', args=[product.id]), data=post_data)
         self.assertRedirects(response, f'/products/{product.id}')
 
-   
+    """ Test Adjusting items in bag """
+    def test_adjust_bag(self):
+        product = Product.objects.create(
+                name="Item", price=50, category_id=1, spice_index=True)
+        post_data = {
+            'quantity': '1',
+        }
+        response = self.client.post(reverse(
+            'adjust_bag', args=[product.id]), data=post_data)
+
+        self.assertRedirects(response, '/bag/')
