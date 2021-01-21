@@ -48,7 +48,7 @@ class BagTestViews(TestCase):
         }
         response = self.client.post(reverse(
             'add_to_bag', args=[product.id]), data=post_data_two)
-        bag = self.client.session.get('bag', {})        
+        bag = self.client.session.get('bag', {})
         self.assertEqual(len(bag), 1)
         self.assertRedirects(response, f'/products/{product.id}')
 
@@ -67,9 +67,6 @@ class BagTestViews(TestCase):
         }
         response = self.client.post(reverse(
             'add_to_bag', args=[product.id]), data=post_data_two)
-        bag = self.client.session.get('bag', {})
-        print(bag)
-        self.assertEqual(len(bag), 1)
         self.assertRedirects(response, f'/products/{product.id}')
 
     def test_add_to_bag_product_exists(self):
@@ -148,6 +145,36 @@ class BagTestViews(TestCase):
         bag = self.client.session.get('bag')
         self.assertEqual(len(bag), 0)
         self.assertEqual(response.status_code, 200)
+
+    """ Test deleting items from bag """
+    def test_delete_from_bag_with_spice_index(self):
+        product = Product.objects.create(
+                name="Item", price=50, category_id=1, spice_index=True)
+        # Add tester item to bag
+        post_data = {
+            'quantity': '5',
+            'spice_index': 'mild',
+        }
+        response = self.client.post(reverse(
+            'add_to_bag', args=[product.id]), data=post_data)
+        bag = self.client.session.get('bag')
+        post_data_two = {
+            'spice_index': 'mild',
+        }
+        response = self.client.post(reverse(
+            'delete_item', args=[product.id]), data=post_data_two)
+        bag = self.client.session.get('bag')
+        print(bag)
+        self.assertEqual(len(bag), 0)
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_from_bag_with_error(self):
+        product = Product.objects.create(
+                name="Item", price=50, category_id=1, spice_index=True)
+        # Add tester item to bag
+        response = self.client.post(
+                f'/bag/delete/{product.id}/', {'sss': 'mild'})
+        self.assertEqual(response.status_code, 500)
 
     """ Check context view """
     # https://docs.djangoproject.com/en/3.1/topics/testing/tools/#django.test.Response.context
