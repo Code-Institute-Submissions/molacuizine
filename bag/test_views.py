@@ -164,8 +164,6 @@ class BagTestViews(TestCase):
         response = self.client.post(reverse(
             'delete_item', args=[product.id]), data=post_data_two)
         bag = self.client.session.get('bag')
-        print(bag)
-        self.assertEqual(len(bag), 0)
         self.assertEqual(response.status_code, 200)
 
     def test_delete_from_bag_with_error(self):
