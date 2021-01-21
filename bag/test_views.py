@@ -97,12 +97,7 @@ class BagTestViews(TestCase):
         response = self.client.post('/bag/store_status/', {'status': 'close'})
         response = self.client.get('/bag/')
         self.assertEqual(response.context['open_status'], False)
-        
 
-    # def test_store_status_invalid(self):
-    #     store_status = Store.objects.create(store_status='close')
-          
-    #     response = self.client.post('/bag/store_status/', {'status': 'open'})
-    #     print(response)
-    #     store_status = get_object_or_404(Store, id=1)
-    #     self.assertEqual(response.status_code, 500)
+    def test_store_status_invalid(self):
+        response = self.client.post('/bag/store_status/', {'sss': 'open'})
+        self.assertEqual(response.status_code, 500)
