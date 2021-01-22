@@ -110,7 +110,6 @@ def checkout(request):
     # Get request
     else:
         # Create Stripe intent request
-
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
         stripe_total = round(total * 100)
@@ -135,12 +134,12 @@ def checkout(request):
             'street_address': profile.default_street_address1,
             })
 
-    context = {
-        'order_form': order_form,
-        'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
-    }
-    return render(request, 'checkout/checkout.html', context)
+        context = {
+            'order_form': order_form,
+            'stripe_public_key': stripe_public_key,
+            'client_secret': intent.client_secret,
+        }
+        return render(request, 'checkout/checkout.html', context)
 
 
 def checkout_success(request, order_number):
