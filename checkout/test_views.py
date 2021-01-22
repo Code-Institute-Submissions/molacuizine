@@ -4,6 +4,7 @@ from django.shortcuts import reverse, get_object_or_404
 from django.contrib.auth.models import User
 from products.models import Product, Category
 from profiles.models import Town
+from checkout.models import Order
 
 
 # Create your tests here.
@@ -17,7 +18,7 @@ class CheckoutTestViews(TestCase):
             username='testuser', password='zahur')
         self.Category = Category.objects.create(name="sides")
         self.Town = Town.objects.create(
-            name="vacoas", long_coord=-22.333333, lat_coord=57.333333)
+            name="vacoas", long_coord=-20.3171, lat_coord=57.5265)
 
     def test_cache_checkout_data(self):
         secret = 'pi_1ICHYpL9RkpyhrRPkV1I195z_secret_dUtSUFf1sx3ugZBV2yPJZPem1'
@@ -199,3 +200,29 @@ class CheckoutTestViews(TestCase):
                 'checkout'), data=data)
             self.assertEqual(len(bag), 1)
             self.assertEqual(response.status_code, 302)
+
+    def test_checkout_success(self):
+        product = Product.objects.create(
+                    name="Item", price=50, category_id=1, spice_index=True)
+        # Create bag
+        post_data = {
+            'quantity': '1',
+        }
+        response = self.client.post(reverse(
+            'add_to_bag', args=[product.id]), data=post_data)
+        bag = self.client.session.get('bag', {})
+        order = Order.objects.create(
+            full_name='zahur meerun',
+            email='zahurmeerun@yahoo.com',
+            phone_number='57075200',
+            street_address='vacoas',
+            town=get_object_or_404(
+                        Town, name='vacoas'),
+            postcode='222222',
+            request='none')
+
+        response = self.client.get(
+            reverse('checkout_success',
+                    kwargs={'order_number': order.order_number}))
+        self.assertEqual(len(bag), 1)
+        self.assertTemplateUsed(response, 'checkout/checkout_success.html')
