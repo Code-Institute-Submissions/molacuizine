@@ -223,6 +223,6 @@ class CheckoutTestViews(TestCase):
 
         response = self.client.get(
             reverse('checkout_success',
-                    kwargs={'order_number': order.order_number}))
+                    args=[order.order_number]))
         self.assertEqual(len(bag), 1)
         self.assertTemplateUsed(response, 'checkout/checkout_success.html')
