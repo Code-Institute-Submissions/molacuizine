@@ -107,7 +107,8 @@ def checkout(request):
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
-    # Get request
+            return redirect(reverse(
+                'checkout'))
     else:
         # Create Stripe intent request
         current_bag = bag_contents(request)
