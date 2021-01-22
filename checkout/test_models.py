@@ -39,3 +39,20 @@ class TestModels(TestCase):
         orderlineitem = OrderLineItem.objects.create(
             order_id=order.id, product=product)
         self.assertAlmostEqual(str(orderlineitem), order.order_number)
+
+    def test_OrderLineItem_deletion(self):
+        order = Order.objects.create(
+            full_name='zahur meerun',
+            email='zahurmeerun@yahoo.com',
+            phone_number='57075200',
+            street_address='vacoas',
+            town=get_object_or_404(
+                        Town, name='vacoas'),
+            postcode='222222',
+            request='none')
+        product = Product.objects.create(
+                name="Item", price=50, category_id=1, spice_index=True)
+        orderlineitem = OrderLineItem.objects.create(
+            order_id=order.id, product=product)
+        orderlineitem = OrderLineItem.objects.get(id=1)
+        orderlineitem.delete()
