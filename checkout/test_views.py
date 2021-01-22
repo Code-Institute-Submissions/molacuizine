@@ -171,3 +171,31 @@ class CheckoutTestViews(TestCase):
                 'checkout'), data=data)
             self.assertEqual(len(bag), 1)
             self.assertRedirects(response, '/checkout/')
+
+    def test_checkout_order_form_save_info(self):
+            product = Product.objects.create(
+                    name="Item", price=50, category_id=1, spice_index=True)
+            # Create bag
+            post_data = {
+                'quantity': '1',
+            }
+            response = self.client.post(reverse(
+                'add_to_bag', args=[product.id]), data=post_data)
+            response = self.client.get(reverse('checkout'))
+            bag = self.client.session.get('bag', {})
+            data = {
+                'save-info': True,
+                'client_secret': 'client_12345_secret_12345',
+                'user_profile': 'zahur meerun',
+                'full_name': 'zahur meerun',
+                'email': 'zahurmeerun@yahoo.com',
+                'phone_number': '57075200',
+                'street_address': 'vacoas',
+                'town': '1',
+                'post_code': '222222',
+                'request': 'none',
+            }
+            response = self.client.post(reverse(
+                'checkout'), data=data)
+            self.assertEqual(len(bag), 1)
+            self.assertEqual(response.status_code, 302)
