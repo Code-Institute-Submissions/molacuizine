@@ -18,11 +18,9 @@ def all_products(request):
     # Add pagination numbers and links to product page
 
     if 'page_number' in request.GET:
-        print('shabana')
         page_number = int(request.GET['page_number'])
 
     else:
-        print('zahur')
         page_number = 1
 
     objects = products
@@ -118,7 +116,6 @@ def category_search(request):
 
     products = Product.objects.all()
     category = None
-
     if 'category' in request.GET:
         category = request.GET['category']
         products = products.filter(category__name=category)
@@ -181,11 +178,11 @@ def store_management(request):
     """ A view to manage store products, openning hours
         and add items
     """
+
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
     if request.method == 'POST':
-
         form = ProductForm(request.POST, request.FILES)
 
         if form.is_valid():
@@ -196,7 +193,7 @@ def store_management(request):
             messages.error(
                 request, 'Item could not be added. \
                     Please ensure the form is valid.')
-
+            return redirect(reverse('store_management'))
     else:
         form = ProductForm()
 
