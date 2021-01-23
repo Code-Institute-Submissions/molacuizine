@@ -79,7 +79,8 @@ def checkout(request):
                     )
                     order_line_item.save()
                 else:
-                    for spice_index, quantity in item_data['spice_index'].items():
+                    for spice_index, quantity in item_data[
+                            'spice_index'].items():
                         order_line_item = OrderLineItem(
                             order=order,
                             product=product,
@@ -153,7 +154,9 @@ def checkout_success(request, order_number):
     google_api = settings.GOOGLE_API_KEY
     lon = order.town.long_coord
     lat = order.town.lat_coord
-    url = f'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=-20.2984,57.4938&destinations={lon},{lat}&key={google_api}'
+    url_one = 'https://maps.googleapis.com/maps/api/distancematrix/'
+    url_two = 'json?units=metric&origins=-20.2984,57.4938&destinations'
+    url = f'{url_one}{url_two}={lon},{lat}&key={google_api}'
     r = requests.get(url)
     res = r.json()
     time = res['rows'][0]['elements'][0]['duration']['text']
