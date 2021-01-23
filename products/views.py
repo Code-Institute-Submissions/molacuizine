@@ -18,9 +18,11 @@ def all_products(request):
     # Add pagination numbers and links to product page
 
     if 'page_number' in request.GET:
+        print('shabana')
         page_number = int(request.GET['page_number'])
 
     else:
+        print('zahur')
         page_number = 1
 
     objects = products
@@ -192,7 +194,8 @@ def store_management(request):
             return redirect(reverse('product_detail', args=[product.id]))
         else:
             messages.error(
-                request, 'Item could not be added. Please ensure the form is valid.')
+                request, 'Item could not be added. \
+                    Please ensure the form is valid.')
 
     else:
         form = ProductForm()
@@ -223,7 +226,8 @@ def product_update(request, product_id):
             return redirect(reverse('product_detail', args=[product.id]))
         else:
             messages.error(
-                request, 'Item could not be added. Please ensure the form is valid.')
+                request, 'Item could not be added. \
+                    Please ensure the form is valid.')
 
     else:
         form = ProductForm(instance=product)
