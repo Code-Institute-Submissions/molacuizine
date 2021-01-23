@@ -55,7 +55,8 @@ class Order(models.Model):
         accounting for delivery costs.
         """
 
-        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        self.order_total = self.lineitems.aggregate(
+            Sum('lineitem_total'))['lineitem_total__sum'] or 0
 
         self.delivery_cost = settings.TRANSPORT_COST
         self.grand_total = self.order_total + self.delivery_cost
