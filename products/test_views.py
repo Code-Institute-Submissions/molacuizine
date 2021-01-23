@@ -67,7 +67,7 @@ class ProductTestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/store_management.html')
 
-    def test_store_management_page_with_valid_post(self):
+    def test_add_product_page_with_valid_post(self):
         self.user = User.objects.create_superuser(
             username='superuser', password='zahur')
         self.client.login(
@@ -84,7 +84,7 @@ class ProductTestViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, f'/products/{product.id}')
 
-    def test_store_management_page_with_invalid_post(self):
+    def test_add_product_page_with_invalid_post(self):
         self.user = User.objects.create_superuser(
             username='superuser', password='zahur')
         self.client.login(
@@ -108,3 +108,66 @@ class ProductTestViews(TestCase):
             f'/products/product_update/{self.product.id}')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/')
+
+    def test_product_update_with_super_user(self):
+        self.user = User.objects.create_superuser(
+            username='superuser', password='zahur')
+        self.client.login(
+            username='superuser', password='zahur')
+        response = self.client.get(
+            f'/products/product_update/{self.product.id}')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'products/product_update.html')
+
+    def test_update_product_page_with_valid_post(self):
+        self.user = User.objects.create_superuser(
+            username='superuser', password='zahur')
+        self.client.login(
+            username='superuser', password='zahur')
+        data = {
+            'name': 'item',
+            'description': 'An item',
+            'price': 50,
+            'category': 1,
+            'spice_index': True,
+        }
+        response = self.client.post(
+            f'/products/product_update/{self.product.id}', data)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, f'/products/{self.product.id}')
+
+    def test_update_product_page_with_invalid_post(self):
+        self.user = User.objects.create_superuser(
+            username='superuser', password='zahur')
+        self.client.login(
+            username='superuser', password='zahur')
+        data = {
+            'name': 'item',
+            'description': 'An item',
+            'price': 50,
+            'category': 'xxx',
+            'spice_index': True,
+        }
+        response = self.client.post(
+            f'/products/product_update/{self.product.id}', data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_product_delete_no_super_user(self):
+        self.user = User.objects.create_user(
+            username='testuser', password='zahur')
+        self.client.login(
+            username='testuser', password='zahur')
+        response = self.client.get(
+            f'/products/product_delete/{self.product.id}')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_product_delete_with_super_user(self):
+        self.user = User.objects.create_superuser(
+            username='superuser', password='zahur')
+        self.client.login(
+            username='superuser', password='zahur')
+        response = self.client.get(
+            f'/products/product_delete/{self.product.id}')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/products/')
