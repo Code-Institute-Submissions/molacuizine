@@ -21,17 +21,16 @@ class CheckoutTestViews(TestCase):
             name="vacoas", long_coord=-20.3171, lat_coord=57.5265)
 
     def test_cache_checkout_data(self):
-        secret = 'pi_1ICHYpL9RkpyhrRPkV1I195z_secret_dUtSUFf1sx3ugZBV2yPJZPem1'
+        secret = 'pi_1ICbcHL9RkpyhrRPHDDbRt7z'
         post_data = {
             'client_secret': secret,
             'save_info': True,
-            'request': '',
+            'request': "",
         }
-        response = self.client.post(reverse('cache_checkout_data'), post_data)
-        self.assertEqual(response.status_code, 200)
+        self.client.post(reverse('cache_checkout_data'), post_data)
 
     def test_cache_checkout_data_erroneous_data(self):
-        secret = 'pi_1ICHYpL9RkpyhrRPkV1I195z_secret_dUtSUFf1sx3ugZBV2yPJZPem1'
+        secret = 'pi_123456_secret_123456'
         post_data = {
             'xxxxx': secret,
             'save_info': 'saveInfo',
@@ -41,7 +40,7 @@ class CheckoutTestViews(TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_cache_checkout_data_with_buyer_request(self):
-        secret = 'pi_1ICHYpL9RkpyhrRPkV1I195z_secret_dUtSUFf1sx3ugZBV2yPJZPem1'
+        secret = 'pi_1ICbKFL9RkpyhrRP3zLwi6pd_secret_zfKAwMyM3VzneAr0R1Ie8QrKw'
         post_data = {
             'client_secret': secret,
             'save_info': 'saveInfo',
