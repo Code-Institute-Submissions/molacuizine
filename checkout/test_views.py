@@ -71,22 +71,6 @@ class CheckoutTestViews(TestCase):
         self.assertEqual(len(bag), 1)
         self.assertRedirects(response, '/products/')
 
-    def test_checkout_with_store_status_open(self):
-        product = Product.objects.create(
-                name="Item", price=50, category_id=1, spice_index=True)
-        # Create bag
-        post_data = {
-            'quantity': '1',
-            'spice_index': 'mild',
-        }
-        response = self.client.post(reverse(
-            'add_to_bag', args=[product.id]), data=post_data)
-        response = self.client.get(reverse('checkout'))
-        bag = self.client.session.get('bag', {})
-        self.assertEqual(len(bag), 1)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'checkout/checkout.html')
-
     def test_checkout_order_form_valid_with_spice_index(self):
         product = Product.objects.create(
                 name="Item", price=50, category_id=1, spice_index=True)
