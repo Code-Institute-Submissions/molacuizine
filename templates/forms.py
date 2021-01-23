@@ -1,6 +1,7 @@
 from allauth.account.forms import SignupForm
 from django import forms
 
+
 # Modification to allauth sign up form to add first_name and last_name
 # Must include ACCOUNT_FORMS in settings
 class CustomSignupForm(SignupForm):
