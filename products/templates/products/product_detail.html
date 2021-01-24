@@ -11,67 +11,69 @@
     <hr>    
     <div class="container">        
         <div class="row mt-5 p-1">
-            <div class="col-lg-1">                
-            </div>
-            <div class="col-12 col-md-7 col-lg-5 p-0">                
-                {% if product.image %}                    
-                    <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">                    
-                {% else %}                    
-                    <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">                    
-                {% endif %}
-            </div>
-            <div class="col-12 col-md-5 col-lg-5 pl-4 pr-0 background">                
-                <p class="text-center card-text font-weight-bold h4 pt-3 pt-md-2">{{ product.name }}</p><hr>
-                <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'category_search' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
-                <p class="card-text pb-1 pt-1">{{ product.description }}</p>
-                <p class="card-text font-weight-bold d-inline">Price: </p><p class="card-text d-inline">Rs {{ product.price }}</p>
-                <!-- Form to add product to bag -->
-                <form class="form d-inline" action="{% url 'add_to_bag' product.id %}" method="POST">
-                    {% csrf_token %}
-                    <div>
-                        {% if open_status %}
-                        <div class="input-group mt-2 mb-3">
-                            <label for="quantity"><p class="card-text font-weight-bold pr-2">Quantity:</p></label>                                                    
-                            <a id="minus" class="input-group-prepend">
-                                <i class="fas fa-minus"></i>
-                            </a>                                        
-                            <input class="quantity w-25" type="number" id="quantity" name="quantity" min="1" max="20" value="1"> 
-                            <a id="plus" class="input-group-append">
-                                <i class="fas fa-plus"></i>
-                            </a>
-                        </div>
-                            {% if product.spice_index %}
-                            <div class="mt-1 mb-3">
-                                <label class="card-text font-weight-bold pr-2" for="spice_index">Spice Index:</label>
-                                <select class="spice-index form-control d-inline w-25" name="spice_index" id="spice_index">
-                                    <option class="text-success" value="mild">Mild</option>
-                                    <option class="text-warning" value="medium">Med</option>
-                                    <option class="text-danger" value="hot">Hot</option>                                    
-                                </select>                                                                                 
-                            </div>                            
-                            {% endif%}
-                        {% else %}
-                        {% endif %} 
-                    </div>
-                    {% if open_status %}
-                    <div class="pt-0 pt-md-5">
-                        <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Continue Ordering</a>
-                        <input type="submit" class="btn product-submit" value="Add to bag">
-                    </div>
-                    {% else %}
-                        <div class="mt-4 pt-3 pt-md-5">
-                            <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Back to menu</a>                            
-                        </div>
+            {% if product.availability or request.user.is_superuser %}
+                <div class="col-lg-1">                
+                </div>
+                <div class="col-12 col-md-7 col-lg-5 p-0">                
+                    {% if product.image %}                    
+                        <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">                    
+                    {% else %}                    
+                        <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">                    
                     {% endif %}
-                </form>
-                {% if request.user.is_superuser %}
-                    <div class="product-update mt-3">       
-                        <a href="{% url 'product_update' product.id %}" class="text-primary">Update</a>/<a href="{% url 'product_delete' product.id %}" class="text-danger">Delete</a>
-                    </div>
-                {% endif %} 
-            </div>
-            <div class="col-lg-1">                
-            </div>                                 
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 pl-4 pr-0 background">                
+                    <p class="text-center card-text font-weight-bold h4 pt-3 pt-md-2">{{ product.name }}</p><hr>
+                    <i class="fas fa-utensils d-inline"></i><a class="product-details-link" href="{% url 'category_search' %}?category={{ product.category }}"><p class="card-text d-inline pl-2">{{ product.category.friendly_name }}</p></a><br>
+                    <p class="card-text pb-1 pt-1">{{ product.description }}</p>
+                    <p class="card-text font-weight-bold d-inline">Price: </p><p class="card-text d-inline">Rs {{ product.price }}</p>
+                    <!-- Form to add product to bag -->
+                    <form class="form d-inline" action="{% url 'add_to_bag' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <div>
+                            {% if open_status %}
+                            <div class="input-group mt-2 mb-3">
+                                <label for="quantity"><p class="card-text font-weight-bold pr-2">Quantity:</p></label>                                                    
+                                <a id="minus" class="input-group-prepend">
+                                    <i class="fas fa-minus"></i>
+                                </a>                                        
+                                <input class="quantity w-25" type="number" id="quantity" name="quantity" min="1" max="20" value="1"> 
+                                <a id="plus" class="input-group-append">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                                {% if product.spice_index %}
+                                <div class="mt-1 mb-3">
+                                    <label class="card-text font-weight-bold pr-2" for="spice_index">Spice Index:</label>
+                                    <select class="spice-index form-control d-inline w-25" name="spice_index" id="spice_index">
+                                        <option class="text-success" value="mild">Mild</option>
+                                        <option class="text-warning" value="medium">Med</option>
+                                        <option class="text-danger" value="hot">Hot</option>                                    
+                                    </select>                                                                                 
+                                </div>                            
+                                {% endif%}
+                            {% else %}
+                            {% endif %} 
+                        </div>
+                        {% if open_status %}
+                        <div class="pt-0 pt-md-5">
+                            <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Continue Ordering</a>
+                            <input type="submit" class="btn product-submit" value="Add to bag">
+                        </div>
+                        {% else %}
+                            <div class="mt-4 pt-3 pt-md-5">
+                                <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> Back to menu</a>                            
+                            </div>
+                        {% endif %}
+                    </form>
+                    {% if request.user.is_superuser %}
+                        <div class="product-update mt-3">       
+                            <a href="{% url 'product_update' product.id %}" class="text-primary">Update</a>/<a href="{% url 'product_delete' product.id %}" class="text-danger">Delete</a>
+                        </div>
+                    {% endif %} 
+                </div>
+                <div class="col-lg-1">                
+                </div>
+            {% endif %}                                 
         </div>
         <br><br>  
     </div>       
