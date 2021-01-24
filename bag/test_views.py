@@ -33,6 +33,18 @@ class BagTestViews(TestCase):
         self.assertEqual(len(bag), 1)
         self.assertRedirects(response, f'/products/{product.id}')
 
+    def test_add_to_bag_product_unavailble(self):
+        product = Product.objects.create(
+            availability=False, name="Item",
+            price=50, category_id=1, spice_index=True)
+        post_data = {
+            'quantity': '1',
+            'spice_index': 'mild',
+        }
+        response = self.client.post(reverse(
+            'add_to_bag', args=[product.id]), data=post_data)
+        self.assertRedirects(response, '/')
+
     def test_add_to_bag_with_different_spice_index_product(self):
         product = Product.objects.create(
                 name="Item", price=50, category_id=1, spice_index=True)
