@@ -12,8 +12,10 @@ def all_products(request):
     """ A view to return all products  """
 
     products = Product.objects.all()
-
-    count = products.count()
+    if not request.user.is_superuser:
+        products = products.filter(availability=True)
+    else:
+        products = products
 
     # Add pagination numbers and links to product page
 
@@ -23,6 +25,7 @@ def all_products(request):
     else:
         page_number = 1
 
+    count = products.count()
     objects = products
 
     p = Paginator(objects, 8)
@@ -58,6 +61,10 @@ def query_search(request):
      including pagination"""
 
     products = Product.objects.all()
+    if not request.user.is_superuser:
+        products = products.filter(availability=True)
+    else:
+        products = products
 
     if 'q' in request.GET:
         query = request.GET['q']
@@ -115,6 +122,11 @@ def category_search(request):
         including pagination"""
 
     products = Product.objects.all()
+    if not request.user.is_superuser:
+        products = products.filter(availability=True)
+    else:
+        products = products
+
     category = None
     if 'category' in request.GET:
         category = request.GET['category']
