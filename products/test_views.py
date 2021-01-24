@@ -26,6 +26,10 @@ class ProductTestViews(TestCase):
         self.assertRedirects(response, '/products/')
 
     def test_product_search_with__q_query_and_no_page_number(self):
+        self.user = User.objects.create_superuser(
+            username='superuser', password='zahur')
+        self.client.login(
+            username='superuser', password='zahur')
         response = self.client.get(reverse('query_search'), {'q': 'rice'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/query_search.html')
@@ -37,6 +41,10 @@ class ProductTestViews(TestCase):
         self.assertTemplateUsed(response, 'products/query_search.html')
 
     def test_product_search_with_category_no_page_number(self):
+        self.user = User.objects.create_superuser(
+            username='superuser', password='zahur')
+        self.client.login(
+            username='superuser', password='zahur')
         response = self.client.get(
             reverse('category_search'), {'category': 'sides'})
         self.assertEqual(response.status_code, 200)
