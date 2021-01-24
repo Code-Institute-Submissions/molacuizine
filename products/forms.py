@@ -26,7 +26,7 @@ class ProductForm(forms.ModelForm):
 
         self.fields['category'].widget.attrs['autofocus'] = True
         for field in self.fields:
-            if field != 'category' and field != ['spice_index']:
+            if field != 'category' and field != 'spice_index':
                 if self.fields[field].required:
                     self.fields[field].widget.attrs[
                         'placeholder'] = f'{placeholders[field]} *'
@@ -35,4 +35,7 @@ class ProductForm(forms.ModelForm):
                         'placeholder'] = placeholders[field]
             self.fields[field].widget.attrs[
                 'class'] = 'border-black rounded-0 product-form-input'
-            self.fields[field].label = False
+            if field != 'availability':
+                self.fields[field].label = False
+            else:
+                self.fields[field].label = "Item Available"
