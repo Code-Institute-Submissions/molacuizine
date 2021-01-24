@@ -12,7 +12,7 @@ def profile(request):
     """ Display the user's profile. """
 
     # Request profile for logged in user
-    profile = get_object_or_404(UserProfile, user__username=request.user)   
+    profile = get_object_or_404(UserProfile, user__username=request.user)
     # Obtain all orders for userprofile called above
     orders = profile.orders.all()
 
