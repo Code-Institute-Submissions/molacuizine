@@ -18,6 +18,7 @@ class ProductForm(forms.ModelForm):
             'name': 'Name',
             'description': 'Description',
             'spice_index': 'Spice Index',
+            'availability': 'Availability',
             'price': 'price',
             'image_url': 'image_url',
             'image': 'Image',
