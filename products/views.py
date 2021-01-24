@@ -230,7 +230,7 @@ def product_update(request, product_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated product!')
-            return redirect(reverse('product_update', args=[product_id]))
+            return redirect(reverse('product_detail', args=[product_id]))
         else:
             messages.error(
                 request, 'Item could not be added. \

@@ -15,6 +15,11 @@ def add_to_bag(request, product_id):
     """ A view that add's specific product to bag"""
 
     product = get_object_or_404(Product, pk=product_id)
+    if product.availability:
+        product = get_object_or_404(Product, pk=product_id)
+    else:
+        messages.error(request, f'Sorry {product.name} is not available')
+        return redirect(reverse('home'))
 
     if request.POST:
         quantity = int(request.POST.get('quantity'))
