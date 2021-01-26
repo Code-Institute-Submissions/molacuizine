@@ -84,9 +84,9 @@
                         </div>
                         {% if request.user.is_superuser %}
                             {% if product.availability %}
-                                <p class="card-text text-success font-weight-bold">Product available</p>
+                                <p class="card-text text-success font-weight-bold">Item available</p>
                             {% else %}
-                                <p class="card-text text-danger font-weight-bold">Product unvailable</p>
+                                <p class="card-text text-danger font-weight-bold">Item unavailable</p>
                             {% endif %}
                             <div class="product-update">       
                                 <a href="{% url 'product_update' product.id %}" class="text-primary">Update</a>/<a href="{% url 'product_delete' product.id %}" class="text-danger">Delete</a>
