@@ -11,11 +11,16 @@
 * [Development cycle](#development-cycle)
 * [Features](#features)
     * [Navbar](#navbar)
-    * [Modals](#modals)
-    * [search bar and pagination](#search-bar-and-pagination) 
+    * [Town Modals](#town-modal)
+    * [search bar](#search-bar) 
+    * [Pagination](#pagination) 
+    * [Items details](#item-details) 
+    * [Bag page](#bag-page) 
+    * [Spice index](#spice-index) 
     * [Profile page](#profile-page)
-    * [Control center](#control-center)
-    * [Side navigation](#side-navigation)
+    * [Store status feature](#store-status-feature)
+    * [Store management page](#store-management-page)
+    * [Item availbility feature](#item-availability-feature)
     * [Sold feature](#sold-feature)
     * [Flash messages](#flash-messages)
     * [Footer](#footer)
@@ -42,11 +47,9 @@
 
 ## INTRODUCTION 
 
-This project is a online food ordering and delivery service. The menu covers a wide range of popular mauritian 
-cuisine whereby a customer can add food items to a basket and then make payments online using stripe service.
-
-The site name 'MoLacuizine' is mauritian for 'My Kitchen' and covers a wide range of item from main dishes to 
-sides.
+This project is a online food ordering and delivery service site. The site name 'MoLacuizine' is mauritian for 'My Kitchen'.
+The menu covers a wide range of popular mauritian cuisine whereby a customer can add food items to a basket and then make payments 
+online using stripe service.
 
 The site would also permit the user to add and modify profile information to be used at checkout and also to have a list
 order history for reference. 
@@ -73,6 +76,7 @@ By using this site as the site owner:
 
 * be able to add, update and delete items for store management purposes.
 * be able to open and close the online site for control  purposes.
+* be able to make an item become temporarily unavailable. 
 
 ### UX design work overview
 
@@ -148,6 +152,8 @@ The main development cycle is listed below:
 19. Project review.
 20. Minor modifications addressed from step 19.
 21. Addition of spice index to site with neccessary updating of installed apps.
+22. Unit testting
+23. Addition of item availability feature.
 
 ## FEATURES
 
@@ -155,83 +161,127 @@ This section gives details of the features included and their function.
 
 ### Navbar
 
-A standard navbar was used which was obtained from materialize to allow navigation between the
-different pages and was made to collapse on medium and down devices.
+The navbar was contructed using bootsrap and and made to be collapsable on medium devices and smaller.
 
-![Navbar](static/doc/navbar.png)
+The navbar consisted of 3 levels. The top levels contained logo, search bar, Account login and bag/basket features. 
+Middle level contained category links and the bottom level the store status.
 
-### Modals
+![Image of navbar](static/doc/navbar.png)
 
-During site design it was decided to use modals for registration and login instead of having separate pages. This was 
-thought to improve the overall site experience since login could be done from the main page. Modals could be 
-interchanged with a click here button and would reopen if data submitted did not meet the login/registration criteria. 
+![Image of navbar collapsed](static/doc/navbarcollapsable.png)
 
-![Image of login modal](static/doc/login.png)
+### Town Modal
 
-![Image of register modal](static/doc/register.png)
+A modal to display the towns the delivery service catered for was provided for the user. It was located on the home page 
+since the users could would be able to know from the beginning if the delivery service catered for their location. 
 
-A third modal was also used for the about section.
+![Image of town modal](static/doc/town_modal.png)
 
-### Search bar and pagination
+### Search bar 
 
-Search bar and pagination features were included in the site. These functions were not originally planned and were  
-were included after mid project review since it was thought to be good practice for such a site where item quantity 
-could be significant. The inclusion was thought to improve UX. The search criteria used were:
-1. seller name
-2. category
-3. description
+Search bar was included in the site since it would be a helpful tool in too narrow down user requirements with ease. The
+search criteria was based on: 
+1. item description
+2. iten name
 
-These criterion were suitable enough to narrow down the item list significantly whilst offering the user broad search requirements.
+These criterion were suitable enough to narrow down the item list significantly. 
 
-![Search bar](static/doc/search.png)
+### Pagination 
 
-### Item cards
+From the project initiation it was decided to include pagination for the item listing pages to improve UX by
+preventing large amount of items being listed in one page. 
 
-The item was displayed on cards and divided into two areas, one for item image and the other for item description.
-All information on the item was located in one place for convenience and the image could be enlarged by clicking 
-on them by making use of materialize media box.
+The amount of items listed per page was defaulted to 8 since this was thought to provide a good balance between 
+small and large devices.
 
-![Item card](static/doc/item.png)
+![pagination](static/doc/pagination.png)
 
-The card also had a link to the profile page of the seller if the buyer wished to obtain further information. Edit and
-delete item buttons were also included on the card to provide convenient place for the item owner to make modifications.
+### Item details
+
+The items details were displayed on two types of cards. One for the main item page and the other for the item detail
+page. This was done so as to not overload the user with details whilst browsing items.
+
+The main difference between the 2 display cards was that the item detail card contained item description and the
+'add to bag' link. Both cards contained price and  category.
+
+![Item detail](static/doc/item.png)
+
+The 'add to bag' link would permit the user to add the item to the bag with the corresponding quantity and spice index.
+
+### Spice index
+
+Certain dishes which could be prepared to have different levels of spice were given a spice index selector. This would permit
+the user to select a spice index according to their preference which and would then be taken into consideration when the menu
+was prepared. The levels were mild, medium and hot.
+
+![Spice index](static/doc/spice-index.png)
+
+### Bag page
+
+The bag page consisted of an order summary where all the items which were added to bag could be viewed in one convenient place
+together with their associated cost.
+
+This page also permitted the user to update and delete items while also updating the total cost.
+
+![order-summary](static/doc/order-summary.png)
+
+The bag page could be assesed via a link in the navbar which also showed the total cost (excluding transport). The bag icon 
+would be black and disabled if the bag was empty and would change become blue and active otherwise.
+
+![bag-icon](static/doc/bag-icon.png)
 
 ### Profile page
 
-A user profile page was included which permitted the user to upload a profile pic and provide a description about themselves
-so a buyer could obtain more details about the person. This feature was made to be optional.
-
-This page also provided the profile user and buyer with and centralised page where all the profile users items would be listed in a 
-convenient way. 
-
-The items could be modified and deleted at will by the profile user instead of having to search for each individual item 
-on the main page hence improving the user interface.
+A user profile page was included which permitted the user to upload/update information about themselves. This information would be
+used during the checkout process, thus providing a smoother checkout experience. The information required was phone number, 
+street addres, town and postcode.
 
 ![Profile page](static/doc/profile.png)
 
-### Control center
+The profile page consisted of a form.
 
-A control center page was included for only for the admin. This page listed all registered users, items and categories for the admin
-to have access to in one convenient place. This page was used for control purposes were all modifications could be made instead of having 
-to search for each individual user and items. 
+The profile page also provided a list of clickable ordered items for the user to review.
 
-![Control center](static/doc/control.png)
+### Store status feature
 
-### Side navigation
+A store status banner was included in the navbar which would indicate whether ordering could be performed. 
 
-A side navigation menu was added on large screen and higher devices. This permitted the user to scroll to items by
-name and was added to improve user experience.
+![Store status](static/doc/store-status.png)
 
-![Side navigation menu](static/doc/menu.png)
+If the case where the store status was set to close coding was added to prevent ordering or checkout being performed.
+This was done to allow the site owner control on when orders could be accepted. 
 
-### Sold feature
+### Store management page
 
-The profile page also included a sold feature whereby the item could be listed as sold instead of deleting them and could be used
-as a marketing tool indicating that the seller items were in demand.
+A Store management page was designed to cater for two features:
+1. Adding/updating of items.
+2. Toggling of store open/close status.
 
-Once the item sold feature was activated the item would be removed from items list on the main page.
+This page was solely for the store adminstrator and additional security coding was provided to achieve this requirement.
 
-![Sold](static/doc/sold.png)
+For adding items a form was provided allowing the uploading of category, item name, description, spice index present, item availability,
+price and image.
+
+The same form would be used to update the item if modifications were required but with all prefilled information which also
+included the original item image. 
+
+![Item form](static/doc/item-form.png)
+
+As for store status, a button was added which would toggle store status from open to close. This would also activate or disable
+the checkout page step.
+
+![Store status button](static/doc/store-status-two.png)
+
+### Item availability feature
+
+The item availablity feature was included in the add product page. This feature would permit the administrator to quickly 
+remove items temporarily from the user view only without removing the item completely. Such an option was thought to
+be ideal in the instance if a specific dish was missing a prepartion ingredient and would not be able to be ordered at that
+specific time.
+
+The item would then be tagged as available or unavailable for the administator only.
+
+![Item availablility](static/doc/available.png)
 
 ### Flash messages
 
