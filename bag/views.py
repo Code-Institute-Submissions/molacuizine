@@ -90,9 +90,8 @@ def delete_from_bag(request, product_id):
 
         if spice_index:
             del bag[product_id]['spice_index'][spice_index]
-            if not bag[product_id]['spice_index']:
-                bag.pop(product_id)
-                messages.success(request, f'Removed {product.name} from bag')
+            messages.success(request, f'Removed {product.name} with \
+            spice index of {spice_index} from bag')
         else:
             bag.pop(product_id)
             messages.success(request, f'Removed {product.name} from bag')
