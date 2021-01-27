@@ -74,7 +74,7 @@ $(document).ready(function(){
 
         
         let saveInfo = Boolean($('#id-save-info').attr('checked'));        
-        let requestInfo = form.request.value
+        let requestInfo = form.request.value;
 
         // From using {% csrf_token %} in the form
         let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
