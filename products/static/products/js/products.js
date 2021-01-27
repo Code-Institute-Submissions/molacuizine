@@ -28,7 +28,7 @@ $(document).ready(function(){
         else{
             $('#id_category').css('color', 'black');
         }          
-    })    
+    });   
     if($('.product-form').attr('id')=='profile-add-form'){
         $('#id_spice_index').val($('#id_spice_index option:first').val()); 
         $('#id_spice_index option:first-child').html('Spice Index');
@@ -44,12 +44,12 @@ $(document).ready(function(){
         else{
             $('#id_spice_index').css('color', 'black');
         }          
-    }) 
+    }); 
     
     // Required to add colour to spice selection //
     
     $('#spice_index').change(function(){
-        let spice_option=$('#spice_index').val()                   
+        let spice_option=$('#spice_index').val();                  
         if(spice_option=="mild"){            
             $('#spice_index').css('color', 'green');
         }
@@ -59,14 +59,14 @@ $(document).ready(function(){
         else if(spice_option=="hot"){            
             $('#spice_index').css('color', 'red');
         }
-    })
+    });
 
     // Required for customisable image upload button //
 
     $('#upload-button').click(function(){
         $('#id_image').click(); 
          
-    })
+    });
 
     $('#id_image').hide();     
     $('#id_image').change(function(){
@@ -78,11 +78,11 @@ $(document).ready(function(){
 
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     $('#open').click(function(){       
-        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'open'})
+        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'open'});
         location.reload();                   
-    })
+    });
     $('#close').click(function(){       
-        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'close'})
+        $.post('/bag/store_status/', {'csrfmiddlewaretoken': csrfToken,'status': 'close'});
         location.reload();                   
-    })    
+    });   
 });
