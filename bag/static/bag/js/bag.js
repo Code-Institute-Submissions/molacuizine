@@ -45,7 +45,7 @@ $(document).ready(function(){
     $('.delete-item').click(function(){
         let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();        
         let itemId = $(this).attr('id');       
-        let spice_index = $(this).attr('value');            
+        let spice_index = $(this).attr('data-name');            
         let url = `/bag/delete/${itemId}/`;        
         var data = {'csrfmiddlewaretoken': csrfToken, 'spice_index': spice_index};       
        

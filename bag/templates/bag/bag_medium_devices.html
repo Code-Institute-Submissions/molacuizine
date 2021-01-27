@@ -28,14 +28,15 @@
                         <i class="fas fa-plus"></i>
                     </a>
                     {% if item.spice_index %}
-                        <label for="spice_index"></label>                
-                        <input type="hidden" name="spice_index" value="{{ item.spice_index }}">
+                        <label>               
+                            <input type="hidden" name="spice_index" value="{{ item.spice_index }}">
+                        </label> 
                     {% else %} 
                     {% endif %} 
                     <div class="row mt-2 w-100">
                         <div class="col-12">
                             <button type="submit" class="btn edit-item rounded-0" value="Update item">Update item</button>
-                            <div class="btn delete-item rounded-0" value="{{ item.spice_index }}" id="{{ item.product.id }}">Delete item</div>
+                            <div class="btn delete-item rounded-0" data-name="{{ item.spice_index }}" id="{{ item.product.id }}">Delete item</div>
                        </div>
                     </div> 
                 </div>
@@ -71,5 +72,4 @@
         {% else %}
         {% endif %}
     </div>      
-</div>
-                       
+</div>                       
