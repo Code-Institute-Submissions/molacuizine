@@ -13,7 +13,7 @@ $(document).ready(function(){
         else{
             $('#id_town').css('color', 'black');
         }          
-    })
+    });
     
     // Stripe Core logic  for payment //    
     let stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
@@ -132,6 +132,6 @@ $(document).ready(function(){
             });
         }).fail(function () {            
             location.reload();
-        })
+        });
     });    
 });
