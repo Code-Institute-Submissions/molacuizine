@@ -23,14 +23,14 @@
                 </div>
                 <!-- Display items next to order form -->
                 {% for item in bag_items %}
-                    <row class="row no-gutters">
+                    <div class="row no-gutters">
                         <div class="col-6">
                             <span class="font-weight-bold">{{ forloop.counter }}. {{ item.product.name }} </span>
                         </div>                    
                         <div class="col-6 text-right">
                             Rs {{ item.sub_total }} 
                         </div>                        
-                    </row>                        
+                    </div>                        
                     <div class="checkout-image mb-1 mt-1">
                         {% if item.product.image %}                    
                             <img class="product-detail-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">                    
@@ -96,11 +96,11 @@
         </div>                                                           
     </div>
     <div id="loading-overlay">
-        <h1 class="text-light logo-font loading-spinner">
+        <div class="h1 text-light logo-font loading-spinner">
             <span class="icon">
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             </span>
-        </h1>
+        </div >
     </div>    
 {% endblock %}
 
