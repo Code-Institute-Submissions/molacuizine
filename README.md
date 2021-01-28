@@ -20,19 +20,19 @@
     * [Profile page](#profile-page)
     * [Store status feature](#store-status-feature)
     * [Store management page](#store-management-page)
-    * [Item availbility feature](#item-availability-feature)
-    * [Sold feature](#sold-feature)
-    * [Flash messages](#flash-messages)
+    * [Item availbility feature](#item-availability-feature)    
+    * [Django messages](#django-messages)
+    * [Checkout page](#checkout-page)
+    * [Delivery time](#delivery-time)
     * [Footer](#footer)
 * [Technologies used](#technologies-used)
-* [Images](#images)
 * [Data schema](#data-schema)
-    * [CRUD operations](#crud-operations)
-    * [Setting up mongodb database](#setting-up-mongodb-database)
+    * [Foreign key](#foreign-key)    
     * [CRUD authorisation and security features](#crud-authorisation-and-security-features)    
 * [Testing](#testing)
     * [UX testing](#ux-testing)
     * [validators](#validators)
+    * [Django unittest](#django-unittest)
     * [Chrome DevTools](#chrome-devtools)    
     * [Site testing](#site-testing)
     * [Responsive design](#responsive-design)
@@ -62,7 +62,8 @@ The live site can be found [here](http://mo-lacuizine.herokuapp.com/).
 
 By visiting this site as a user I want to:
 * have a user friendly registration/login process in order to use the site.
-* be provided with full details of each product.
+* be provided with details of each product.
+* be able to narrow down items list so as to show items that meet my requirements.
 * be able to add items to a basket so I can view all items I have selected together with the associated cost.
 * be able to modify items added to my basket so as to make any required changes.
 * be able to add and update my user profile so to make any changes if required.
@@ -75,8 +76,9 @@ By visiting this site as a user I want to:
 By using this site as the site owner:
 
 * be able to add, update and delete items for store management purposes.
-* be able to open and close the online site for control  purposes.
+* be able to open and close the online site for control purposes.
 * be able to make an item become temporarily unavailable. 
+* be able control access to the store management page and features.
 
 ### UX design work overview
 
@@ -268,7 +270,7 @@ included the original item image.
 ![Item form](static/doc/item-form.png)
 
 As for store status, a button was added which would toggle store status from open to close. This would also activate or disable
-the checkout page step.
+the checkout process.
 
 ![Store status button](static/doc/store-status-two.png)
 
@@ -283,16 +285,42 @@ The item would then be tagged as available or unavailable for the administator o
 
 ![Item availablility](static/doc/available.png)
 
-### Flash messages
+### Django messages
 
-Flash messages were used whenever a create, update or delete operation was performed. This would provide confirmation 
-to the user that the operation had been completed and the database had been updated.
+The django messages framework was used to provide temporary messages to indicate whether actions have been completed or not.
+This was done using django message levels info, success and error.
 
-![flash message](static/doc/flash.png)
+This was used specifically for:
+1. Login and registration
+2. Adding/Updating of products
+3. Adding/updating of profiles information
+4. Adding/updating/deleting products from bag
+5. Store status update
+6. Checkout process
+
+![Temporary messages](static/doc/messages.png)
+
+### Checkout page
+
+The checkout page consisted of a form which would be prefilled with user profile information and a section for order summary. 
+This page would permit the user to add credit card details and make payment online using the stripe payment sytem. 
+
+The town field consisted of a list of available delivery towns. A text request field was also added to permit the user  to add
+any special request which they might have.
+
+![image of checkout page](static/doc/checkout.png)
+
+### Delivery time
+
+A delievry time featuture was also included making use of google distance matrix API. 
+
+The calculation used was: 30 preparations time + google matrix delivery time rounded up to the nearest 5 mins.
+
+![Delivery time](static/doc/delivery.png)
 
 ### footer
 
-A basic footer was provided with a link to wikipedia containing a list of art museums.
+A basic footer was provided with openning times and conatct info.
 
 ## TECHNOLOGIES USED
 
@@ -300,117 +328,95 @@ A basic footer was provided with a link to wikipedia containing a list of art mu
 * css 
 * javacript (ES6)
 * python (v3.8.6)
-* flask (v1.1.2) for the web framework
-* mongodb to store data 
+* Django framework
+* SQL database
+* Amazon web servives for production storage of static and images files
 * Jquery to simplify DOM manipulation
-* pylint, flake8 for python syntax
+* pylint, flake8 PEP8 compliance
 * official W3C validator to check HTML syntax
 * css official validator(jigsaw) to check css syntax
 * JSHint to check javacript syntax 
 * Chrome developers tools for analysing scripts and debugging
-* Materilize 1.0.0 for :
+* Boostrap 4 for :
     1. page layout purposes and responsive design aspects
     2. Forms 
-    3. Modals
-    4. Scrollspy
-    5. Materialized media box
-    6. Navbar
-    7. Footer
+    3. Modals    
+    4. Navbar
+    5. Footer
 * balsamiq wireframes application to create the site design
 * Chrome extension 'responsive viewer' to aid in responsive design 
 
-## Images 
-
-An important part of the website design process was the means by which the user would provide images to the site. 
-From the onset it was decided to allow the user to upload images instead of the user providing a URL. This was thought to 
-improve the overall site experience since it would be much more convenient for the user. 
-
-A tutorial on how to upload images into mongodb database was sought and is located [here](https://www.youtube.com/watch?v=DsgAuceHha4)
-
-Mongodb BSON documents allowed the storage of images and was capped at 16mb. This was thought to be sufficient for the
-intended use. A helper text when uploading images was added stating a lower limit of 10mb. 
-
-Images which were deleted had there corresponding fs.files and fs.chunks removed for house cleaning purposes since the database was 
-of limited size.
-
 ## Data schema 
 
-Mongodb was used for database storage since this type of non-relational database was well suited for storing user and
-item details which contained information of different formats. Information could be displayed faster since a query doesn’t 
-have to view several tables in order to deliver an answer, this was well suited for the items collections.
+SQLite was used for storing data local storage and PostgreSQL for production.
 
-Also flexible schema offered by mongodb was thought to be advantageous in the likely event that new fields would need to be
-added in the future. This was highlighted by the introduction of the sold feature into the items collection.
+Models were created in django to define the fields and behaviour of the data. These models would map to the above
+database.
 
-The main database contained 4 collections:
+The following table gives the model used:
+ 
+| Models        |   Fields                                                                       |  Function               |
+|:--------------|:-------------------------------------------------------------------------------|:------------------------|
+|User           |  Username, firstname, lastname, password email                                 |  sign-in/registration   |
+|Store          |  Store Status                                                                  |  Store open/close Status|
+|Order          |  Ordernumber, userprofile, fullname, email, phone-number, street address, town,|  Storing Orders         |
+|               |  postcode, request, date, delivery-cost, grand-total cost, original-bag, pid   |                         |
+|OrderLineItems |  order, product, quantity, spice-index, lineitemtotal                          |  Storing Orders         |
+|Town           |  name, long coord, lat coord                                                   |  Delivery               |         
+|Userprofile    |  user, default_phone_number, default_street_address, default_post_code, town   |  Checkout process       |
+|category       |  name, friendly_name                                                           |  Ordering               |
+|Product        |  category, name, decription, spice_index, availability, price, image           |  Ordering               |
 
-| Collections         |   Fields                                                           |
-|:--------------------|:-------------------------------------------------------------------|
-|User                 |  Username, Password, contact number, email                         |                                     |    
-|Profile              |  Username, profile image, full name, profile description           |
-|Items                |  Category, image, name, description, price, username, sold         |             
-|Categories           |  Category name                                                     |            
+The User model made use Django-allauth package so as to reduce software development. Some customisation was 
+provided so as allow users to add their first and last name during sign-up. Customisation was achived by literature
+obtained from [here](https://dev.to/gajesh/the-complete-django-allauth-guide-la3).
 
-The user collection was used for registration and login purposes. The contact number and email fields were
-added to this collection instead of the items collection since it would only have to be entered once and would remain
-constant for that user. This would also prevent the user from having to add contact info with each item upload and prevent 
-duplicate contact info for the same user.
+Signal were also used to permit the creation of a Userprofile model once the user had registered.
 
-The username would be used as seller name.
+### Foreign key
 
-The profile collection was used to provide additional information on the seller and was purposely given its own 
-collection since it was an option and could be independently edited without affecting other collections. 
+Foreign keys were created for databases which were relationships were required, thus permitting querying objects
+related to another model. 
 
-The items collections consisted of all the required information about the item being sold for a buyer to see. 
+The foreign keys were set-up as follows:
 
-Categories collections consisted of seven main painting categories and was made to be independent.
+| Foreign Key   |  Models                     |  Location               |
+|:--------------|:----------------------------|:------------------------|
+|user_profile   |  Order, Userprofile         |  Order                  |
+|order          |  Order, OrderLineItem       |  OrderLineItem          |
+|category       |  Category, Product          |  Product                |
+|user           |  User, userProfile          |  UserProfile            |
 
-The user, profile and items collections had a matching field of 'username' which was used as a common reference. This was
-done to links documents where common information about a user needed to be displayed. One such page which made use of this 
-reference was the profile page.
-
-![Collections](static/doc/collections.png)
+An example of the use of foreign key was one could obtain all orders for a specific user profile through a query as 
+such:  ```orders = profile.orders.all()```.
 
 ### CRUD operations
 
-CRUD operations were essential for the running of the site and were provided for the following features:
+CRUD operations from the site interface were provided as follows:
 
-| Feature             |   Create   |   Read    |  Update  |  Delete  |  Mongodb collection | 
+| Feature             |   Create   |   Read    |  Update  |  Delete  |  Models             | 
 |:--------------------|:-----------|:----------|:---------|:---------|:--------------------|
-|User registration    |  &#9745;   |           |  &#9745; |          | Users               |   
+|User registration    |  &#9745;   |           |  &#9745; |          | User                |   
 |User login           |            |  &#9745;  |          |          | Users               |
-|User items           |  &#9745;   |  &#9745;  |  &#9745; |  &#9745; | Items               |             
-|User Profile         |  &#9745;   |  &#9745;  |  &#9745; |  &#9745; | Profile             |            
-|Item sold            |  &#9745;   |  &#9745;  |  &#9745; |          | Items               |
-|Category             |  &#9745;   |  &#9745;  |  &#9745; |  &#9745; | Category            |
+|Bag                  |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | bag.session         |             
+|Profile              |  &#9745;   |  &#9745;  |  &#9745; |          | UserProfile         |            
+|Products             |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | products            |
+|Store status         |            |  &#9745;  |  &#9745; |          | Store Status        |
 
-The update operation for the registration feature was for the contact information fields only. 
-
-### Setting up Mongodb database
-
-1. On the designated cluster setup up the security database settings by adding a database user.
-![security settings](static/doc/security.png)
-
-2. On the designated cluster click on collections.
-
-    ![collections](static/doc/collections2.png)
-
-3. Click on create database and then add database name collections.
-
-    ![database](static/doc/database.png)
-    ![database2](static/doc/database2.png)
+Full CRUD operations where provided for all models from the admin page interface.
 
 ### CRUD authorisation and security features
 
-A user would have authorisation to update and delete any information uploaded by themselves except for the their username,
-and password. 
+A user would be have access to only their profile page and thus could only update their own profile. This was achived using the 
+django login decorator. 
 
-No registered user would be able to apply CRUD operations for any other user. This was done by providing jinja template logic.
+A user would be able to apply CRUD operations to items stored in the bag sessions.
 
-The admin would have authorisation to update and delete all uploaded user information present in the database.
-This was done so as the admin could maintain control on what information was being displayed on the site. 
+The store management page could only be accessed by the administrator by usng the django login decorator. A redirect
+was also included to prevent url manipulation by a user if the user was not an administator thus preventing illegal
+access to the store management page. This would prevent CRUD operations on products and changing of store status. 
 
-The control center was only accessible to the admin by using jinja template logic.
+Also a redirect would be triggered if a user tried to manipulate url to access the checkout page if store status was closed.
 
 ## TESTING 
 
@@ -419,8 +425,9 @@ This section provides details of testing performed during development. The follo
 | Test                | Stage Performed                                  | Tool used                                     |
 |---------------------|:-------------------------------------------------|:----------------------------------------------|
 |Syntax errors        |Once During mid development and on completion     |W3C validator, css validator(jigsaw), jshint   |
-|Debugging            |During the whole project                          |Chrome Devtools                                |
-|Responsive design    |During the whole project                          |Chrome Devtools and responsive viewer extension|
+|Debugging            |During the whole project                          |Chrome Devtools, Flake8                        |
+|Unitest              |project completion                                |django TestCase                                |
+|Responsive design    |During the whole project                          |Python code                                    |
 |Site testing         |As from when main site was completed              |By myself and relatives                        |
 |Browser compatibility|On project completion                             |Manual testing on browsers                     |                    
 |Button/link testing  |During development and project completion         |Manual testing                                 |
@@ -429,38 +436,47 @@ This section provides details of testing performed during development. The follo
 
 The goals set out in the UX section were accomplished as follows:
 
-1. User goal: *be able to easily understand what the site is about in order to see if it is of interest to me*<br>
-The site design was thought to achieve this goal and an about section was included to this effect.
+1. User goal: *have a user friendly registration/login process in order to use the site*<br>
+This was achieved using the django allauth application which allowed a tried and tested login and registration process.
 
-2. User goal: *have a user friendly register/login process in order to start using the site*</br>
-The site made use of easy to use straight forward registration and login modals which made the both processes very easy. 
+2. User goal: *be provided with full details of each product.*</br>
+This was achieved using the product details card which provided all relevant details on the item for the user.
 
-3. User goal: *be able to upload my item information with ease in order for buyers to view them*</br>
-This was achieved by using an add item form page which contained all the necessary information required for uploading in 
-one easy to use form.
+3. User goal: *be able to narrow down items list so as to show items that meet my requirements.*</br>
+This was achieved by using both search bar and category search links.    
 
-    ![Add item](static/doc/add-item.png)
+5. User goal: *be able to add items to a basket so I can view all items I have selected together with the associated cost.*</br>
+This was achieved with the bag view [page](#bag-page) described above.
 
-4. User goal: *be provided with an option to upload my personal information so potential buyers can see who I am*</br>
-This was achieved by having using a profile page which is described [above](#profile-page).
+5. User goal: *be able to add and update my user profile so to make any changes if required.*</br>
+This was achieved with the profile user page.
 
-5. User goal: *be able to edit and delete all uploaded information if any changes need to be made*</br>
-This was achieved by using the CRUD functions detailed [above](#crud-operations).
+6. User goal: *have a user friendly checkout process.*</br>
+This was achieved by using the checkout page.
 
-6. User goal: *be able to tag an item as sold so as the buyers can see how in demand my works are*</br>
-This was achieved by using the sold item feature detailed [above](#sold-feature).
+7. User goal: *be provided with estimated delivery time for ordered items to be able to know when I expect my food items to arrive*</br>
+This was achieved by using the google distance matrix described [above](#delivery-time).
 
-7. Buyer goal: *have information about the item being sold in one place for convenience of use*</br>
-This was achieved by using the items cards detailed [above](#item-cards).
+8. User goal: *be provided with a list of previously ordered items for me to track my order history.*</br>
+This was achieved using order history page providing a list of all ordered items for that user.
 
-8. Buyer goal: *have the ability to view items by search criteria in order to narrow down item list to specific requirements*</br>
-This was achieved by using the search bar detailed [above](#search-bar-and-pagination).
+9. User goal: *be advised that checkout was successful to ensure order was processed*</br>
+This was achieved with the checkout success page.
 
-9. Site owner: *be able to edit and delete any loaded information for content control purposes.*</br>
-This was achieved by allowing full CRUD operations to the admin as detailed [above](#crud-authorisation).
+10. User goal: *be informed of the online open/close status for ordering*</br>
+This was achieved with the store status desribed [above](#store-status-feature).
 
-10. Site owner: *have full access to all uploaded information in one convenient place for CRUD operations*</br>
-This was achieved by using the [control center](#control-center) and tested by myself.
+11. Site administrator goal: *be able to add, update and delete items for store management purposes.*</br>
+This was achieved with the store management [page](#store-management-page).
+
+12. Site administrator goal: *be able to open and close the online site for control purposes.*</br>
+This was achieved with store status [feature](#store-status-feature).
+
+13. Site administrator goal: *be able to make an item become temporarily unavailable.*</br>
+This was achieved with item availability [feature](#item-availability-feature).
+
+14. Site administrator goal: *be able control access to the store management page and features.*</br>
+This was achieved with by providing coding to prevent illegal access as described [here](#crud-authorisation-and-security-features).
 
 The above user goals were further tested by obtaining feedback from an artist. The feedback was positive all on aspects.
 
@@ -476,17 +492,35 @@ Errors were corrected and final test results are given below:
 
 | Test                                 | Expected result                | Results            |                                 
 |:-------------------------------------|:-------------------------------|:-------------------|
-|W3C validator                         |No errors or warnings to show   |Passed              | 
+|W3C HTML validator                    |No errors or warnings to show   |Errors present      | 
 |css official validator(jigsaw)        |No errors found                 |Passed              |                            
 |JSHint located                        |Congratulations. No error found |Warnings present    |
 |Python validator(pylint, Flake8, PEP8)|No errors                       |Errors present      |
 
-For the W3C validator all errors due to jinja templates were filtered out.
+For the W3C HTML validator all errors were due to django template language which raised a ```bad value``` error. These errors
+were filtered out.
 
 The error 'Doctype must be declared first' was also ignored and was due to the use of base.html template.
 
 The Jshint test results had the warning " 'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz)." was due to
 syntax used for defining variables.
+
+### Django unittest
+
+Django unittest was performed on all apps created by myself to check for bugs and inconsistencies in python code. The testing covered the
+views, models and forms for each app.
+
+The coverage is summarised below:
+
+| app           | Coverage (%)     |                                
+|:--------------|:-----------------|
+| bag           |99                |
+| checkout      |80                | 
+| home          |87                |                         
+| products      |99                | 
+| profile       |98                |                          
+
+![Unittest results](static/doc/coverage.png)
 
 ### Chrome DevTools
 
@@ -498,8 +532,8 @@ Chrome DevTools were used extensively during development phase to assist in:
 
 ### Site testing
 
-The site was tested by myself and once the main site was completed it was further tested by having an artist 
-register and use the site with minimal prompting. The feedback obtained was positive.
+The site was tested by myself and once the main site was completed it was further tested by having relatives use the site.
+The feedback obtained was positive.
 
 ### Responsive design
 
@@ -521,8 +555,6 @@ extension was also used. Resolutions covered are as follows:
 |323 X 786        |Pixel 3, 3 XL                  |
 
 ![responsive design Image](static/doc/responsive.png)
-
-A final check was done using the website http://ami.responsivedesign.is/. 
 
 ### Browser compatibility
 
