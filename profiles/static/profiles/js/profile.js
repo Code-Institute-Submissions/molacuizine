@@ -12,5 +12,5 @@ $(document).ready(function(){
         else{
             $('#id_town').css('color', 'black');
         }          
-    })     
+    });     
 }); 
