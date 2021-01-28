@@ -19,38 +19,36 @@
     {% endif %}
     <nav aria-label="Page navigation example">
     <!-- Page pagination -->
-    <ul class="pagination justify-content-center mb-4">
-        <li class="page-item">
-            {% if previous == 0 %}
-                <span class="page-link page-item text-secondary end-link" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </span> 
+    <ul class="pagination justify-content-center mb-4">        
+        {% if previous == 0 %}
+            <li class="page-link page-item text-secondary end-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </li> 
+        {% else %}
+            <li class="page-link text-dark font-weight-bold" href="{% url 'category_search' %}?page_number={{ previous }}&category={{ current_category }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </li> 
+        {% endif %}
+        {% for num in page_num %}
+            {% if num == page_number %}
+                <li class="page-item font-weight-normal active"><a class="page-link text-dark"  href="{% url 'category_search' %}?page_number={{ num }}&category={{ current_category }}">{{ num }}</a></li>
             {% else %}
-                <a class="page-link text-dark font-weight-bold" href="{% url 'category_search' %}?page_number={{ previous }}&category={{ current_category }}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a> 
+                <li class="page-item font-weight-normal"><a class="page-link text-dark"  href="{% url 'category_search' %}?page_number={{ num }}&category={{ current_category }}">{{ num }}</a></li>
             {% endif %}
-            {% for num in page_num %}
-                {% if num == page_number %}
-                    <li class="page-item font-weight-normal active"><a class="page-link text-dark"  href="{% url 'category_search' %}?page_number={{ num }}&category={{ current_category }}">{{ num }}</a></li>
-                {% else %}
-                    <li class="page-item font-weight-normal"><a class="page-link text-dark"  href="{% url 'category_search' %}?page_number={{ num }}&category={{ current_category }}">{{ num }}</a></li>
-                {% endif %}
-            {% endfor %}
-            {% if next > last %}
-                <span class="page-link page-item text-secondary end-link" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </span> 
-            {% else %}
-                <a class="page-link text-dark font-weight-bold" href="{% url 'category_search' %}?page_number={{ next }}&category={{ current_category }}" aria-label="Previous">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            {% endif %} 
-        </li>
+        {% endfor %}
+        {% if next > last %}
+            <li class="page-link page-item text-secondary end-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </li> 
+        {% else %}
+            <li class="page-link text-dark font-weight-bold" href="{% url 'category_search' %}?page_number={{ next }}&category={{ current_category }}" aria-label="Previous">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </li>
+        {% endif %}         
     </ul>    
     </nav>
     <!-- Product listng -->
