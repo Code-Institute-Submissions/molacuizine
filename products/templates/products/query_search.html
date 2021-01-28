@@ -36,10 +36,10 @@
             {% endif %}
         {% endfor %}
         {% if next > last %}
-            <span class="page-link page-item text-secondary end-link" aria-label="Next">
+            <li class="page-link page-item text-secondary end-link" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
-            </span> 
+            </li> 
         {% else %}
             <li>
                 <a class="page-link text-dark font-weight-bold" href="{% url 'query_search' %}?page_number={{ next }}&q={{ query }}" aria-label="Previous">
