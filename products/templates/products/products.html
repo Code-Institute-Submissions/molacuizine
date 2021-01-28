@@ -46,12 +46,12 @@
                 <span class="sr-only">Next</span>
             </li> 
         {% else %}
-        <li>
-            <a class="page-link text-dark font-weight-bold" href="{% url 'products' %}?page_number={{ next }}" aria-label="Previous">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>
+            <li>
+                <a class="page-link text-dark font-weight-bold" href="{% url 'products' %}?page_number={{ next }}" aria-label="Previous">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
         {% endif %}         
     </ul>    
     </nav>
