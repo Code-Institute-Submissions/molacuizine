@@ -43,9 +43,12 @@
                         {% endif %}  
                     </div>                        
                         Qty: {{ item.quantity }}                         
-                {% endfor %}
-                <!-- Order summary totals -->                
+                {% endfor %}                
+                <!-- Order summary totals -->                             
                 <div class="row no-gutters font-weight-bold border-top mt-2">
+                    <div class="col-12 text-right">
+                        <a href="{% url 'view_bag' %}" class="btn allauth-button mt-2 mb-2 pt-1">Edit order</a>   
+                    </div>
                     <div class="col-7 col-md-8 text-right mt-1">
                         Order Total  
                     </div>
