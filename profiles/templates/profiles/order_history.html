@@ -40,7 +40,11 @@
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Town</div>
                 <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.town}}</div>
                 <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Postcode</div>
-                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.postcode}}</div>                       
+                <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.postcode}}</div>
+                {% if order.request %}
+                    <div class="col-12 col-md-6 text-left text-dark font-weight-bold mt-1">Request</div>
+                    <div class="col-12 col-md-6 mt-md-1 text-md-right">{{ order.request }}</div>
+                {% endif %}                        
                 <div class="col-12">
                     Billing Info:
                 </div>
