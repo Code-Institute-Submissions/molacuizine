@@ -230,7 +230,7 @@ This page also permitted the user to update and delete items while also updating
 ![order-summary](static/doc/order-summary.png)
 
 The bag page could be assesed via a link in the navbar which also showed the total cost (excluding transport). The bag icon 
-would be black and disabled if the bag was empty and would change become blue and active otherwise.
+would be black and disabled if the bag was empty and would change to blue and active otherwise.
 
 ![bag-icon](static/doc/bag-icon.png)
 
@@ -253,13 +253,14 @@ A store status banner was included in the navbar which would indicate whether or
 ![Store status](static/doc/store-status.png)
 
 If the case where the store status was set to close coding was added to prevent ordering or checkout being performed.
-This was done to allow the site owner control on when orders could be accepted. 
+This was done to allow the site owner control on when orders could be accepted. This feature would be used to change store 
+online status for openning and closing purposes and in the event the store required closing.
 
 ### Store management page
 
 A Store management page was designed to cater for two features:
 1. Adding/updating of items.
-2. Toggling of store open/close status.
+2. Toggling of store open/close online status.
 
 This page was solely for the store adminstrator and additional security coding was provided to achieve this requirement.
 
@@ -316,7 +317,7 @@ any special request which they might have.
 
 A delivery time featuture was also included making use of google distance matrix API. 
 
-Requests were made making using the user's selected town coordinates referenced to the home base coordinates.
+Requests were made making use of the user's selected town coordinates referenced to the home base coordinates.
 
 The calculation used was: 30 mins preparations time + google matrix delivery time rounded up to the nearest 5 mins.
 
@@ -382,7 +383,7 @@ The store model permitted the saving of the store online status which would coul
 ### Foreign key
 
 Foreign keys were created for databases which were relationships were required, thus permitting querying objects
-related to another model. 
+related to another model. Hence justifying the need for a relational database.
 
 The foreign keys were set-up as follows:
 
@@ -401,14 +402,15 @@ such:  ```orders = profile.orders.all()```.
 
 CRUD operations from the site interface were provided as follows:
 
-| Feature             |   Create   |   Read    |  Update  |  Delete  |  Models             | 
-|:--------------------|:-----------|:----------|:---------|:---------|:--------------------|
-|User registration    |  &#9745;   |           |  &#9745; |          | User                |   
-|User login           |            |  &#9745;  |          |          | Users               |
-|Bag                  |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | bag.session         |             
-|Profile              |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | UserProfile         |            
-|Products             |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | products            |
-|Store status         |            |  &#9745;  |  &#9745; |          | Store Status        |
+| Feature             |   Create   |   Read    |  Update   |  Delete  |  Models             | 
+|:--------------------|:-----------|:----------|:----------|:---------|:--------------------|
+|User registration    |  &#9745;   |           |  &#9745;  |          | User                |   
+|User login           |            |  &#9745;  |  &#9745; *|          | Users               |
+|Bag                  |  &#9745;   |  &#9745;  |  &#9745;  | &#9745;  | bag.session         |             
+|Profile              |  &#9745;   |  &#9745;  |  &#9745;  | &#9745;  | UserProfile         |            
+|Products             |  &#9745;   |  &#9745;  |  &#9745;  | &#9745;  | products            |
+|Store status         |            |  &#9745;  |  &#9745;  |          | Store Status        |
+*password update
 
 Full CRUD operations where provided for all models from the admin page interface.
 
@@ -417,11 +419,13 @@ Full CRUD operations where provided for all models from the admin page interface
 A user would be have access to only their profile page and thus could only update their own profile. This was achived using the 
 django login decorator. 
 
-A user would be able to apply CRUD operations to items stored in the bag sessions.
+A user would be able to apply CRUD operations to items stored in their bag sessions only.
 
 The store management page could only be accessed by the administrator by usng the django login decorator. A redirect
 was also included to prevent url manipulation by a user if the user was not an administator thus preventing illegal
 access to the store management page. This would prevent CRUD operations on products and changing of store status. 
+
+Redirects were applied in the case site users tried to manipulate urls to delete or update products.
 
 Also a redirect would be triggered if a user tried to manipulate url to access the checkout page if store status was closed.
 
@@ -429,7 +433,7 @@ Also a redirect would be triggered if a user tried to manipulate url to access t
 
 During project conception it was decided not to allow anonymous checkout and thus sign-up would be required. Therefore,
 if a user had not signed in and the checkout page was clicked on a redirect would trigger leading to the sign-up page for
-only anonymous users.
+anonymous users only.
 
 ## TESTING 
 
@@ -441,7 +445,7 @@ This section provides details of testing performed during development. The follo
 |Debugging            |During the whole project                          |Chrome Devtools, Flake8                        |
 |Unitest              |project completion                                |django TestCase                                |
 |Responsive design    |During the whole project                          |Python code                                    |
-|Site testing         |As from when main site was completed              |By myself and relatives                        |
+|Site testing         |As from when views were completed                 |By myself and relatives                        |
 |Browser compatibility|On project completion                             |Manual testing on browsers                     |                    
 |Button/link testing  |During development and project completion         |Manual testing                                 |
 
@@ -571,7 +575,7 @@ extension was also used. Resolutions covered are as follows:
 
 ### Browser compatibility
 
-The site was tested on Google Chrome, FireFox, Internet Explorer, Safari and Opera.
+The site was tested on Google Chrome, FireFox, Internet Explorer, Safari and Opera. Issues are discussed [below](#issues-encountered-during-development)
 
 ### Button and link testing
 
@@ -649,7 +653,6 @@ The following summarises the CRUD operations from the site interface except for 
 |n/a        |update item quantity in bag |item quantity updated in bag                                 |Passed   |    &#9745;   |
 |n/a        |delete item from bag        |item deleted from bag                                        |Passed   |    &#9745;   |
 
-
 Full CRUD operations were available from the admin interface.
 
 The following summarises the CRUD operations from the admin inteface for categories and town:
@@ -664,6 +667,9 @@ The following summarises the CRUD operations from the admin inteface for categor
 
 ### Stripe operation testing
 
+The stripe process was linked to the order model since orders would only be created if the stripe payement process
+was successful. Therefore testing was peformed also on the stripe process as detailed below.
+
 Stripe webhook testing was performed by:
 1. Creating test activity on account
 2. Manually sending test events from dashboard
@@ -672,12 +678,12 @@ The above two testing methods were in-line with the stripe [documentation](https
 
 Results are given below:
 
-|Action                         |Expected webhook result                   | Status      |Results  |                                 
-|:------------------------------|:-----------------------------------------|:---------- -|:--------|
-|Send test webhook              |Test webhook sent successfully            |   200       |Passed   |    
-|Direct to checkout page        |payment_intent.created                    |   200       |Passed   |
-|Complete order(send to kitchen)|payment_intent.succeeded                  |   200       |Passed   |  
-|Complete order(send to kitchen)|charge.succeeded                          |   200       |Passed   |  
+|Action                         |Expected webhook result                   | Status     |Results  |                                 
+|:------------------------------|:-----------------------------------------|:-----------|:--------|
+|Send test webhook              |Test webhook sent successfully            |   200      |Passed   |    
+|Direct to checkout page        |payment_intent.created                    |   200      |Passed   |
+|Complete order(send to kitchen)|payment_intent.succeeded                  |   200      |Passed   |  
+|                               |charge.succeeded                          |   200      |Passed   |  
 
 After successful stripe operation, orders would be created in relevant database. Results are given below:
 
@@ -685,41 +691,84 @@ After successful stripe operation, orders would be created in relevant database.
 |:------------|:------------------------------|:------------------------------------|:--------|:------------|
 |Order        |Complete order(send to kitchen)|Order created in database            |Passed   |   &#9745;   | 
 |OrderLineItem|Complete order(send to kitchen)|OrderLineItem  created in database   |Passed   |   &#9745;   |
+|n/a          |Complete order(send to kitchen)|Email sent to email in order form    |Passed   |   &#9745;   |
 
-Once the send to kitchen button was pressed stripe would verify card details before processing order, during this
-this process the submit button was deactivated temporarily. After successful payment the submit button would be reacticated
-and the order would be created in database as tested above. If for any reason the card checking process was successful 
-and submit could not be activated the order would be created via the webhook handler view. This would cater for the event
-that a customer had made a payement but no order was created. 
+Once the 'send to kitchen' button was pressed stripe would verify card details before processing order, during this
+this period the submit button was deactivated temporarily. After successful payment the submit button would be reacticated
+and the order would be created in database as tested above via the checkout view. If for any reason the card checking 
+process was successful and submit button could not be activated the order would be created via the webhook handler view. 
+This would cater for the event that a customer had made a successful payment and submit button was not activated. 
 
 Below details test performed to verify that this process was successful. To simulate the condition where the submit button 
 was deactivated the page was closed after pressing the send to kitchen button.
 
-|Action                                                        |Expected recieved webhook received          | Status      |Results  |                                 
-|:-------------------------------------------------------------|:-------------------------------------------|:---------- -|:--------|
-|Complete order(send to kitchen) with activated submit button  |SUCCESS: Verified order already in database |   200       |Passed   |  
-|Complete order(send to kitchen) with deactivated submit button|SUCCESS: Created order in webhook           |   200       |Passed   |  
+|Action                                                        |Expected recieved webhook received          | Status |Results  |                                 
+|:-------------------------------------------------------------|:-------------------------------------------|:-------|:--------|
+|Complete order(send to kitchen) with activated submit button  |SUCCESS: Verified order already in database |   200  |Passed   |  
+|Complete order(send to kitchen) with deactivated submit button|SUCCESS: Created order in webhook           |   200  |Passed   |  
 
+In both cases orders were verified to have been created in the Order and orderInLine model.
 
+Checkout form was also tested as follows:
+
+|Action                                                 |Expected recieved webhook received  |Results |                                 
+|:----------------------------------------------------- |:--------------------------------- -|--------|
+|Complete order(send to kitchen) missing required field |'please fill out this field' prompt | Passed |  
+|Complete order(send to kitchen) invalid card info      |'Your card number is invalid.'      | Passed |  
+ 
 ### Issues Encountered during development
 
 During testing phase the following issues were identified and corrected.
 
-1. Pagination  and creating new views
+1. Pagination was included in the items listing page. This was initially planned to be coded in the ```all_products```
+view. After completing this function the pagination would not work with the search bar or category search feature. The search
+criteria would be dropped when selecting another page. The solution adopted was to create seperate views for search bar and 
+category search.
 
-2. Active link in pagination and using z-index-0.
+2. Whilst scrolling the items page the active pagination number link would hide the navbar. To prevent this issue the active z-index index was set to 0.
 
-3. Cusomising sign in form to include firstname and lastname
+    ![error](static/doc/error1.png)
 
-4. Adding placeholders to customised registration by using js.
+3. Initially at registration the user would only need to input email, password and username. After mid project review it 
+was decided to include firstname and lastname in the sign-up process since anonymous ordering was not permitted and these
+inputs would be required. Attempts to modify the sign-up form were tried and unsuccessfully and research was performed. The 
+solution was obtained from the this [link](#https://dev.to/gajesh/the-complete-django-allauth-guide-la3).
 
-5. Adding placeholder to profile form using javascript.
+4. When forms fields consisted of a dropdown field, such as category and towns, the placeholder would not reflect that
+field. It would be dashed lines.
 
-6. Adding customised upload image button using javascript
+    ![error2](static/doc/error2.png)
+Inorder to resolve this issue javacript was used to make the first child equal to that field with the following coding:
+  
+    ```$('#id_category option:first-child').html('Category');```  
 
-7. Deployment and creating fixtures to enable deployment
+5. On the store management page the upload button was default button for uploading images. This was thought not to fit 
+into the overall site deisgn. To overcome this issue the default button was set to hidden using javacript and another button 
+was introduced which when clicked on would activate the hidden upload button. 
+    
+    ```$('#id_image').hide()```  
+    ```$('#upload-button').click(function(){```
+    ```$('#id_image').click()``` 
+    ```})```
 
-8. stripe publishable key errr
+6. One of the features introduced was the store status which permitted opening and closing of the store online status.
+The toggling of store status was originally planned to be a form situated on the store management page. However after
+initial coding the form would not work since the store management page already had a form for adding and removing products
+thus not allowing a second form. To overcome this problem, and still have the store status feature on the store management
+page, javacript was used instead of a form. When the open/close button was pressed information was sent to the store status
+view using javacript which would subsequently update the store status model. 
+
+7. After initial deployment to heroku was performed the site would not run. After research one of the issues was thought to 
+not having data in the category and product database. To fix this issue fixtures were created using ```python manage.py dumpdata```
+and then loaded into the PostgreSQL database. This corrected the issue.
+
+8. Initially when unittest were performed a 404 error would occur for all tests eventhough the site worked normally.
+After several attempts to find the problem the issue was found. For the unittest to work properly the store status was required to be set to 'open' 
+in the test setup. Once this was done all tests worked normally.
+ 
+9. When a item was set to unavailable it still could be added to bag by manipulating the url. To prevent this issue 
+additonal coding was introduced which would action a redirect if an unavailable item was added to a bag with a relevant 
+error message.
 
 # DEPLOYMENT
 
