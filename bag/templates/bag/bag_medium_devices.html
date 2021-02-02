@@ -1,5 +1,5 @@
 <!-- For medium and smaller devices -->  
-<div class="row top-row no-gutters">
+<div class="row top-row no-gutters ">
     {% for item in bag_items %}                        
         <div class="col-12 col-sm-5 d-md-none">
             <p class="bag-text pb-0 p-1 mb-2 border-bottom border-secondary font-weight-bold">{{ forloop.counter }}.{{ item.product.name}}</p> 
@@ -66,9 +66,9 @@
         Rs {{ grand_total }}
     </div>     
     <div class="col-12 d-md-none text-right pr-0 mb-2">        
-        <a href="{% url 'products' %}" class="btn product-return"><i class="fas fa-chevron-left"></i> MAIN MENU</a>        
+        <a href="{% url 'products' %}" class="btn product-return mb-3"><i class="fas fa-chevron-left"></i> MAIN MENU</a>        
         {% if open_status %}
-        <a href="{% url 'checkout' %}" class="btn checkout-button"><i class="fas fa-lock"></i> SECURE CHECKOUT</a>
+        <a href="{% url 'checkout' %}" class="btn checkout-button mb-3"><i class="fas fa-lock"></i> SECURE CHECKOUT</a>
         {% else %}
         {% endif %}
     </div>      
