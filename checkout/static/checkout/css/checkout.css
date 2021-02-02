@@ -1,3 +1,7 @@
+body {
+    background-color: #f1ebeb;
+}
+
 .stripe-style-input::placeholder {
     color: #aab7c4;
 }
