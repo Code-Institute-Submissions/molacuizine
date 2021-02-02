@@ -416,7 +416,7 @@ Full CRUD operations where provided for all models from the admin page interface
 
 ### CRUD authorisation and security features
 
-A user would be have access to only their profile page and thus could only update their own profile. This was achived using the 
+A user would be able to have access to only their profile page and thus could only update their own profile. This was achived using the 
 django login decorator. 
 
 A user would be able to apply CRUD operations to items stored in their bag sessions only.
@@ -767,7 +767,7 @@ After several attempts to find the problem the issue was found. For the unittest
 in the test setup. Once this was done all tests worked normally.
  
 9. When a item was set to unavailable it still could be added to bag by manipulating the url. To prevent this issue 
-additonal coding was introduced which would action a redirect if an unavailable item was added to a bag with a relevant 
+additonal coding was introduced which would action a redirect if an unavailable item was added to a bag followed by a relevant 
 error message.
 
 # DEPLOYMENT
@@ -777,7 +777,7 @@ heroku for [hosting](http://artist-for-life.herokuapp.com/).
 
 To deploy the project from Heroku the following steps were used:
 
-1. Login to heroku and create the artist for life repository by clicking on create new app.
+1. Login to heroku and create the mo lacuizine repository by clicking on create new app.
 ![heroku deployment](static/doc/new.png)
 
 2. Ensure requirements.txt file and Procfile have been created. 
