@@ -62,7 +62,7 @@ $(document).ready(function(){
     });
 
     // Required for customisable image upload button //
-     $('#id_image').hide();   
+    $('#id_image').hide();   
     $('#upload-button').click(function(){
         $('#id_image').click();         
     });
