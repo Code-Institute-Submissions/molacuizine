@@ -135,6 +135,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /*----- Media screen -------------------------------*/
 
 @media (max-width: 991px) {
