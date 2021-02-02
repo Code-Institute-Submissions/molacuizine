@@ -28,7 +28,8 @@
 * [Technologies used](#technologies-used)
 * [Data schema](#data-schema)
     * [Foreign key](#foreign-key)    
-    * [CRUD authorisation and security features](#crud-authorisation-and-security-features)    
+    * [CRUD authorisation and security features](#crud-authorisation-and-security-features)
+    * [Checkout user restrictions](#checkout-user-restrictions)      
 * [Testing](#testing)
     * [UX testing](#ux-testing)
     * [validators](#validators)
@@ -38,7 +39,8 @@
     * [Responsive design](#responsive-design)
     * [Browser compatibility](#browser-compatibility)
     * [Button and link testing](#button-and-link-testing) 
-    * [Crud operation testing](#crud-operation-testing)    
+    * [CRUD operation testing](#crud-operation-testing)   
+    * [Stripe operation testing](#stripe-operation-testing)      
     * [Issues encountered during development](#issues-encountered-during-development)
 
 * [Deployment](#deployment)
@@ -76,7 +78,7 @@ By visiting this site as a user I want to:
 By using this site as the site owner:
 
 * be able to add, update and delete items for store management purposes.
-* be able to open and close the online site for control purposes.
+* be able to toggle the online status of the store for control purposes.
 * be able to make an item become temporarily unavailable. 
 * be able control access to the store management page and features.
 
@@ -269,8 +271,8 @@ included the original item image.
 
 ![Item form](static/doc/item-form.png)
 
-As for store status, a button was added which would toggle store status from open to close. This would also activate or disable
-the checkout process.
+As for store status, a button was added which would toggle store status from online to offline. The offline status would disable
+the checkout process and add to bag operation only.
 
 ![Store status button](static/doc/store-status-two.png)
 
@@ -312,9 +314,11 @@ any special request which they might have.
 
 ### Delivery time
 
-A delievry time featuture was also included making use of google distance matrix API. 
+A delivery time featuture was also included making use of google distance matrix API. 
 
-The calculation used was: 30 preparations time + google matrix delivery time rounded up to the nearest 5 mins.
+Requests were made making using the user's selected town coordinates referenced to the home base coordinates.
+
+The calculation used was: 30 mins preparations time + google matrix delivery time rounded up to the nearest 5 mins.
 
 ![Delivery time](static/doc/delivery.png)
 
@@ -350,14 +354,14 @@ A basic footer was provided with openning times and conatct info.
 
 SQLite was used for storing data local storage and PostgreSQL for production.
 
-Models were created in django to define the fields and behaviour of the data. These models would map to the above
-database.
+Models were created in django by defining the fields and behaviour of the data. These models would map to the above
+databases.
 
 The following table gives the model used:
  
 | Models        |   Fields                                                                       |  Function               |
 |:--------------|:-------------------------------------------------------------------------------|:------------------------|
-|User           |  Username, firstname, lastname, password email                                 |  sign-in/registration   |
+|User           |  Username, firstname, lastname, password, email                                |  sign-in/registration   |
 |Store          |  Store Status                                                                  |  Store open/close Status|
 |Order          |  Ordernumber, userprofile, fullname, email, phone-number, street address, town,|  Storing Orders         |
 |               |  postcode, request, date, delivery-cost, grand-total cost, original-bag, pid   |                         |
@@ -373,6 +377,8 @@ obtained from [here](https://dev.to/gajesh/the-complete-django-allauth-guide-la3
 
 Signal were also used to permit the creation of a Userprofile model once the user had registered.
 
+The store model permitted the saving of the store online status which would could be changed accordingly.
+
 ### Foreign key
 
 Foreign keys were created for databases which were relationships were required, thus permitting querying objects
@@ -385,7 +391,8 @@ The foreign keys were set-up as follows:
 |user_profile   |  Order, Userprofile         |  Order                  |
 |order          |  Order, OrderLineItem       |  OrderLineItem          |
 |category       |  Category, Product          |  Product                |
-|user           |  User, userProfile          |  UserProfile            |
+|user           |  User, UserProfile          |  UserProfile            |
+|town           |  Town, UserProfile          |  UserProfile            |
 
 An example of the use of foreign key was one could obtain all orders for a specific user profile through a query as 
 such:  ```orders = profile.orders.all()```.
@@ -399,7 +406,7 @@ CRUD operations from the site interface were provided as follows:
 |User registration    |  &#9745;   |           |  &#9745; |          | User                |   
 |User login           |            |  &#9745;  |          |          | Users               |
 |Bag                  |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | bag.session         |             
-|Profile              |  &#9745;   |  &#9745;  |  &#9745; |          | UserProfile         |            
+|Profile              |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | UserProfile         |            
 |Products             |  &#9745;   |  &#9745;  |  &#9745; | &#9745;  | products            |
 |Store status         |            |  &#9745;  |  &#9745; |          | Store Status        |
 
@@ -417,6 +424,12 @@ was also included to prevent url manipulation by a user if the user was not an a
 access to the store management page. This would prevent CRUD operations on products and changing of store status. 
 
 Also a redirect would be triggered if a user tried to manipulate url to access the checkout page if store status was closed.
+
+### Checkout user restrictions
+
+During project conception it was decided not to allow anonymous checkout and thus sign-up would be required. Therefore,
+if a user had not signed in and the checkout page was clicked on a redirect would trigger leading to the sign-up page for
+only anonymous users.
 
 ## TESTING 
 
@@ -469,7 +482,7 @@ This was achieved with the store status desribed [above](#store-status-feature).
 11. Site administrator goal: *be able to add, update and delete items for store management purposes.*</br>
 This was achieved with the store management [page](#store-management-page).
 
-12. Site administrator goal: *be able to open and close the online site for control purposes.*</br>
+12. Site administrator goal: *be able to toggle the online status of the store for control purposes.*</br>
 This was achieved with store status [feature](#store-status-feature).
 
 13. Site administrator goal: *be able to make an item become temporarily unavailable.*</br>
@@ -562,64 +575,131 @@ The site was tested on Google Chrome, FireFox, Internet Explorer, Safari and Ope
 
 ### Button and link testing
 
-The following gives test results for button and link testing not related to CRUD operations.
+The following gives test results for button and link testing not related to CRUD operations and stripe checkout process.
 
-|links/button                            |Expected result                                                           | Results |                                 
-|:---------------------------------------|:-------------------------------------------------------------------------|:--------|
-|Register                                |Register modal to open                                                    |Passed   |
-|Submit (Register modal-correct data)    |Flash message "You have been registered"                                  |Passed   |                                           
-|Submit (Register modal-incorrect data)  |Flash message error mesage and modal to reopen                            |Passed   |
-|Submit (Login modal-correct data)       |Flash message "You have been logged in"                                   |Passed   |
-|Submit (Login modal-incorrect data)     |Flash error message and modal to reopen                                   |Passed   |
-|here text on modals                     |Login/Register Modals to switch over                                      |Passed   |
-|Logout                                  |Flash message "You have been logged out"                                  |Passed   | 
-|Home                                    |Home page to load                                                         |Passed   |
-|About                                   |About Modal to open up                                                    |Passed   |
-|Register (about modal)                  |About modal to close and register modal to open                           |Passed   |
-|Artist for life logo                    |Main index html page to load                                              |Passed   |
-|Control center                          |Control center html  page to load                                         |Passed   |
-|Profile                                 |Profile html page to load                                                 |Passed   |
-|Add item                                |Add item html form page to load                                           |Passed   |
-|Edit item                               |Edit item html form page to load                                          |Passed   |
-|Create profile                          |Add profile html form page to load                                        |Passed   |
-|Edit profile                            |Edit profile html form page to load                                       |Passed   |
-|Edit Contact details                    |Edit contact html form to load                                            |Passed   |
-|Mark as sold                            |Sold banner text to appear on item and item to be removed from item list  |Passed   |
-|Mark as available                       |Sold banner text to be removed from item and item to be added to item list|Passed   |
-|Seller profile                          |Profile page to load for that user                                        |Passed   |
-|chevron arrows                          |Loading of next or previous page                                          |Passed   |
-|pagination numbers                      |Loading of selected page                                                  |Passed   |
-|search button                           |Search page to load with relevant search results                          |Passed   |
-|Reset search                            |Main item page to load                                                    |Passed   |
-|Palette icon                            |Wikepedia page to open in separate page                                   |Passed   |
-|click to call                           |Phone request to be made with correct number                              |Passed   |
-|click to mail                           |Email request activated with correct email                                |Passed   |
-|Provide non-existent url                |Loading of 404.html page                                                  |Passed   |
+| location            |links/button                   |Expected result                                                | Results |                                 
+|:--------------------|:------------------------------|:--------------------------------------------------------------|:--------|
+|Navbar               | logo                          |Redirect to home page                                          |Passed   |
+|Navbar               | Search bar                    |Produce list of related search items                           |Passed   |
+|Navbar               | My Account                    |Dropdown menu to appear                                        |Passed   |
+|Navbar               | Login                         |Redirect to login page                                         |Passed   |
+|Navbar               | Register                      |Redirect to registration page                                  |Passed   |
+|Navbar               | Logout                        |Redirect to logout page                                        |Passed   |
+|Navbar               | Store management              |Redirect to Store management page                              |Passed   |
+|Navbar               | profile                       |Redirect to profile page                                       |Passed   |
+|Navbar               | Bag icon(bag empty)           |Link inactive                                                  |Passed   |
+|Navbar               | Bag icon(bag with item)       |Redirect to bag page                                           |Passed   |
+|Navbar               | All Menu                      |Redirect to page listing all items                             |Passed   | 
+|Navbar               | Main Dishes                   |Redirect to page listing all main dishes                       |Passed   | 
+|Navbar               | Snacks                        |Redirect to page listing all snacks                            |Passed   | 
+|Navbar               | Drinks                        |Redirect to page listing all main drinks                       |Passed   | 
+|Navbar               | Sides                         |Redirectto page listing all sides                              |Passed   | 
+|Navbar               | Burger icon                   |collapsable menu to activate                                   |Passed   | 
+|Home page            | Motorcycle icon               |Town we deliver to modal to open                               |Passed   | 
+|Town modal           | close                         |Town we deliver to modal to close                              |Passed   | 
+|Home page            | Order now                     |Direct to page listing all menu                                |Passed   | 
+|Footer               | email icon                    |Click to email to activate                                     |Passed   | 
+|Footer               | phone icon                    |Click to phone to activate                                     |Passed   | 
+|Item pages           | click on item                 |Redirect to item detail page                                   |Passed   | 
+|Item pages           | Cutlery icon                  |Redirect to page listing that item                             |Passed   | 
+|Item pages           | pagination numbers            |Redirect to clicked page                                       |Passed   | 
+|Item pages           | pagination arrows             |Redirect to next or previous page                              |Passed   |
+|Item pages           | pagination (first page)       |left arrow to disactivate                                      |Passed   |
+|Item pages           | pagination (last page)        |Right arrow to disactivate                                     |Passed   |
+|Login page           | sign in (correct sign in data)|Direct to home page with success message                       |Passed   |
+|Login page           | sign in (incorrect login data)|Error message to display                                       |Passed   |
+|Login page           | sign up                       |Redirect to sign page                                          |Passed   |
+|Login page           | Forgot password               |Redirect to password reset page                                |Passed   |
+|Reset password page  | Reset my password             |Redirect to reset password page                                |Passed   |
+|Sign-up page         | sign-up (invalid form)        |Prompt with relevant warning                                   |Passed   |
+|Sign-up page         | sign-up (valid form)          |Redirect to login page with email notification  for validation |Passed   |
+|Sign-up page         | sign-in                       |Redirect to sign in page                                       |Passed   |
+|Profile page         | change password               |Redirect to change password page                               |Passed   |
+|profile page         | order history                 |Redirect to clicked order history                              |Passed   |
+|Change password page | change                        |Redirect to user profile page with success message             |Passed   |
+|Order history page   | My profile                    |Redirect to user profile                                       |Passed   |
+|Order history page   | My profile                    |Redirect to user profile                                       |Passed   |
+|Product detail page  | Continue ordering             |Redirect to all menu page                                      |Passed   |
+|Bag page (with items)| Continue ordering             |Redirect to all menu page                                      |Passed   |
+|Bag page (empty)     | Fill you bag                  |Redirect to all menu page                                      |Passed   |
+|Bag page             | secure checkout               |Redirect to checkout page                                      |Passed   |
+|checkout page        | edit order                    |Redirect to bag page                                           |Passed   |
+|Item listing page    | update                        |Redirect to store management page                              |Passed   |
 
-### Crud operation testing
+### CRUD operation testing
 
-The following table summarises CRUD operation testing
+The following summarises the CRUD operations from the site interface except for STRIPE checkout process:
 
-|Button            | Location              |Expected result                                                     | Results | Flash Alerts |                                 
-|:-----------------|:----------------------|:-------------------------------------------------------------------|:--------|:-------------|
-|Submit            | Registration modal    |user information to be added to users collection in mongodb         |Passed   |    &#9745;   | 
-|Add item          | Add item form         |Item information to be added to items collection in mongodb         |Passed   |    &#9745;   |
-|Add profile       | Add profile form      |Profile information to be added to profiles collection in mongodb   |Passed   |    &#9745;   |
-|Confirm           | Edit item form        |Item information to be updated in items collection in mongodb       |Passed   |    &#9745;   |
-|Confirm           | Edit profile form     |Item information to be updated in profiles collection in mongodb    |Passed   |    &#9745;   |
-|Delete            | items main page       |Item information to be removed from items collectionsin mongodb     |Passed   |    &#9745;   |
-|Delete            | Profile main page     |Item/profile to be removed from items/profile collection in mongodb |Passed   |    &#9745;   |
-|confirm           | Edit contact form     |Contact details to be updated in users collection in mongodb        |Passed   |    &#9745;   |
-|delete            | Control center        |Item/profile/category deleted in users collection in mongodb        |Passed   |    &#9745;   |
-|Add category      | Control center page   |New category to be added to categories collection in mongodb        |Passed   |    &#9745;   |
-|Confirm           | Edit category form    |Category to be updated in categories collection in mongodb          |Passed   |    &#9745;   |
-|Mark as sold      | Profile html page     |Sold field to be updated to "true" in items collection              |Passed   |    &#9745;   |
-|Mark as available | Profile html page     |Sold field to be updated to "false" in items collection             |Passed   |    &#9745;   |
+|Model      |Action                      |Expected result                                              |Results  | Message      |                                 
+|:----------|:---------------------------|:------------------------------------------------------------|:--------|:-------------|
+|Profile    |Modify phone number         |user phone number to be updated in database                  |Passed   |    &#9745;   | 
+|Profile    |Modify street address       |Street address to be updated in database                     |Passed   |    &#9745;   |
+|Profile    |Modify town                 |Town to be updated in database                               |Passed   |    &#9745;   |
+|Profile    |Modify postcode             |Postcode to be updated in database                           |Passed   |    &#9745;   |
+|Profile    |Remove phone number         |user phone number to be deleted in database                  |Passed   |    &#9745;   | 
+|Profile    |Remove street address       |Street address to be deleted in database                     |Passed   |    &#9745;   |
+|Profile    |Remove town                 |Town to be deleted in database                               |Passed   |    &#9745;   |
+|Profile    |Remove postcode             |Postcode to be deleted in database                           |Passed   |    &#9745;   |
+|Store      |Modify open status          |store status to be updated to close in database              |Passed   |    &#9745;   |
+|Store      |Modify open close           |store status to be updated to open in database               |Passed   |    &#9745;   |
+|Product    |Add product                 |Product added to database                                    |Passed   |    &#9745;   |
+|product    |Modify product fields       |Modified field updated in database                           |Passed   |    &#9745;   |
+|product    |Delete product              |Product deleted in database                                  |Passed   |    &#9745;   |
+|n/a        |add item                    |item added to bag                                            |Passed   |    &#9745;   |
+|n/a        |update item quantity in bag |item quantity updated in bag                                 |Passed   |    &#9745;   |
+|n/a        |delete item from bag        |item deleted from bag                                        |Passed   |    &#9745;   |
 
-During item deletion/editing it was checked to see that image data was removed/updated from fs.files and fs.chunks also.
 
-A further test was performed whereby all items and profiles were deleted to check whether no data remained in fs.files and
-fs.chunks. This test was successful.
+Full CRUD operations were available from the admin interface.
+
+The following summarises the CRUD operations from the admin inteface for categories and town:
+
+|Model      |Action                      |Expected result                                              |Results  |                                 
+|:----------|:---------------------------|:------------------------------------------------------------|:--------|
+|Category   |Create category             |category added to database                                   |Passed   |    
+|Category   |Modify category fields      |Modified field updated in database                           |Passed   |   
+|Category   |Delete category             |category deleted in database                                 |Passed   |   
+|Town       |Create town                 |Town added to database                                       |Passed   |   
+|Town       |Delete town                 |town deleted in database                                     |Passed   |    
+
+### Stripe operation testing
+
+Stripe webhook testing was performed by:
+1. Creating test activity on account
+2. Manually sending test events from dashboard
+
+The above two testing methods were in-line with the stripe [documentation](https://stripe.com/docs/webhooks/test).
+
+Results are given below:
+
+|Action                         |Expected webhook result                   | Status      |Results  |                                 
+|:------------------------------|:-----------------------------------------|:---------- -|:--------|
+|Send test webhook              |Test webhook sent successfully            |   200       |Passed   |    
+|Direct to checkout page        |payment_intent.created                    |   200       |Passed   |
+|Complete order(send to kitchen)|payment_intent.succeeded                  |   200       |Passed   |  
+|Complete order(send to kitchen)|charge.succeeded                          |   200       |Passed   |  
+
+After successful stripe operation, orders would be created in relevant database. Results are given below:
+
+|Model        |Action                         |Expected result                      |Results  | Message     |                                 
+|:------------|:------------------------------|:------------------------------------|:--------|:------------|
+|Order        |Complete order(send to kitchen)|Order created in database            |Passed   |   &#9745;   | 
+|OrderLineItem|Complete order(send to kitchen)|OrderLineItem  created in database   |Passed   |   &#9745;   |
+
+Once the send to kitchen button was pressed stripe would verify card details before processing order, during this
+this process the submit button was deactivated temporarily. After successful payment the submit button would be reacticated
+and the order would be created in database as tested above. If for any reason the card checking process was successful 
+and submit could not be activated the order would be created via the webhook handler view. This would cater for the event
+that a customer had made a payement but no order was created. 
+
+Below details test performed to verify that this process was successful. To simulate the condition where the submit button 
+was deactivated the page was closed after pressing the send to kitchen button.
+
+|Action                                                        |Expected recieved webhook received          | Status      |Results  |                                 
+|:-------------------------------------------------------------|:-------------------------------------------|:---------- -|:--------|
+|Complete order(send to kitchen) with activated submit button  |SUCCESS: Verified order already in database |   200       |Passed   |  
+|Complete order(send to kitchen) with deactivated submit button|SUCCESS: Created order in webhook           |   200       |Passed   |  
+
 
 ### Issues Encountered during development
 
