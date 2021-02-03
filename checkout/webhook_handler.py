@@ -117,7 +117,8 @@ class StripeWhHandler:
                         )
                         order_line_item.save()
                     else:
-                        for spice_index, quantity in item_data['spice_index'].items():
+                        spice = 'spice_index'
+                        for spice_index, quantity in item_data[spice].items():
                             order_line_item = OrderLineItem(
                                 order=order,
                                 product=product,
