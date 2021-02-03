@@ -317,7 +317,8 @@ any special request which they might have.
 
 A delivery time featuture was also included making use of google distance matrix API. 
 
-Requests were made making use of the user's selected town coordinates referenced to the home base coordinates.
+Requests were made making use of the user's selected town coordinates referenced to the home base coordinates. The Home
+base chosen was vacoas.
 
 The calculation used was: 30 mins preparations time + google matrix delivery time rounded up to the nearest 5 mins.
 
@@ -770,35 +771,46 @@ in the test setup. Once this was done all tests worked normally.
 additonal coding was introduced which would action a redirect if an unavailable item was added to a bag followed by a relevant 
 error message.
 
+10. For browser compatibility, only Internet Explorer caused several issues. The issues were incorrect font colour, font sizes,
+missing backgrounds and quantity increment/decrement buttons not working. 
+
+    ![error](static/doc/browser.png)
+
+The site still worked on Internet Explorer but the overall UX was less than that of other browsers.
+
 # DEPLOYMENT
 
 Gitpod was used as an online IDE and then pushed to GITHUB. The Github account was then linked to 
-heroku for [hosting](http://artist-for-life.herokuapp.com/).
+heroku for [hosting](http://mo-lacuizine.herokuapp.com/).
 
 To deploy the project from Heroku the following steps were used:
 
 1. Login to heroku and create the mo lacuizine repository by clicking on create new app.
 ![heroku deployment](static/doc/new.png)
 
-2. Ensure requirements.txt file and Procfile have been created. 
+2. Add PostgreSQL to the new app from the resource page.
+![heroku deployment](static/doc/postgresql.png)
 
-3. Go to settings and set all confing vars in Heroku.
+3. Ensure requirements.txt file and Procfile have been created. 
+
+4. Go to settings and set all confing vars in Heroku.
 ![image of config vars](static/doc/config.png)
 
-4. Go to Deploy section in Heroku from menu bar.
+5. Make migrations to the new PostgreSQL database from the gitpod CLI by adding the new database to django settings.
+
+6. Go to Deploy section in Heroku from menu bar.
 ![Menu](static/doc/deploy.png)
 
-5. Scroll down to deployment method and select Github.
+7. Scroll down to deployment method and select Github.
 ![image of github deployment](static/doc/deployment.png)
 
-6. Scroll to connect to github and search and select the required repository.
+8. Scroll to connect to github and search and select the required repository.
 ![image of heroku deployment](static/doc/connect-2.png)
-![image of heroku deployment](static/doc/connect.png)
 
-7. Enable automatic deploy. 
+9. Enable automatic deploy. 
 ![image of heroku deployment](static/doc/automatic.png)
 
-8. When the command ```git push``` is applied in gitpod this will automatically update heroku.
+10. When the command ```git push``` is applied in gitpod this will automatically update heroku.
 
 To run code locally the following steps should be performed:
 1. On GitHub, navigate to the main page of the repository.
@@ -807,13 +819,18 @@ To run code locally the following steps should be performed:
 3. Open Git Bash.
 4. Change the current working directory to the location where you want the cloned directory.
 5. Type git clone, and then paste the URL you copied earlier.</br>
-    $ git clone https://github.com/zahur76/MilestoneProject_3
+    $ git clone https://github.com/zahur76/molacuizine
 6. Press Enter to create your local clone.
 
 ## FUTURE IMPROVEMENTS
 
-1. Pagination would need to be added to the profile page.
-2. Include a review system wherby buyers could write about the product purchased.
+1. Pagination would need to be added to the order history on the profile page.
+2. Add a feature which would add the orders to the kitchen once checkout was complete and list the ingredients required. 
+Once the order had been prepared the order could be ticked off as being ready for delivery.
+3. Include an app which would be used for the delivery service. The app would be able to show delivery status
+and update the order delivery status. 
+4. For delivery, instead of having a list of towns for the user to choose from, the user could select their location using 
+google map. Their location could then be used by the delivery service for more accurate delivery time and location.
 
 ## CREDITS
 
