@@ -1,7 +1,7 @@
 /* bag app css */
 
 body {
-    background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url("/media/background.jpg");    
+    background: linear-gradient(rgba(255,255,255,.86), rgba(255,255,255,.86)), url("/media/background.jpg");    
     background-size: contain;      
 }
 
