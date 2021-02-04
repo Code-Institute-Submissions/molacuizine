@@ -45,8 +45,9 @@
     * [Form validation](#form-validation)
     * [Stripe operation testing](#stripe-operation-testing)      
     * [Issues encountered during development](#issues-encountered-during-development)
-
 * [Deployment](#deployment)
+    * [Run code locally](#run-code-locally)
+    * [Setting S3 bucket](#setting-up-s3-bucket)
 * [Future improvements](#future-improvements)
 * [Credits](#credits)
 
@@ -865,7 +866,7 @@ as such:
 
     ```DATABASES = {'default': dj_database_url.parse(os.environ.get('postgres://******************************'))}```    
 
-6. Make fixtures for categories and products using the ```dumpdata`` command.
+6. Make fixtures for categories and products using the ```dumpdata``` command.
 
 7. Load data into new database using the ```loaddata``` command.
 
@@ -897,6 +898,8 @@ Static files will be used from Amazon web service.
 
 15. When the command ```git push``` is applied in gitpod this will automatically update heroku.
 
+## Run code locally
+
 To run code locally the following steps should be performed:
 1. On GitHub, navigate to the main page of the repository.
 2. Above the list of files, click  Code and copy URL.
@@ -908,6 +911,13 @@ To run code locally the following steps should be performed:
 5. Type git clone, and then paste the URL you copied earlier.</br>
     ```$ git clone https://github.com/zahur76/molacuizine```
 6. Press Enter to create your local clone.
+
+## Setting up S3 bucket 
+
+Information on setting up a AWS s3 bucket can be found [here](#https://docs.aws.amazon.com/quickstarts/latest/s3backup/step-1-create-bucket.html).
+
+Once the s3 bucket was set-up, the settings file was updated to allow the heroku app to link to the Amazon Web Service bucket for
+static and media files. 
 
 ## FUTURE IMPROVEMENTS
 
