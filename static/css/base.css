@@ -114,7 +114,7 @@ hr {
 }
 
 .toast-body  {
-    background-color: rgb(237, 239, 241, 0.7);
+    background-color: rgb(237, 239, 241);
     width: 250px;
     font-size: 0.8rem;    
 }
