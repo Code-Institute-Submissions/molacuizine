@@ -849,20 +849,21 @@ heroku for [hosting](http://mo-lacuizine.herokuapp.com/).
 To deploy the project from Heroku the following steps were used:
 
 1. Login to heroku and create the mo lacuizine repository by clicking on create new app.
-![heroku deployment](static/doc/new.png)
+
+    ![heroku deployment](static/doc/new.png)
 
 2. Provision a PostgreSQL database for the new app from the resource page.
-![heroku deployment](static/doc/postgresql.png)
+
+    ![heroku deployment](static/doc/postgresql.png)
 
 3. Install dj-database-url and psycopg2-binary
 
 4. Freeze requirements: ```pip3 freeze --local > requiremenets.txt``` and ensure Procfile has been created.
 
-5. Make migrations to the new PostgreSQL database from the gitpod CLI by adding the new database to django settings.
+5. Run migrations to the new PostgreSQL database from the gitpod CLI by adding the new database to django settings
 as such:
-```DATABASES = {'default': dj_database_url.parse(os.environ.get('postgres://******************************'))}```
 
-And then running migrations: ```python3 manage.py migrations```
+    ```DATABASES = {'default': dj_database_url.parse(os.environ.get('postgres://******************************'))}```    
 
 6. Make fixtures for categories and products using the ```dumpdata`` command.
 
@@ -870,35 +871,42 @@ And then running migrations: ```python3 manage.py migrations```
 
 8. Create a new Superuser using the command: ```python3 manage.py createsuperuser```
 
-9. Go to settings and set all confing vars in Heroku including disabling collect static.
+9. Go to settings and set all confing vars in Heroku including DISABLE_COLLECTSTATIC=1.
 Static files will be used from Amazon web service.
-![image of config vars](static/doc/config.png)
+
+    ![image of config vars](static/doc/config.png)
 
 10. Add host name of heroku site to allowed host in settings:
 ```ALLOWED_HOSTS = ['mo-lacuizine.herokuapp.com', 'localhost']```
 
 11. Go to Deploy section in Heroku from menu bar.
-![Menu](static/doc/deploy.png)
+
+    ![Menu](static/doc/deploy.png)
 
 12. Scroll down to deployment method and select Github.
-![image of github deployment](static/doc/deployment.png)
+
+    ![image of github deployment](static/doc/deployment.png)
 
 13. Scroll to connect to github and search and select the required repository.
-![image of heroku deployment](static/doc/connect-2.png)
 
-14 Enable automatic deploy. 
-![image of heroku deployment](static/doc/automatic.png)
+    ![image of heroku deployment](static/doc/connect-2.png)
+
+14. Enable automatic deploy. 
+
+    ![image of heroku deployment](static/doc/automatic.png)
 
 15. When the command ```git push``` is applied in gitpod this will automatically update heroku.
 
 To run code locally the following steps should be performed:
 1. On GitHub, navigate to the main page of the repository.
-2. Above the list of files, click  Code and copy URL.</br>
-![image of github pages section](static/doc/clone.png)
+2. Above the list of files, click  Code and copy URL.
+
+    ![image of github pages section](static/doc/clone.png)
+
 3. Open Git Bash.
 4. Change the current working directory to the location where you want the cloned directory.
 5. Type git clone, and then paste the URL you copied earlier.</br>
-    $ git clone https://github.com/zahur76/molacuizine
+    ```$ git clone https://github.com/zahur76/molacuizine```
 6. Press Enter to create your local clone.
 
 ## FUTURE IMPROVEMENTS
