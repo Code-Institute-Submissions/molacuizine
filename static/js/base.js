@@ -6,9 +6,9 @@ $(document).ready(function(){
     $('#id_first_name').attr('placeholder', "Firstname"); 
     $('#id_last_name').attr('placeholder', "Lastname");
     
-    $('.product-submit').click(function(){''
+    $('.product-submit').click(function(){
         $(".fa-shopping-bag").css('font-size', '40px');
         $(".fa-shopping-bag").css('color', 'green');
         $(".header-link").hide();
-    })
+    });
 }); 
