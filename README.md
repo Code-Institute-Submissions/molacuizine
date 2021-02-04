@@ -28,6 +28,7 @@
 * [Registration and login](#registration-and-login)
 * [Technologies used](#technologies-used)
 * [Data schema](#data-schema)
+    * [Forms used](#forms-used)  
     * [Foreign key](#foreign-key)    
     * [CRUD authorisation and security features](#crud-authorisation-and-security-features)
     * [Checkout user restrictions](#checkout-user-restrictions)      
@@ -40,7 +41,8 @@
     * [Responsive design](#responsive-design)
     * [Browser compatibility](#browser-compatibility)
     * [Button and link testing](#button-and-link-testing) 
-    * [CRUD operation testing](#crud-operation-testing)   
+    * [CRUD operation testing](#crud-operation-testing)
+    * [Form validation](#form-validation)
     * [Stripe operation testing](#stripe-operation-testing)      
     * [Issues encountered during development](#issues-encountered-during-development)
 
@@ -396,6 +398,16 @@ Signal were also used to permit the creation of a Userprofile model once the use
 
 The store model permitted the saving of the store online status which would could be changed accordingly.
 
+### Forms used
+
+Forms were available for the following models:
+1. Order
+2. UserProfile
+3. Product
+
+The forms provided a convenient means for the user to apply CRUD operations to the relevant database as described 
+[below](#crud-operations). All forms required validation and were tested [below](#form-validation).
+
 ### Foreign key
 
 Foreign keys were created for databases which were relationships were required, thus permitting querying objects
@@ -441,13 +453,12 @@ The store management page could only be accessed by the administrator by usng th
 was also included to prevent url manipulation by a user if the user was not an administator thus preventing illegal
 access to the store management page. This would prevent CRUD operations on products and changing of store status. 
 
-Redirects were applied in the case site users tried to manipulate urls to delete or update products.
-
-Also a redirect would be triggered if a user tried to manipulate url to access the checkout page if store status was closed.
+Redirects were also applied in the case site users tried to manipulate urls to delete or update products or if a user 
+tried to manipulate url to access the checkout page if store status was closed.
 
 ### Checkout user restrictions
 
-As anonymous checkout was not allowed users would be requierd to sign-in for purchases. Therefore, if a user had not signed 
+As anonymous checkout was not allowed users would be required to sign-in for purchases. Therefore, if a user had not signed 
 in and the checkout page was clicked on a redirect would trigger leading to the sign-up page. This redirect was for
 anonymous users only. 
 
@@ -674,12 +685,33 @@ Full CRUD operations were available from the admin interface.
 The following summarises the CRUD operations from the admin inteface for categories and town:
 
 |Model      |Action                      |Expected result                        |Results  |                                 
-|:----------|:---------------------------|:------------------------------------ -|:--------|
+|:----------|:---------------------------|:--------------------------------------|:--------|
 |Category   |Create category             |category added to database             |Passed   |    
 |Category   |Modify category fields      |Modified field updated in database     |Passed   |   
 |Category   |Delete category             |category deleted in database           |Passed   |   
 |Town       |Create town                 |Town added to database                 |Passed   |   
-|Town       |Delete town                 |town deleted in database               |Passed   |    
+|Town       |Delete town                 |town deleted in database               |Passed   | 
+
+### Form validation
+
+Two types of form validation existed. One would pick up errors in the frontend such as missing required fields
+and the other backend. The backend would check if form was valid before applying CRUD operations to the database. If for any
+reason errors were detected this would raise an error.
+
+The add/update product form were tested as follows:
+
+|Action                            |Expected error message               |Results |                                 
+|:---------------------------------|:------------------------------------|:-------|
+| missing required field           |'please fill out this field' prompt' | Passed |
+
+The above condition didnt not apply to the profile page since none of the fields were required. Testing was performed only
+on the incorrect number format as follows: 
+
+|Action                            |Expected error message                                                          |Results |                                 
+|:---------------------------------|:-------------------------------------------------------------------------------|:-------|
+| Incorrect phone number           |'Error: Incorrect number format. Update failed. Please ensure the form is valid.| Passed |
+
+Hence, the above test was proof that the backend form validation was operational.
 
 ### Stripe operation testing
 
@@ -701,8 +733,8 @@ Results are given below:
 |Complete order(send to kitchen)|payment_intent.succeeded                  |   200      |Passed   |  
 |                               |charge.succeeded                          |   200      |Passed   |  
 
-After successful stripe operation, orders would be created in relevant database with feedback success message and a redirect
-the checkout success page. 
+After successful stripe operation, orders would be created in relevant database with a feedback success message and 
+a redirect to the checkout success page. 
 Results are given below:
 
 |Model        |Action                         |Expected result                      |Results  | Message     |                                 
@@ -711,7 +743,7 @@ Results are given below:
 |OrderLineItem|Complete order(send to kitchen)|OrderLineItem  created in database   |Passed   |   &#9745;   |
 |n/a          |Complete order(send to kitchen)|Email sent to email in order form    |Passed   |   &#9745;   |
 
-![stripe success message](static/doc/stripe-success.png) 
+![stripe success message](static/doc/messages.png) 
 
 Once the 'send to kitchen' button was pressed stripe would verify card details before processing order, during this
 this period the submit button was deactivated temporarily. After successful payment the submit button would be reactivated
@@ -734,11 +766,11 @@ In both cases orders were verified to have been created in the Order and orderIn
 Possible errors were also tested in the checkout process. Any errors would be highlighted to the user via a message which was part
 of the feedback system:
 
-|Action                                                  |Expected error message              |Results |                                 
-|:-------------------------------------------------------|:-----------------------------------|:-------|
-|Complete order(send to kitchen) missing required field  |'please fill out this field' prompt | Passed |  
-|Complete order(send to kitchen) invalid card info       |'Your card number is invalid.'      | Passed |
-|Complete order(send to kitchen) using card decline code*|'Your card was declined.'           | Passed | 
+|Action                                                  |Expected error message               |Results |                                 
+|:-------------------------------------------------------|:------------------------------------|:-------|
+|Complete order(send to kitchen) missing required field  |'please fill out this field' prompt' | Passed |  
+|Complete order(send to kitchen) invalid card info       |'Your card number is invalid.'       | Passed |
+|Complete order(send to kitchen) using card decline code*|'Your card was declined.'            | Passed | 
 *card number:4000 0000 0000 0002  
 
 ![stripe error message](static/doc/stripe-error.png) 
@@ -805,6 +837,10 @@ missing backgrounds and quantity increment/decrement buttons not working.
 The site still worked on Internet Explorer but the overall UX was less than that of other browsers. Due to Internet Explorer 
 no longer being supported bugs were left as such.
 
+11. During form testing it was noticed that incorrect phone format could be applied to the UserProfile phone number field without raising an 
+error. Research was peformed and django [RegexValidators](#https://docs.djangoproject.com/en/3.1/ref/validators/#regexvalidator)
+were used. This permitted the use of regex for correct number formatting while raising an error which could be displayed to the user.
+
 # DEPLOYMENT
 
 Gitpod was used as an online IDE and then pushed to GITHUB. The Github account was then linked to 
@@ -815,29 +851,45 @@ To deploy the project from Heroku the following steps were used:
 1. Login to heroku and create the mo lacuizine repository by clicking on create new app.
 ![heroku deployment](static/doc/new.png)
 
-2. Add PostgreSQL database to the new app from the resource page.
+2. Provision a PostgreSQL database for the new app from the resource page.
 ![heroku deployment](static/doc/postgresql.png)
 
-3. Ensure requirements.txt file and Procfile have been created. 
+3. Install dj-database-url and psycopg2-binary
 
-4. Go to settings and set all confing vars in Heroku.
-![image of config vars](static/doc/config.png)
+4. Freeze requirements: ```pip3 freeze --local > requiremenets.txt``` and ensure Procfile has been created.
 
 5. Make migrations to the new PostgreSQL database from the gitpod CLI by adding the new database to django settings.
+as such:
+```DATABASES = {'default': dj_database_url.parse(os.environ.get('postgres://******************************'))}```
 
-6. Go to Deploy section in Heroku from menu bar.
+And then running migrations: ```python3 manage.py migrations```
+
+6. Make fixtures for categories and products using the ```dumpdata`` command.
+
+7. Load data into new database using the ```loaddata``` command.
+
+8. Create a new Superuser using the command: ```python3 manage.py createsuperuser```
+
+9. Go to settings and set all confing vars in Heroku including disabling collect static.
+Static files will be used from Amazon web service.
+![image of config vars](static/doc/config.png)
+
+10. Add host name of heroku site to allowed host in settings:
+```ALLOWED_HOSTS = ['mo-lacuizine.herokuapp.com', 'localhost']```
+
+11. Go to Deploy section in Heroku from menu bar.
 ![Menu](static/doc/deploy.png)
 
-7. Scroll down to deployment method and select Github.
+12. Scroll down to deployment method and select Github.
 ![image of github deployment](static/doc/deployment.png)
 
-8. Scroll to connect to github and search and select the required repository.
+13. Scroll to connect to github and search and select the required repository.
 ![image of heroku deployment](static/doc/connect-2.png)
 
-9. Enable automatic deploy. 
+14 Enable automatic deploy. 
 ![image of heroku deployment](static/doc/automatic.png)
 
-10. When the command ```git push``` is applied in gitpod this will automatically update heroku.
+15. When the command ```git push``` is applied in gitpod this will automatically update heroku.
 
 To run code locally the following steps should be performed:
 1. On GitHub, navigate to the main page of the repository.
