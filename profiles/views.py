@@ -23,10 +23,17 @@ def profile(request):
             messages.success(request, 'Profile updated successfully')
             return redirect(reverse('profile'))
         else:
-            error = form.errors['default_phone_number'][0]
-            messages.error(
-                request, f'Error: {error}.\
-                    Update failed. Please ensure the form is valid.')
+            errors = []
+            for key in form.errors.items():
+                errors.append(key[0])
+            if 'default_phone_number' in errors:
+                error = form.errors['default_phone_number'][0]
+                messages.error(
+                    request, f'Error: {error}.\
+                        Update failed. Please ensure the form is valid.')
+            else:
+                messages.error(
+                    request, 'Update failed. Please ensure the form is valid.')
             return redirect(reverse('profile'))
     if request.method == 'GET':
         form = UserProfileForm(instance=profile)
