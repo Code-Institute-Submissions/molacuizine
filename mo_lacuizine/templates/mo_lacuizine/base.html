@@ -65,14 +65,15 @@
                                 {% endif %}
                             </div>                        
                         </div>
+                        <!-- Bag icon logic -->
                         <div class="col-4 col-md-2 col-lg-1 text-center pt-lg-2">
                             {% if total == 0 %}
                                 <div><i class="fas fa-shopping-bag fa-lg text-dark"></i></div>
                                 <!-- Total obtained from context.py -->
                                 <div class="header-link">Rs {{ total }}</div> 
                             {% else %}
-                                <div><a href="{% url 'view_bag' %}"><i class="fas fa-shopping-bag fa-lg"></i></a></div>                                
-                                <a class="header-link" href="{% url 'view_bag' %}">Rs {{ total }}</a> 
+                                <div><a href="{% url 'view_bag' %}"><i class="fas fa-shopping-bag fa-lg"></i></a></div>                                                              
+                                <a class="header-link" href="{% url 'view_bag' %}">Rs {{ total }}</a>                                
                             {% endif %}                            
                         </div>
                     </div>                    
