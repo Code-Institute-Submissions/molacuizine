@@ -1,6 +1,6 @@
 # **MoLacuizine**
 
-![Responsive image for site](static/doc/responsive2.png)
+![Responsive image for site](static/doc/responsive.png)
 
 ## TABLE OF CONTENT 
 * [Introduction](#introduction)    
@@ -25,6 +25,7 @@
     * [Checkout page](#checkout-page)
     * [Delivery time](#delivery-time)
     * [Footer](#footer)
+* [Registration and login](#registration-and-login)
 * [Technologies used](#technologies-used)
 * [Data schema](#data-schema)
     * [Foreign key](#foreign-key)    
@@ -156,8 +157,10 @@ The main development cycle is listed below:
 19. Project review.
 20. Minor modifications addressed from step 19.
 21. Addition of spice index to site with neccessary updating of installed apps.
-22. Unit testting
+22. Unit testing
 23. Addition of item availability feature.
+24. Final project review.
+25. Final adjustments.
 
 ## FEATURES
 
@@ -242,7 +245,7 @@ street addres, town and postcode.
 
 ![Profile page](static/doc/profile.png)
 
-The profile page consisted of a form.
+The profile page consisted of a form which would allow users to create and edit records in the UserProfile database.
 
 The profile page also provided a list of clickable ordered items for the user to review.
 
@@ -328,6 +331,18 @@ The calculation used was: 30 mins preparations time + google matrix delivery tim
 
 A basic footer was provided with openning times and conatct info.
 
+## REGISTRATION AND LOGIN
+
+During project conception it was decided not to allow anonymous checkout and thus sign-up would be required. The reasoning 
+behind this was to gather maximum information on user order preferences. This information could be used as a marketing tool 
+to pick-up user trends which could then be used to send out customised promotional emails which in the long run could be more profitable
+than having anonymous checkout. 
+
+Also, anonymous users would still have to fill in the checkout form which contained most of the details for registration hence making
+registration less of an issue.
+
+The django allauth module was used for registration and login purposes.
+
 ## TECHNOLOGIES USED
 
 * HTML5
@@ -405,8 +420,8 @@ CRUD operations from the site interface were provided as follows:
 
 | Feature             |   Create   |   Read    |  Update   |  Delete  |  Models             | 
 |:--------------------|:-----------|:----------|:----------|:---------|:--------------------|
-|User registration    |  &#9745;   |           |  &#9745;  |          | User                |   
-|User login           |            |  &#9745;  |  &#9745; *|          | Users               |
+|User registration    |  &#9745;   |           |  &#9745;  |          | User                |     
+|User login           |            |  &#9745;  |  &#9745; *|          | User                |
 |Bag                  |  &#9745;   |  &#9745;  |  &#9745;  | &#9745;  | bag.session         |             
 |Profile              |  &#9745;   |  &#9745;  |  &#9745;  | &#9745;  | UserProfile         |            
 |Products             |  &#9745;   |  &#9745;  |  &#9745;  | &#9745;  | products            |
@@ -432,9 +447,9 @@ Also a redirect would be triggered if a user tried to manipulate url to access t
 
 ### Checkout user restrictions
 
-During project conception it was decided not to allow anonymous checkout and thus sign-up would be required. Therefore,
-if a user had not signed in and the checkout page was clicked on a redirect would trigger leading to the sign-up page for
-anonymous users only.
+As anonymous checkout was not allowed users would be requierd to sign-in for purchases. Therefore, if a user had not signed 
+in and the checkout page was clicked on a redirect would trigger leading to the sign-up page. This redirect was for
+anonymous users only. 
 
 ## TESTING 
 
@@ -572,7 +587,7 @@ extension was also used. Resolutions covered are as follows:
 |360 X 740        |Galaxy S9, Note 8, S8          |
 |323 X 786        |Pixel 3, 3 XL                  |
 
-![responsive design Image](static/doc/responsive.png)
+![responsive design Image](static/doc/responsive-two.png)
 
 ### Browser compatibility
 
@@ -658,13 +673,13 @@ Full CRUD operations were available from the admin interface.
 
 The following summarises the CRUD operations from the admin inteface for categories and town:
 
-|Model      |Action                      |Expected result                                              |Results  |                                 
-|:----------|:---------------------------|:------------------------------------------------------------|:--------|
-|Category   |Create category             |category added to database                                   |Passed   |    
-|Category   |Modify category fields      |Modified field updated in database                           |Passed   |   
-|Category   |Delete category             |category deleted in database                                 |Passed   |   
-|Town       |Create town                 |Town added to database                                       |Passed   |   
-|Town       |Delete town                 |town deleted in database                                     |Passed   |    
+|Model      |Action                      |Expected result                        |Results  |                                 
+|:----------|:---------------------------|:------------------------------------ -|:--------|
+|Category   |Create category             |category added to database             |Passed   |    
+|Category   |Modify category fields      |Modified field updated in database     |Passed   |   
+|Category   |Delete category             |category deleted in database           |Passed   |   
+|Town       |Create town                 |Town added to database                 |Passed   |   
+|Town       |Delete town                 |town deleted in database               |Passed   |    
 
 ### Stripe operation testing
 
@@ -675,7 +690,7 @@ Stripe webhook testing was performed by:
 1. Creating test activity on account
 2. Manually sending test events from dashboard
 
-The above two testing methods were in-line with the stripe [documentation](https://stripe.com/docs/webhooks/test).
+The above two testing methods were in-line with the stripe [documentation](https://stripe.com/docs/webhooks/test)
 
 Results are given below:
 
@@ -686,7 +701,9 @@ Results are given below:
 |Complete order(send to kitchen)|payment_intent.succeeded                  |   200      |Passed   |  
 |                               |charge.succeeded                          |   200      |Passed   |  
 
-After successful stripe operation, orders would be created in relevant database. Results are given below:
+After successful stripe operation, orders would be created in relevant database with feedback success message and a redirect
+the checkout success page. 
+Results are given below:
 
 |Model        |Action                         |Expected result                      |Results  | Message     |                                 
 |:------------|:------------------------------|:------------------------------------|:--------|:------------|
@@ -694,13 +711,15 @@ After successful stripe operation, orders would be created in relevant database.
 |OrderLineItem|Complete order(send to kitchen)|OrderLineItem  created in database   |Passed   |   &#9745;   |
 |n/a          |Complete order(send to kitchen)|Email sent to email in order form    |Passed   |   &#9745;   |
 
+![stripe success message](static/doc/stripe-success.png) 
+
 Once the 'send to kitchen' button was pressed stripe would verify card details before processing order, during this
-this period the submit button was deactivated temporarily. After successful payment the submit button would be reacticated
+this period the submit button was deactivated temporarily. After successful payment the submit button would be reactivated
 and the order would be created in database as tested above via the checkout view. If for any reason the card checking 
 process was successful and submit button could not be activated the order would be created via the webhook handler view. 
 This would cater for the event that a customer had made a successful payment and submit button was not activated. 
 
-Below details test performed to verify that this process was successful. To simulate the condition where the submit button 
+Below details tests performed to verify that this process was successful. To simulate the condition where the submit button 
 was deactivated the page was closed after pressing the send to kitchen button.
 
 |Action                                                        |Expected recieved webhook received          | Status |Results  |                                 
@@ -708,15 +727,22 @@ was deactivated the page was closed after pressing the send to kitchen button.
 |Complete order(send to kitchen) with activated submit button  |SUCCESS: Verified order already in database |   200  |Passed   |  
 |Complete order(send to kitchen) with deactivated submit button|SUCCESS: Created order in webhook           |   200  |Passed   |  
 
+![stripe process](static/doc/stripe-process.png) 
+
 In both cases orders were verified to have been created in the Order and orderInLine model.
 
-Checkout form was also tested as follows:
+Possible errors were also tested in the checkout process. Any errors would be highlighted to the user via a message which was part
+of the feedback system:
 
-|Action                                                 |Expected recieved webhook received  |Results |                                 
-|:----------------------------------------------------- |:--------------------------------- -|--------|
-|Complete order(send to kitchen) missing required field |'please fill out this field' prompt | Passed |  
-|Complete order(send to kitchen) invalid card info      |'Your card number is invalid.'      | Passed |  
- 
+|Action                                                  |Expected error message              |Results |                                 
+|:-------------------------------------------------------|:-----------------------------------|:-------|
+|Complete order(send to kitchen) missing required field  |'please fill out this field' prompt | Passed |  
+|Complete order(send to kitchen) invalid card info       |'Your card number is invalid.'      | Passed |
+|Complete order(send to kitchen) using card decline code*|'Your card was declined.'           | Passed | 
+*card number:4000 0000 0000 0002  
+
+![stripe error message](static/doc/stripe-error.png) 
+
 ### Issues Encountered during development
 
 During testing phase the following issues were identified and corrected.
@@ -772,11 +798,12 @@ additonal coding was introduced which would action a redirect if an unavailable 
 error message.
 
 10. For browser compatibility, only Internet Explorer caused several issues. The issues were incorrect font colour, font sizes,
-missing backgrounds and quantity increment/decrement buttons not working. 
+missing backgrounds and quantity increment/decrement buttons not working.  
 
     ![error](static/doc/browser.png)
 
-The site still worked on Internet Explorer but the overall UX was less than that of other browsers.
+The site still worked on Internet Explorer but the overall UX was less than that of other browsers. Due to Internet Explorer 
+no longer being supported bugs were left as such.
 
 # DEPLOYMENT
 
@@ -788,7 +815,7 @@ To deploy the project from Heroku the following steps were used:
 1. Login to heroku and create the mo lacuizine repository by clicking on create new app.
 ![heroku deployment](static/doc/new.png)
 
-2. Add PostgreSQL to the new app from the resource page.
+2. Add PostgreSQL database to the new app from the resource page.
 ![heroku deployment](static/doc/postgresql.png)
 
 3. Ensure requirements.txt file and Procfile have been created. 
@@ -831,14 +858,13 @@ Once the order had been prepared the order could be ticked off as being ready fo
 and update the order delivery status. 
 4. For delivery, instead of having a list of towns for the user to choose from, the user could select their location using 
 google map. Their location could then be used by the delivery service for more accurate delivery time and location.
+5. Provide a loyalty program for users which would offer discount to users.
 
 ## CREDITS
 
 ### Content
 
-* [wikepedia](https://en.wikipedia.org/wiki/List_of_art_museums) was used as source for list of art museums.
 * [Geek for geeks](https://www.geeksforgeeks.org) for providing resource on how to create unique filenames.
-* [Pretty Printed](https://www.youtube.com/watch?v=DsgAuceHha4) for resource on how to upload and retrieve files from mongodb database.
 * [Stack Overflow](https://stackoverflow.com/questions/34248898/how-to-validate-select-option-for-a-materialize-dropdown ) on how to validate drop down menus.
 * [W3 Schools](https://www.w3schools.com/howto/howto_css_smooth_scroll.asp#section2 ) on how to make scroll behaviour smooth.
 
