@@ -6,9 +6,10 @@
         </button>
     </div>
     <div class="toast-body">
+        {{ open_status }}
         <span class="text-center">{{ message }}</span>        
-        {% if total and not on_profile_page %}            
-            <a href="{% url 'checkout' %}" class="w-100 allauth-button btn p-2 mt-2"><i class="fas fa-lock"></i>  SECURE CHECKOUT</a>                 
+        {% if open_status and total %}            
+            <a href="{% url 'checkout' %}" class="w-100 allauth-button btn p-2 mt-2"><i class="fas fa-lock"></i>  SECURE CHECKOUT</a>                
         {% endif %}
     </div>
 </div>
