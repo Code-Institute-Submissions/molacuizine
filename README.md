@@ -809,7 +809,8 @@ solution was obtained from the this [link](#https://dev.to/gajesh/the-complete-d
 field. It would be dashed lines.
 
     ![error2](static/doc/error2.png)
-Inorder to resolve this issue javacript was used to make the first child equal to that field with the following coding:
+
+    Inorder to resolve this issue javacript was used to make the first child equal to that field with the following coding:
   
     ```$('#id_category option:first-child').html('Category');```  
 
