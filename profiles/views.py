@@ -27,9 +27,8 @@ def profile(request):
             for key in form.errors.items():
                 errors.append(key[0])
             if 'default_phone_number' in errors:
-                error = form.errors['default_phone_number'][0]
                 messages.error(
-                    request, f'Error: {error}.\
+                    request, 'Incorrect phone number format.\
                         Update failed. Please ensure the form is valid.')
             else:
                 messages.error(
