@@ -39,4 +39,3 @@ class ProductForm(forms.ModelForm):
                 self.fields[field].label = False
             else:
                 self.fields[field].label = "Item Available"
-                
