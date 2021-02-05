@@ -35,4 +35,8 @@ class ProductForm(forms.ModelForm):
                         'placeholder'] = placeholders[field]
             self.fields[field].widget.attrs[
                 'class'] = 'border-black rounded-0 product-form-input'
-            self.fields[field].label = False
+            if field != 'availability':
+                self.fields[field].label = False
+            else:
+                self.fields[field].label = "Item Available"
+                
