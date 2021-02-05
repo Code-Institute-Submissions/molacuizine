@@ -28,25 +28,22 @@ $(document).ready(function(){
         else{
             $('#id_category').css('color', 'black');
         }          
-    });   
-    if($('.product-form').attr('id')=='profile-add-form'){
-        $('#id_spice_index').val($('#id_spice_index option:first').val()); 
-        $('#id_spice_index option:first-child').html('Spice Index');
-    }   
-    if($('#id_spice_index option:selected').val()== 'unknown'){
+    });
+
+    // Placeholder for spice index field //
+
+    if($('#id_spice_index option:selected').val()== "unknown"){
             $('#id_spice_index').css('color', '#aab7c4');            
         }
-   
-    $('#id_spice_index').change(function(){             
-        if($('#id_spice_index option:selected').val()== 'unknown'){
+    $('#id_spice_index option:first-child').html('Spice Index');
+    $('#id_spice_index').change(function(){                 
+        if($('#id_spice_index option:selected').val()== "unknown"){
             $('#id_spice_index').css('color', '#aab7c4');            
         }        
         else{
             $('#id_spice_index').css('color', 'black');
         }          
-    }); 
-    
-    // Required to add colour to spice selection //
+    });     
     
     $('#spice_index').change(function(){
         let spice_option=$('#spice_index').val();                  
