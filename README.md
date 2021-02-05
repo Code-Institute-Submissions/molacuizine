@@ -719,9 +719,9 @@ The add/update product form were tested as follows:
 The above condition didnt not apply to the profile page since none of the fields were required. Testing was performed only
 on the incorrect number format as follows: 
 
-|Action                            |Expected error message                                                          |Results |                                 
-|:---------------------------------|:-------------------------------------------------------------------------------|:-------|
-| Incorrect phone number           |'Error: Incorrect number format. Update failed. Please ensure the form is valid.| Passed |
+|Action                            |Expected error message                                                                |Results |                                 
+|:---------------------------------|:-------------------------------------------------------------------------------------|:-------|
+| Incorrect phone number           |'Error: Incorrect phone number format. Update failed. Please ensure the form is valid.| Passed |
 
 Hence, the above test was proof that the backend form validation was operational.
 
@@ -835,7 +835,8 @@ These fixtures were then loaded into the PostgreSQL database. This corrected the
 
 8. Initially when unittest were performed a 404 error would occur for all tests eventhough the site worked normally.
 After several attempts to identify the problem the issue was found to be not having the store status defined. To resolve
-this issue the the store status was set to 'open'  in the initial test class set-up. 
+this issue the the store status was set to 'open'  in the initial test class set-up.
+
     ![error](static/doc/test-open.png)
  
 9. When a item was set to unavailable it still could be added to bag by manipulating the url. To prevent this issue 
@@ -843,19 +844,24 @@ additonal coding was introduced which would trigger a redirect if an unavailable
 error message.    
 
 10. For browser compatibility, only Internet Explorer caused several issues. The issues were incorrect font colour, font sizes,
-missing backgrounds and quantity increment/decrement buttons not working.    
+missing backgrounds and quantity increment/decrement buttons not working.
+
     ![error](static/doc/browser.png)
 
 The site still worked on Internet Explorer but the overall UX was less than that of other browsers. Due to Internet Explorer 
 no longer being supported bugs were left as such.
 
 11. During form testing it was noticed that incorrect phone format could be applied to the UserProfile phone number field without raising an 
-error. Research was peformed and django [RegexValidators](#https://docs.djangoproject.com/en/3.1/ref/validators/#regexvalidator)
-were used. This permitted the use of regex for correct number formatting while raising an error which could be displayed to the user.
+error. Research was peformed and django [RegexValidators](https://docs.djangoproject.com/en/3.1/ref/validators/#regexvalidator)
+were used. This permitted the use of regex for correct phone number formatting while raising an error which could be displayed to the user.
 
 12. When the store status was changed the django message system would not always send a success message. This error was left as such
 since the store status banner would always update to the correct statement, hence providing sufficient evidence that the store status
 had effectively changed.
+
+13. During testing it was noticed that toast success messages would always display the checkout button even when the store online status was
+closed. To resolve this issue template logic was incorporated to only allow the checkout button to be visible when store was open and bag contained
+an item.
 
 # DEPLOYMENT
 
