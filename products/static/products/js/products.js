@@ -58,7 +58,25 @@ $(document).ready(function(){
         }
     });
 
+    // Logic to toggle label for availbility field //
+
+    if($( "input:checked" ).val()=='on'){
+            $('.form-check-label').html('Item Available');
+        }
+        else{
+            $('.form-check-label').html('Item Unavailable');
+    } 
+    $('#id_availability').change(function(){          
+        if($( "input:checked" ).val()=='on'){
+            $('.form-check-label').html('Item Available');
+        }
+        else{
+            $('.form-check-label').html('Item Unavailable');
+        }
+    });    
+
     // Required for customisable image upload button //
+
     $('#id_image').hide();   
     $('#upload-button').click(function(){
         $('#id_image').click();         
