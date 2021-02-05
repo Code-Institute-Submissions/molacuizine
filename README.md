@@ -28,7 +28,8 @@
 * [Registration and login](#registration-and-login)
 * [Technologies used](#technologies-used)
 * [Data schema](#data-schema)
-    * [Forms used](#forms-used)  
+    * [Forms used](#forms-used)
+    * [Migrations](#migrations)
     * [Foreign key](#foreign-key)    
     * [CRUD authorisation and security features](#crud-authorisation-and-security-features)
     * [Checkout user restrictions](#checkout-user-restrictions)      
@@ -47,15 +48,15 @@
     * [Issues encountered during development](#issues-encountered-during-development)
 * [Deployment](#deployment)
     * [Run code locally](#run-code-locally)
-    * [Setting S3 bucket](#setting-up-s3-bucket)
+    * [Setting up of S3 bucket](#setting-up-of-s3-bucket)
 * [Future improvements](#future-improvements)
 * [Credits](#credits)
 
 ## INTRODUCTION 
 
-This project is a online food ordering and delivery service site. The site name 'MoLacuizine' is mauritian for 'My Kitchen'.
-The menu covers a wide range of popular mauritian cuisine whereby a customer can add food items to a basket and then make payments 
-online using stripe service.
+This project is an online food ordering and delivery service site. The site name 'MoLacuizine' is mauritian for 'My Kitchen'.
+The menu covers a wide range of popular mauritian cuisine whereby a customer can add food items to a basket and then make 
+online payements using stripe service.
 
 The site would also permit the user to add and modify profile information to be used at checkout and also to have a list
 order history for reference. 
@@ -99,7 +100,8 @@ The main landing page would also show the main information about the site such o
 The site implemented several features to make registration, login, checkout, adding items and profiles as user friendly and 
 intuitive as possible which are described below. 
 
-The django messages system was included so as to enable the user obtain feedback on whether actions had been completed.
+The django messages system was included so as to enable the user obtain feedback on whether actions had been completed and raise
+relevant errors.
 
 A search bar was then provided in the top navbar for conveienience to provide an easy way for searching for items.
 
@@ -112,8 +114,7 @@ From the product detail page items could be added to a basket to be viewed later
 The bag view consisted of a convenient place to view all items added to basket with their associated cost. Items could be 
 modified if required in this view.
 
-The profile page consisted of a form which the user could prefill which could be used at checkout so as to enable a 
-smoother checkout process.
+The profile page consisted of a form which the user could prefill to be subsequently used at checkout so as to enable a smoother checkout process.
 
 The store management page allowed a convenient place to upload items and update shop online status.
 
@@ -173,7 +174,7 @@ This section gives details of the features included and their function.
 
 The navbar was contructed using bootsrap and and made to be collapsable on medium devices and smaller.
 
-The navbar consisted of 3 levels. The top levels contained logo, search bar, Account login and bag/basket features. 
+The navbar consisted of 3 levels. The top level contained a logo, search bar, Account login and bag link. 
 Middle level contained category links and the bottom level the store status.
 
 ![Image of navbar](static/doc/navbar.png)
@@ -183,7 +184,7 @@ Middle level contained category links and the bottom level the store status.
 ### Town Modal
 
 A modal to display the towns the delivery service catered for was provided for the user. It was located on the home page 
-since the users could would be able to know from the beginning if the delivery service catered for their location. 
+since the users would be able to know from the beginning if the delivery service catered for their location. 
 
 ![Image of town modal](static/doc/town_modal.png)
 
@@ -221,7 +222,7 @@ The 'add to bag' link would permit the user to add the item to the bag with the 
 ### Spice index
 
 Certain dishes which could be prepared to have different levels of spice were given a spice index selector. This would permit
-the user to select a spice index according to their preference which and would then be taken into consideration when the menu
+the user to select a spice index according to their preference. This would then be taken into consideration when the menu
 was prepared. The levels were mild, medium and hot.
 
 ![Spice index](static/doc/spice-index.png)
@@ -244,7 +245,7 @@ would be black and disabled if the bag was empty and would change to blue and ac
 
 A user profile page was included which permitted the user to upload/update information about themselves. This information would be
 used during the checkout process, thus providing a smoother checkout experience. The information required was phone number, 
-street addres, town and postcode.
+street address, town and postcode.
 
 ![Profile page](static/doc/profile.png)
 
@@ -258,9 +259,11 @@ A store status banner was included in the navbar which would indicate whether or
 
 ![Store status](static/doc/store-status.png)
 
-If the case where the store status was set to close coding was added to prevent ordering or checkout being performed.
-This was done to allow the site owner control on when orders could be accepted. This feature would be used to change store 
-online status for openning and closing purposes and in the event the store required closing.
+If the case where the store status was set to close, coding was added to prevent ordering or checkout being performed.
+This was done to allow the site admin control on when orders could be accepted. This feature would be used to change store 
+online status for openning and closing purposes.
+
+Such an option would also be useful in the case temporary closure was required for unforseen cicumstances.
 
 ### Store management page
 
@@ -273,24 +276,24 @@ This page was solely for the store adminstrator and additional security coding w
 For adding items a form was provided allowing the uploading of category, item name, description, spice index present, item availability,
 price and image.
 
-The same form would be used to update the item if modifications were required but with all prefilled information which also
+The same form would be used to update the item if modifications were required but with prefilled information which also
 included the original item image. 
 
 ![Item form](static/doc/item-form.png)
 
 As for store status, a button was added which would toggle store status from online to offline. The offline status would disable
-the checkout process and add to bag operation only.
+the checkout process and the 'add to bag' operation only.
 
 ![Store status button](static/doc/store-status-two.png)
 
 ### Item availability feature
 
-The item availablity feature was included in the add product page. This feature would permit the administrator to quickly 
-remove items temporarily from the user view only without removing the item completely. Such an option was thought to
-be ideal in the instance if a specific dish was missing a prepartion ingredient and would not be able to be ordered at that
-specific time.
+The item availablity feature was included in the add/modify product form. This feature was not originally planned and was introduced 
+to permit the administrator to quickly remove items temporarily from the user view only without removing the 
+item completely. Such an option was thought to be ideal in the instance if a specific dish was missing a prepartion ingredient
+and would not be able to be ordered at that specific time.
 
-The item would then be tagged as available or unavailable for the administator only.
+The item would then be tagged as available or unavailable for the admin only.
 
 ![Item availablility](static/doc/available.png)
 
@@ -300,21 +303,22 @@ The django messages framework was used to provide temporary messages to indicate
 This was done using django message levels info, success and error.
 
 This was used specifically for:
-1. Login and registration
+1. Login and registration 
 2. Adding/Updating of products
 3. Adding/updating of profiles information
 4. Adding/updating/deleting products from bag
 5. Store status update
 6. Checkout process
+7. Form validation errors
 
 ![Temporary messages](static/doc/messages.png)
 
 ### Checkout page
 
-The checkout page consisted of a form which would be prefilled with user profile information and a section for order summary. 
+The checkout page consisted of a form which would be prefilled with user profile information and a seperate section for order summary. 
 This page would permit the user to add credit card details and make payment online using the stripe payment sytem. 
 
-The town field consisted of a list of available delivery towns. A text request field was also added to permit the user  to add
+The town field consisted of a list of available delivery towns. A text request field was also added to permit the user to add
 any special request which they might have.
 
 ![image of checkout page](static/doc/checkout.png)
@@ -323,8 +327,8 @@ any special request which they might have.
 
 A delivery time featuture was also included making use of google distance matrix API. 
 
-Requests were made making use of the user's selected town coordinates referenced to the home base coordinates. The Home
-base chosen was vacoas.
+Requests were made making use of the user's selected town coordinates referenced to the home base coordinates. An arbitary 
+home base of Vacoas was chosen.
 
 The calculation used was: 30 mins preparations time + google matrix delivery time rounded up to the nearest 5 mins.
 
@@ -342,7 +346,7 @@ to pick-up user trends which could then be used to send out customised promotion
 than having anonymous checkout. 
 
 Also, anonymous users would still have to fill in the checkout form which contained most of the details for registration hence making
-registration less of an issue.
+registration process less of an issue.
 
 The django allauth module was used for registration and login purposes.
 
@@ -354,7 +358,7 @@ The django allauth module was used for registration and login purposes.
 * python (v3.8.6)
 * Django framework
 * SQL database
-* Amazon web servives for production storage of static and images files
+* Amazon web servives for production storage of static and media files
 * Jquery to simplify DOM manipulation
 * pylint, flake8 PEP8 compliance
 * official W3C validator to check HTML syntax
@@ -368,13 +372,14 @@ The django allauth module was used for registration and login purposes.
     4. Navbar
     5. Footer
 * balsamiq wireframes application to create the site design
-* Chrome extension 'responsive viewer' to aid in responsive design 
+* Chrome extension 'responsive viewer' to aid in responsive design
+* Google distance matrix to calculate delivery time 
 
 ## Data schema 
 
 SQLite was used for storing data local storage and PostgreSQL for production.
 
-Models were created in django by defining the fields and behaviour of the data. These models would map to the above
+Models were created in django by defining the fields and behaviour of the data. These models would then map to the above
 databases.
 
 The following table gives the model used:
@@ -395,9 +400,18 @@ The User model made use Django-allauth package so as to reduce software developm
 provided so as allow users to add their first and last name during sign-up. Customisation was achived by literature
 obtained from [here](https://dev.to/gajesh/the-complete-django-allauth-guide-la3).
 
-Signal were also used to permit the creation of a Userprofile model once the user had registered.
+Signals were used to permit the creation of a Userprofile model once the user had registered and also for the updating of cost totals
+when items were deleted or added.
 
 The store model permitted the saving of the store online status which would could be changed accordingly.
+
+### Migrations
+
+Once models were defined migrations were made to SQLite database using the commands:
+1. ```python3 manage.py makemigrations```
+2. ```python3 manage.py migrate```
+
+This would ensure the database was set-up correctly and were aligned with the models.
 
 ### Forms used
 
@@ -411,7 +425,7 @@ The forms provided a convenient means for the user to apply CRUD operations to t
 
 ### Foreign key
 
-Foreign keys were created for databases which were relationships were required, thus permitting querying objects
+Foreign keys were created for databases which relationships were required, thus permitting querying objects
 related to another model. Hence justifying the need for a relational database.
 
 The foreign keys were set-up as follows:
@@ -445,7 +459,7 @@ Full CRUD operations where provided for all models from the admin page interface
 
 ### CRUD authorisation and security features
 
-A user would be able to have access to only their profile page and thus could only update their own profile. This was achived using the 
+A user would be able to have access to only their profile page and thus could only update their own profile. This was achieved using the 
 django login decorator. 
 
 A user would be able to apply CRUD operations to items stored in their bag sessions only.
@@ -523,8 +537,6 @@ This was achieved with item availability [feature](#item-availability-feature).
 14. Site administrator goal: *be able control access to the store management page and features.*</br>
 This was achieved with by providing coding to prevent illegal access as described [here](#crud-authorisation-and-security-features).
 
-The above user goals were further tested by obtaining feedback from an artist. The feedback was positive all on aspects.
-
 ### Validators
 
 Code syntax were checked for errors with the following validators:
@@ -577,8 +589,7 @@ Chrome DevTools were used extensively during development phase to assist in:
 
 ### Site testing
 
-The site was tested by myself and once the main site was completed it was further tested by having relatives use the site.
-The feedback obtained was positive.
+The site was tested by myself and once the main site was completed it was further tested by relatives. The feedback obtained was positive.
 
 ### Responsive design
 
@@ -696,8 +707,8 @@ The following summarises the CRUD operations from the admin inteface for categor
 ### Form validation
 
 Two types of form validation existed. One would pick up errors in the frontend such as missing required fields
-and the other backend. The backend would check if form was valid before applying CRUD operations to the database. If for any
-reason errors were detected this would raise an error.
+and the other backend. The backend validation would check if form was valid before applying CRUD operations to the database. If for any
+reason errors were detected this would raise an error with a message.
 
 The add/update product form were tested as follows:
 
@@ -742,18 +753,18 @@ Results are given below:
 |:------------|:------------------------------|:------------------------------------|:--------|:------------|
 |Order        |Complete order(send to kitchen)|Order created in database            |Passed   |   &#9745;   | 
 |OrderLineItem|Complete order(send to kitchen)|OrderLineItem  created in database   |Passed   |   &#9745;   |
-|n/a          |Complete order(send to kitchen)|Email sent to email in order form    |Passed   |   &#9745;   |
+|n/a          |Complete order(send to kitchen)|Email sent                           |Passed   |   &#9745;   |
 
 ![stripe success message](static/doc/messages.png) 
 
-Once the 'send to kitchen' button was pressed stripe would verify card details before processing order, during this
-this period the submit button was deactivated temporarily. After successful payment the submit button would be reactivated
-and the order would be created in database as tested above via the checkout view. If for any reason the card checking 
-process was successful and submit button could not be activated the order would be created via the webhook handler view. 
-This would cater for the event that a customer had made a successful payment and submit button was not activated. 
+Once the 'send to kitchen' button was pressed stripe would verify card details before processing order. During this
+process the submit button was disabled temporarily. After successful payment the submit button would be re-enabled
+and the order would be created in database as tested above via the checkout view. If the card checking 
+process was successful but the submit button could not be re-enabled the order would then be created via the webhook handler view. 
+This would cater for the event that a customer had made a successful payment and submit button was not enabled. 
 
 Below details tests performed to verify that this process was successful. To simulate the condition where the submit button 
-was deactivated the page was closed after pressing the send to kitchen button.
+was disabled the page was closed after pressing the send to kitchen button.
 
 |Action                                                        |Expected recieved webhook received          | Status |Results  |                                 
 |:-------------------------------------------------------------|:-------------------------------------------|:-------|:--------|
@@ -762,9 +773,9 @@ was deactivated the page was closed after pressing the send to kitchen button.
 
 ![stripe process](static/doc/stripe-process.png) 
 
-In both cases orders were verified to have been created in the Order and orderInLine model.
+In both cases orders were verified to have been created in the Order and orderInLine database.
 
-Possible errors were also tested in the checkout process. Any errors would be highlighted to the user via a message which was part
+Form errors were also tested in the checkout process. Any errors would be highlighted to the user via a message which was part
 of the feedback system:
 
 |Action                                                  |Expected error message               |Results |                                 
@@ -819,20 +830,20 @@ page, javacript was used instead of a form. When the open/close button was press
 view using javacript which would subsequently update the store status model. 
 
 7. After initial deployment to heroku was performed the site would not run. After research one of the issues was thought to 
-not having data in the category and product database. To fix this issue fixtures were created using ```python manage.py dumpdata```
-and then loaded into the PostgreSQL database. This corrected the issue.
+not having data in the category and product database. To fix this issue fixtures were created using  the ```dumpdata``` command.
+These fixtures were then loaded into the PostgreSQL database. This corrected the issue.
 
 8. Initially when unittest were performed a 404 error would occur for all tests eventhough the site worked normally.
-After several attempts to find the problem the issue was found. For the unittest to work properly the store status was required to be set to 'open' 
-in the test setup. Once this was done all tests worked normally.
+After several attempts to identify the problem the issue was found to be not having the store status defined. To resolve
+this issue the the store status was set to 'open'  in the initial test class set-up. 
+    ![error](static/doc/test-open.png)
  
 9. When a item was set to unavailable it still could be added to bag by manipulating the url. To prevent this issue 
-additonal coding was introduced which would action a redirect if an unavailable item was added to a bag followed by a relevant 
-error message.
+additonal coding was introduced which would trigger a redirect if an unavailable item was added to a bag followed by a relevant 
+error message.    
 
 10. For browser compatibility, only Internet Explorer caused several issues. The issues were incorrect font colour, font sizes,
-missing backgrounds and quantity increment/decrement buttons not working.  
-
+missing backgrounds and quantity increment/decrement buttons not working.    
     ![error](static/doc/browser.png)
 
 The site still worked on Internet Explorer but the overall UX was less than that of other browsers. Due to Internet Explorer 
@@ -841,6 +852,10 @@ no longer being supported bugs were left as such.
 11. During form testing it was noticed that incorrect phone format could be applied to the UserProfile phone number field without raising an 
 error. Research was peformed and django [RegexValidators](#https://docs.djangoproject.com/en/3.1/ref/validators/#regexvalidator)
 were used. This permitted the use of regex for correct number formatting while raising an error which could be displayed to the user.
+
+12. When the store status was changed the django message system would not always send a success message. This error was left as such
+since the store status banner would always update to the correct statement, hence providing sufficient evidence that the store status
+had effectively changed.
 
 # DEPLOYMENT
 
@@ -872,8 +887,8 @@ as such:
 
 8. Create a new Superuser using the command: ```python3 manage.py createsuperuser```
 
-9. Go to settings and set all confing vars in Heroku including DISABLE_COLLECTSTATIC=1.
-Static files will be used from Amazon web service.
+9. Go to settings and set all config vars in Heroku including DISABLE_COLLECTSTATIC=1.
+Static files would be hosted by Amazon web service for the herokuapp.
 
     ![image of config vars](static/doc/config.png)
 
@@ -912,12 +927,14 @@ To run code locally the following steps should be performed:
     ```$ git clone https://github.com/zahur76/molacuizine```
 6. Press Enter to create your local clone.
 
-## Setting up S3 bucket 
+## Setting up of S3 bucket 
 
-Information on setting up a AWS s3 bucket can be found [here](#https://docs.aws.amazon.com/quickstarts/latest/s3backup/step-1-create-bucket.html).
+Information on setting up a AWS s3 bucket can be found [here](https://docs.aws.amazon.com/quickstarts/latest/s3backup/step-1-create-bucket.html).
 
-Once the s3 bucket was set-up, the settings file was updated to allow the heroku app to link to the Amazon Web Service bucket for
-static and media files. 
+Once the s3 bucket was set-up the settings file was updated to allow the heroku app to link to the Amazon Web Service bucket for
+static and media files.
+    
+![image of github pages section](static/doc/amazon.png)
 
 ## FUTURE IMPROVEMENTS
 
@@ -928,22 +945,24 @@ Once the order had been prepared the order could be ticked off as being ready fo
 and update the order delivery status. 
 4. For delivery, instead of having a list of towns for the user to choose from, the user could select their location using 
 google map. Their location could then be used by the delivery service for more accurate delivery time and location.
-5. Provide a loyalty program for users which would offer discount to users.
+5. Provide a loyalty program for users which would offer discount to users and attract more customers.
 
 ## CREDITS
 
 ### Content
 
-* [Geek for geeks](https://www.geeksforgeeks.org) for providing resource on how to create unique filenames.
-* [Stack Overflow](https://stackoverflow.com/questions/34248898/how-to-validate-select-option-for-a-materialize-dropdown ) on how to validate drop down menus.
-* [W3 Schools](https://www.w3schools.com/howto/howto_css_smooth_scroll.asp#section2 ) on how to make scroll behaviour smooth.
+* [Geek for geeks](https://www.geeksforgeeks.org) for providing resource:
+    - on how to hide input [arrows](https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp).
+* [Stack Overflow](https://stackoverflow.com) for providing resource:
+    -  on how obtain selected value from dropdown [menu](https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript).
+    - making backgrpound image [transparent](https://stackoverflow.com/questions/41662545/background-image-transparency-in-div).
+    - on how to use [RegexValidators](https://stackoverflow.com/questions/19130942/whats-the-best-way-to-store-phone-number-in-django-models) in django.
 
 ### Media
-
 * All Icons were obtained from [font awesome](https://www.fontawesome.com).
-* All images obtained from [Unsplash](https://unsplash.com/).
+* Background image was purchased from [vecteezy](https://www.vecteezy.com).
 
 ### Acknowledgment
 
-* I would like to thank Samia Mallam-Hasham for testing the site and Allen Thomas Varghese for his input during 
+* I would like to thank shabana, zara and sofia for testing the site and Allen Thomas Varghese for his input during 
 the mentor sessions.
