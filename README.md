@@ -566,6 +566,9 @@ The error 'Doctype must be declared first' was also ignored and was due to the u
 The Jshint test results had the warning " 'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz)." was due to
 syntax used for defining variables.
 
+The PEP8 'line too long' warning was left for the ```AUTH_PASSWORD_VALIDATORS``` in settings file since attempting to divide lines into segments
+gave rise to errors.
+
 ### Django unittest
 
 Django unittest was performed on all apps created by myself to check for bugs and inconsistencies in python code. The testing covered the
