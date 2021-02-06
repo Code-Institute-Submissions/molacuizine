@@ -20,7 +20,6 @@ class ProductForm(forms.ModelForm):
             'spice_index': 'Spice Index',
             'availability': 'Availability',
             'price': 'price',
-            'image_url': 'image_url',
             'image': 'Image',
         }
 
