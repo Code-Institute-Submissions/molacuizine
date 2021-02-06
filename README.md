@@ -221,11 +221,13 @@ The 'add to bag' link would permit the user to add the item to the bag with the 
 
 ### Spice index
 
-Certain dishes which could be prepared to have different levels of spice were given a spice index selector. This would permit
+Certain dishes which could be prepared to have different degrees of spiciness were given a spice index selector. This would permit
 the user to select a spice index according to their preference. This would then be taken into consideration when the menu
 was prepared. The levels were mild, medium and hot.
 
 ![Spice index](static/doc/spice-index.png)
+
+The spice index could be toggled on/off from the product form.
 
 ### Bag page
 
@@ -296,6 +298,8 @@ and would not be able to be ordered at that specific time.
 The item would then be tagged as available or unavailable for the admin only.
 
 ![Item availablility](static/doc/available.png)
+
+This feature could be toggled via the product form.
 
 ### Django messages
 
@@ -715,6 +719,8 @@ The add/update product form were tested as follows:
 |Action                            |Expected error message               |Results |                                 
 |:---------------------------------|:------------------------------------|:-------|
 | missing required field           |'please fill out this field' prompt' | Passed |
+| Change item availability status  | Product availability modified       | Passed |
+| Change item spice index          | Product spice index  modified       | Passed |
 
 The above condition didnt not apply to the profile page since none of the fields were required. Testing was performed only
 on the incorrect number format as follows: 
