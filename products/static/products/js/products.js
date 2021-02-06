@@ -30,7 +30,23 @@ $(document).ready(function(){
         }          
     });
 
-    // Placeholder for spice index field //
+    // Placeholder for spice index fields //
+
+    if($('#id_spice_index option:selected').html()=='No'){
+        $('#id_spice_index option:selected').html('Spice Index (No)');
+    }
+    if($('#id_spice_index option:selected').html()=='Yes'){
+        $('#id_spice_index option:selected').html('Spice Index (Yes)');
+    }
+
+    $('#id_spice_index').change(function(){        
+        if($('#id_spice_index option:selected').html()=='No'){
+            $('#id_spice_index option:selected').html('Spice Index (No)');
+        }
+        else if($('#id_spice_index option:selected').html()=='Yes'){
+            $('#id_spice_index option:selected').html('Spice Index (Yes)');
+        }
+    });
 
     if($('#id_spice_index option:selected').val()== "unknown"){
             $('#id_spice_index').css('color', '#aab7c4');            
